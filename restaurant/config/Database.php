@@ -32,13 +32,7 @@ class Database
     private function connect(): void
     {
         try {
-            $dbPath = $this->config['database'];
-            
-            // Create database directory if it doesn't exist
-            $dbDir = dirname($dbPath);
-            if (!is_dir($dbDir)) {
-                mkdir($dbDir, 0755, true);
-            }
+            $dbPath = $this->resolveWritableDbPath($this->config['database']);
 
             $this->connection = new PDO(
                 "sqlite:{$dbPath}",
@@ -47,14 +41,57 @@ class Database
                 $this->config['options']
             );
 
-            // Enable WAL mode for better performance
-            $this->connection->exec('PRAGMA journal_mode = WAL');
-            $this->connection->exec('PRAGMA foreign_keys = ON');
-            $this->connection->exec('PRAGMA cache_size = -16000');
+            // Enable WAL mode for better performance. Some hosted SQLite builds
+            // (or read-only filesystems) reject it, so degrade gracefully.
+            try {
+                $this->connection->exec('PRAGMA journal_mode = WAL');
+            } catch (\Throwable $e) {
+                // ignore - fall back to default rollback journal
+            }
+            try {
+                $this->connection->exec('PRAGMA foreign_keys = ON');
+                $this->connection->exec('PRAGMA cache_size = -16000');
+            } catch (\Throwable $e) {
+                // non-fatal
+            }
 
         } catch (PDOException $e) {
             throw new \RuntimeException("Database connection failed: " . $e->getMessage());
         }
+    }
+
+    /**
+     * Ensure the database file lives in a writable location.
+     * Creates the directory (recursively) and the file itself (so SQLite's
+     * -wal / -shm siblings can be created). If the configured directory is
+     * not writable (common on read-only PaaS like Wasmer), falls back to a
+     * temp directory so the app can still boot.
+     */
+    private function resolveWritableDbPath(string $dbPath): string
+    {
+        $dbDir = dirname($dbPath);
+
+        if (!is_dir($dbDir)) {
+            @mkdir($dbDir, 0755, true);
+        }
+
+        // If the directory cannot be created/written, fall back to a temp dir.
+        if (!is_dir($dbDir) || !is_writable($dbDir)) {
+            $fallbackDir = rtrim(sys_get_temp_dir(), '/') . '/dzieres';
+            if (!is_dir($fallbackDir)) {
+                @mkdir($fallbackDir, 0755, true);
+            }
+            if (is_dir($fallbackDir) && is_writable($fallbackDir)) {
+                $dbPath = $fallbackDir . '/restaurant.db';
+            }
+        }
+
+        // Make sure the file exists so WAL mode can create -wal/-shm files.
+        if (!file_exists($dbPath)) {
+            @touch($dbPath);
+        }
+
+        return $dbPath;
     }
 
     public function getConnection(): PDO
