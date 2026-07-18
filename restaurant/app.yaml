@@ -1,0 +1,14 @@
+kind: wasmer.io/App.v0
+name: dzieres
+owner: holyseyi
+package: .
+app_id: da_nm3IetwUw7MA
+scaling:
+  mode: single_concurrency
+annotations:
+  shipitcli.com/config:
+    name: out
+    phpix: true
+  shipitcli.com/provider: php
+  shipitcli.com/version: 0.22.1
+  wasmer.io/version: 7.2.0
