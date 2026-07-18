@@ -6,7 +6,38 @@
 
 // Error reporting
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', (getenv('APP_DEBUG') ?: '1') === '0' ? '0' : '1');
+
+// Use a writable temp dir for sessions/uploads and SQLite WAL siblings.
+// Many PaaS runtimes (Wasmer) ship a read-only default session dir, which
+// makes session_start() fatal with a 500. Point it at the system temp dir.
+$writableTmp = rtrim(sys_get_temp_dir(), '/') . '/dzieres';
+if (!is_dir($writableTmp)) {
+    @mkdir($writableTmp, 0755, true);
+}
+if (is_dir($writableTmp) && is_writable($writableTmp)) {
+    if (empty(session_save_path()) || !is_writable(session_save_path())) {
+        session_save_path($writableTmp);
+    }
+    if (empty(ini_get('upload_tmp_dir')) || !is_writable(ini_get('upload_tmp_dir'))) {
+        ini_set('upload_tmp_dir', $writableTmp);
+    }
+}
+
+// Surface real errors instead of a blank 500 so failures are diagnosable.
+set_exception_handler(function (\Throwable $e) {
+    http_response_code(500);
+    if ((getenv('APP_DEBUG') ?: '1') !== '0') {
+        echo '<pre style="padding:20px;font:13px monospace;white-space:pre-wrap">'
+            . '500 Internal Server Error' . "\n\n"
+            . get_class($e) . ': ' . $e->getMessage() . "\n"
+            . 'in ' . $e->getFile() . ':' . $e->getLine() . "\n\n"
+            . $e->getTraceAsString() . '</pre>';
+    } else {
+        echo '500 Internal Server Error';
+    }
+    exit;
+});
 
 // Timezone
 date_default_timezone_set('Africa/Accra');
