@@ -2,9 +2,9 @@ name: DzieRes
 app_id: da_nP7IptBUWDlV
 owner: holyseyi
 package: ./restaurant
-kind: wasmer.io/App.v0
 scaling:
   mode: single_concurrency
+kind: wasmer.io/App.v0
 annotations:
   shipitcli.com/config:
     name: out
