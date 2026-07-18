@@ -6,21 +6,16 @@
 name = "dzieres"
 version = "0.1.0"
 
-# The directory whose contents will be uploaded to Wasmer
-# (keep this consistent with app.yaml: package: ./restaurant)
-# Wasmer uses the root as the package source; we deploy the whole repo.
-
-# Run PHP built-in server. We use restaurant/server.php as the router.
-# Wasmer provides the `$PORT` env var (commonly used by Wasmer).
-# If your Wasmer version doesn't, PHP will still bind to 8000.
+# Deploy package root is ./restaurant (see app.yaml: package: ./restaurant).
+# Wasmer uploads the *contents* of restaurant/ as the app root, so the
+# document root and router must be referenced relative to that package root
+# (i.e. ./server.php), NOT ./restaurant/server.php — otherwise every request
+# 404s because restaurant/restaurant/... does not exist in the deployed image.
 
 [webserver]
 command = "sh"
-args = ["-c", "PORT=${PORT:-8000}; php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t restaurant restaurant/server.php"]
+args = ["-c", "PORT=${PORT:-8000}; php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t . server.php"]
 
 # Single process; scale handled by platform.
-
-[mounts]
-# Mount repository root as-is (default behavior is fine); explicit mount kept empty.
 
 
