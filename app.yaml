@@ -1,4 +1,11 @@
+kind: wasmer.io/App.v0
 name: DzieRes
 owner: holyseyi
 package: .
-kind: wasmer.io/App.v0
+app_id: da_nP7IptBUWDlV
+annotations:
+  shipitcli.com/config:
+    name: out
+  shipitcli.com/provider: staticfile
+  shipitcli.com/version: 0.22.1
+  wasmer.io/version: 7.2.0
