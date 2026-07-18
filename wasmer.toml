@@ -1,21 +1,7 @@
-# Wasmer manifest for DzieRes (PHP front controller)
-# Fixes: `wasmer deploy` failing because `wasmer.toml` was missing.
-
-[package]
-# This repository contains the app in the `restaurant/` folder
-name = "dzieres"
-version = "0.1.0"
-
-# Deploy package root is ./restaurant (see app.yaml: package: ./restaurant).
-# Wasmer uploads the *contents* of restaurant/ as the app root, so the
-# document root and router must be referenced relative to that package root
-# (i.e. ./server.php), NOT ./restaurant/server.php — otherwise every request
-# 404s because restaurant/restaurant/... does not exist in the deployed image.
-
-[webserver]
-command = "sh"
-args = ["-c", "PORT=${PORT:-8000}; php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t . server.php"]
-
-# Single process; scale handled by platform.
-
-
+# NOTE: This root wasmer.toml is NOT used for deployment.
+# The deploy package is the `restaurant/` folder — see restaurant/app.yaml
+# (`package: .`) and restaurant/wasmer.toml, which is the manifest that
+# `wasmer deploy` actually reads.
+#
+# Run `wasmer deploy` from the repo root; it will load restaurant/app.yaml
+# and find restaurant/wasmer.toml inside the package root.
