@@ -9,20 +9,21 @@
         <?php foreach ($_SESSION['_flash'] as $type => $message): ?>
             <?php if (in_array($type, ['success', 'error', 'info', 'warning'])): ?>
                 <?php
-                $bg = match ($type) {
+                $bgMap = [
                     'success' => 'text-bg-success',
                     'error' => 'text-bg-danger',
                     'warning' => 'text-bg-warning',
                     'info' => 'text-bg-info',
-                    default => 'text-bg-secondary'
-                };
-                $icon = match ($type) {
+                ];
+                $bg = $bgMap[$type] ?? 'text-bg-secondary';
+                
+                $iconMap = [
                     'success' => 'check',
                     'error' => 'exclamation',
                     'warning' => 'exclamation',
                     'info' => 'info',
-                    default => 'info',
-                };
+                ];
+                $icon = $iconMap[$type] ?? 'info';
                 ?>
                 <div class="toast show align-items-center border-0 <?= $bg ?>" role="alert" data-bs-delay="5000">
                     <div class="d-flex">

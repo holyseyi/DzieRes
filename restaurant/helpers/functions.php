@@ -626,13 +626,34 @@ function getLoyaltyPoints(int $userId): int
 
 function matchStatusColor(string $status): string
 {
-    return match ($status) {
-        'delivered', 'completed', 'paid', 'approved', 'active', 'confirmed' => 'success',
-        'cancelled', 'rejected', 'failed', 'expired', 'banned', 'no_show' => 'danger',
-        'pending', 'in_stock' => 'warning',
-        'ready', 'preparing', 'cooking', 'accepted', 'reviewed', 'attended' => 'info',
-        default => 'secondary'
-    };
+    switch ($status) {
+        case 'delivered':
+        case 'completed':
+        case 'paid':
+        case 'approved':
+        case 'active':
+        case 'confirmed':
+            return 'success';
+        case 'cancelled':
+        case 'rejected':
+        case 'failed':
+        case 'expired':
+        case 'banned':
+        case 'no_show':
+            return 'danger';
+        case 'pending':
+        case 'in_stock':
+            return 'warning';
+        case 'ready':
+        case 'preparing':
+        case 'cooking':
+        case 'accepted':
+        case 'reviewed':
+        case 'attended':
+            return 'info';
+        default:
+            return 'secondary';
+    }
 }
 
 // ============================================

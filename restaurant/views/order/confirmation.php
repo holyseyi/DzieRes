@@ -6,12 +6,14 @@
  * @var array $orderItems
  * @var array $tracking
  */
-$statusClass = match ($order->status) {
-    'delivered' => 'success',
-    'cancelled', 'rejected' => 'danger',
-    'ready' => 'info',
-    'default' => 'warning'
-};
+$statusClass = 'warning';
+if (in_array($order->status, ['delivered', 'completed', 'paid', 'approved', 'active', 'confirmed'])) {
+    $statusClass = 'success';
+} elseif (in_array($order->status, ['cancelled', 'rejected'])) {
+    $statusClass = 'danger';
+} elseif (in_array($order->status, ['ready'])) {
+    $statusClass = 'info';
+}
 ?>
 <section class="section-padding">
     <div class="container">
