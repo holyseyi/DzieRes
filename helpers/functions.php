@@ -897,7 +897,15 @@ function menuImageUrl(object $food): string
     $slug = $food->slug ?? '';
     $menuDir = __DIR__ . '/../assets/images/menu/';
     if ($slug && is_dir($menuDir)) {
-        foreach (glob($menuDir . $slug . '-*.{jpg,jpeg,png,webp}', GLOB_BRACE) as $file) {
+        $files = [];
+        if (defined('GLOB_BRACE')) {
+            $files = glob($menuDir . $slug . '-*.{jpg,jpeg,png,webp}', GLOB_BRACE);
+        } else {
+            foreach (['jpg','jpeg','png','webp'] as $ext) {
+                $files = array_merge($files, glob($menuDir . $slug . '-*.' . $ext));
+            }
+        }
+        foreach ($files as $file) {
             return asset('images/menu/' . basename($file));
         }
     }
