@@ -6,9 +6,9 @@
 :root {
     --primary: #001a4a;
     --secondary: #003380;
-    --gold: #001a4a;
-    --gold-light: #003380;
-    --gold-dark: #000d26;
+    --gold: #d4af37;
+    --gold-light: #f1d96f;
+    --gold-dark: #b8960c;
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
     --bg-dark: #001a4a;
@@ -30,7 +30,7 @@
     --font-script: 'Dancing Script', cursive;
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    --gradient-gold: linear-gradient(135deg, #001a4a, #003380);
+    --gradient-gold: linear-gradient(135deg, #d4af37, #003380);
     --nav-bg: #001a4a;
     --footer-bg: #001a4a;
 }
