@@ -25,17 +25,17 @@ if (is_dir($writableTmp) && is_writable($writableTmp)) {
 }
 
 // Surface real errors instead of a blank 500 so failures are diagnosable.
-set_exception_handler(function (\Throwable $e) {
+$errorLog = __DIR__ . '/logs/error.log';
+set_exception_handler(function (\Throwable $e) use ($errorLog): void {
+    $msg = date('Y-m-d H:i:s') . ' ' . get_class($e) . ': ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . "\n";
+    @file_put_contents($errorLog, $msg, FILE_APPEND);
+    
     http_response_code(500);
-    if ((getenv('APP_DEBUG') ?: '1') !== '0') {
-        echo '<pre style="padding:20px;font:13px monospace;white-space:pre-wrap">'
-            . '500 Internal Server Error' . "\n\n"
-            . get_class($e) . ': ' . $e->getMessage() . "\n"
-            . 'in ' . $e->getFile() . ':' . $e->getLine() . "\n\n"
-            . $e->getTraceAsString() . '</pre>';
-    } else {
-        echo '500 Internal Server Error';
-    }
+    echo '<pre style="padding:20px;font:13px monospace;white-space:pre-wrap">'
+        . '500 Internal Server Error' . "\n\n"
+        . get_class($e) . ': ' . $e->getMessage() . "\n"
+        . 'in ' . $e->getFile() . ':' . $e->getLine() . "\n\n"
+        . $e->getTraceAsString() . '</pre>';
     exit;
 });
 
@@ -83,6 +83,9 @@ try {
     // Run schema if tables don't exist
     if (!$db->tableExists('users')) {
         $schema = file_get_contents(__DIR__ . '/database/schema.sql');
+        if ($schema === false) {
+            throw new \RuntimeException('Failed to read database schema file');
+        }
         $db->getConnection()->exec($schema);
     }
     
@@ -138,6 +141,8 @@ try {
         }
     }
 } catch (Exception $e) {
+    $msg = 'Database initialization failed: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . "\n";
+    @file_put_contents($errorLog, date('Y-m-d H:i:s') . ' ' . $msg, FILE_APPEND);
     die('Database initialization failed: ' . $e->getMessage());
 }
 

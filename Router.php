@@ -6,10 +6,10 @@
 
 class Router
 {
-    private array $routes = [];
-    private array $middleware = [];
-    private string $prefix = '';
-    private ?string $notFoundHandler = null;
+    private $routes = [];
+    private $middleware = [];
+    private $prefix = '';
+    private $notFoundHandler = null;
 
     public function get(string $path, $handler, array $middleware = []): void
     {

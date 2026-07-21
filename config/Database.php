@@ -95,7 +95,7 @@ class Database
         return $stmt;
     }
 
-    public function fetch(string $sql, array $params = []): ?object
+    public function fetch(string $sql, array $params = [])
     {
         $result = $this->query($sql, $params);
         $row = $result->fetch();

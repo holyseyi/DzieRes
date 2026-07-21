@@ -3,6 +3,7 @@ name = "dzieres"
 version = "0.1.0"
 
 [package.metadata]
+php_version = "8.1"
 php_extensions = [
     "pdo",
     "pdo_sqlite",

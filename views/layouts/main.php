@@ -25,6 +25,10 @@
     <!-- Custom CSS -->
     <link href="<?= \asset('css/style.css') ?>" rel="stylesheet">
     
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8947299957289484"
+         crossorigin="anonymous"></script>
+    
     <link rel="icon" type="image/svg+xml" href="<?= \asset('images/favicon.svg') ?>">
     
     <!-- Schema.org markup -->
@@ -108,6 +112,23 @@
         </div>
     </nav>
 
+    <!-- ============================================ -->
+    <!-- ADVERTISEMENT BANNER -->
+    <!-- ============================================ -->
+    <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 76px;">
+        <div class="container py-2">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-8947299957289484"
+                 data-ad-slot="1234567890"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
     <!-- Search Overlay -->
     <div class="search-overlay" id="searchOverlay">
         <div class="search-overlay-content">
@@ -118,7 +139,7 @@
                         <input type="text" name="search" class="form-control search-input" 
                                placeholder="Search menu items..." autocomplete="off" id="globalSearch">
                         <button class="btn btn-gold" type="submit">
-                            <?= \icon('search', []) ?>></i>
+                            <?= \icon('search', []) ?>
                         </button>
                     </div>
                 </form>
@@ -173,6 +194,23 @@
             <?php require $__viewPath ?? ''; ?>
         <?php endif; ?>
     </main>
+
+    <!-- ============================================ -->
+    <!-- BOTTOM ADVERTISEMENT -->
+    <!-- ============================================ -->
+    <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 40px;">
+        <div class="container py-3">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-8947299957289484"
+                 data-ad-slot="1234567890"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
 
     <!-- ============================================ -->
     <!-- FOOTER -->
