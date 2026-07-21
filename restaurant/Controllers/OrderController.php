@@ -146,7 +146,8 @@ class OrderController extends BaseController
         
         try {
             $orderNumber = \generateOrderNumber();
-            $userId = \auth() ? \auth()->id : null;
+            $user = \auth();
+            $userId = $user ? (int)$user->id : null;
             
             $orderId = \db()->insert('orders', [
                 'order_number' => $orderNumber,
@@ -175,7 +176,6 @@ class OrderController extends BaseController
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
             ]);
             
-            // Add order items
             foreach ($cartItems as $item) {
                 \db()->insert('order_items', [
                     'order_id' => $orderId,
@@ -187,7 +187,6 @@ class OrderController extends BaseController
                 ]);
             }
             
-            // Add tracking
             \db()->insert('order_tracking', [
                 'order_id' => $orderId,
                 'status' => 'pending',
@@ -195,23 +194,19 @@ class OrderController extends BaseController
                 'created_by' => $userId,
             ]);
             
-            // Clear cart
             if ($userId) {
                 \db()->delete('carts', 'user_id = ?', [$userId]);
             } else {
                 unset($_SESSION['cart']);
             }
             
-            // Clear coupon
             \sessionRemove('coupon');
             
-            // Add loyalty points
             if ($userId) {
                 $points = (int)($total * \config('loyalty.points_per_ghs', 10));
                 \addLoyaltyPoints($userId, $points, 'earned', "Order #{$orderNumber}", 'order', $orderId);
             }
             
-            // Update coupon usage
             if ($couponCode) {
                 \db()->query(
                     "UPDATE coupons SET used_count = used_count + 1 WHERE code = ?",
@@ -223,18 +218,21 @@ class OrderController extends BaseController
             
             \logActivity('order_placed', 'orders', "Order #{$orderNumber} placed", $userId);
             
-            // Notify admins (user_id NULL = shown to all admins)
             \createNotification(
-                null,
+                $userId,
                 'order',
                 'New Order',
-                "New {$orderType} order #{$orderNumber} placed" . ($userId ? " by " . \auth()->firstname : " by guest"),
+                "New {$orderType} order #{$orderNumber} placed" . ($userId ? " by user #{$userId}" : " by guest"),
                 \baseUrl("admin/orders/{$orderId}")
             );
             
             \sessionFlash('success', 'Order placed successfully');
             $this->redirect(\baseUrl("order/confirmation/{$orderId}"));
             
+        } catch (\PDOException $e) {
+            \db()->rollback();
+            \sessionFlash('error', 'Failed to place order: ' . $e->getMessage() . ' (Code: ' . $e->getCode() . ')');
+            $this->redirect(\baseUrl('checkout'));
         } catch (\Exception $e) {
             \db()->rollback();
             \sessionFlash('error', 'Failed to place order: ' . $e->getMessage());

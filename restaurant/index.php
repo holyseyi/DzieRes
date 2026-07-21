@@ -85,6 +85,32 @@ try {
         $schema = file_get_contents(__DIR__ . '/database/schema.sql');
         $db->getConnection()->exec($schema);
     }
+    
+    // Ensure default users exist so login/admin works even if the database
+    // is recreated or wiped (common on ephemeral/read-only PaaS like Wasmer).
+    if (!$db->fetchColumn('SELECT COUNT(*) FROM users')) {
+        $users = [
+            ['Admin', 'User', 'admin@dzieres.com', '+233 50 000 0001', password_hash('admin123', PASSWORD_DEFAULT), 1],
+            ['Staff', 'User', 'staff@dzieres.com', '+233 50 000 0002', password_hash('staff123', PASSWORD_DEFAULT), 2],
+            ['Test', 'Customer', 'customer@dzieres.com', '+233 50 000 0003', password_hash('customer123', PASSWORD_DEFAULT), 3],
+        ];
+        $stmt = $db->getConnection()->prepare('INSERT OR IGNORE INTO users (firstname, lastname, email, phone, password, role_id, status) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        foreach ($users as $u) {
+            $stmt->execute([...$u, 'active']);
+        }
+    }
+    
+    // Ensure default categories exist if foods were seeded but categories were not.
+    if (!$db->fetchColumn('SELECT COUNT(*) FROM categories')) {
+        $categories = [
+            ['Breakfast', 'breakfast'], ['Lunch', 'lunch'], ['Dinner', 'dinner'],
+            ['Sides', 'sides'], ['Desserts', 'desserts'], ['Drinks', 'drinks'],
+        ];
+        $stmt = $db->getConnection()->prepare('INSERT OR IGNORE INTO categories (name, slug, sort_order) VALUES (?, ?, ?)');
+        foreach ($categories as $i => $c) {
+            $stmt->execute([...$c, $i]);
+        }
+    }
 } catch (Exception $e) {
     die('Database initialization failed: ' . $e->getMessage());
 }
