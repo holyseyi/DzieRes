@@ -921,23 +921,109 @@ img {
    CART PAGE
    ============================================ */
 .cart-item {
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
+    background: #ffffff;
+    border-radius: 20px;
     padding: 20px;
     margin-bottom: 15px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
+    box-shadow: 0 2px 4px rgba(0,26,74,0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
 }
 
 .cart-summary {
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
+    background: #ffffff;
+    border-radius: 20px;
     padding: 30px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,26,74,0.05);
+    border: 1px solid #e2e8f0;
     position: sticky;
     top: 100px;
+}
+
+/* ============================================
+   ORDER TYPE SELECTOR
+   ============================================ */
+.order-type-selector {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.order-type-option {
+    flex: 1;
+    min-width: 140px;
+}
+
+.order-type-option input[type="radio"] {
+    display: none;
+}
+
+.order-type-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #4a5568;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.order-type-option input[type="radio"]:checked + span {
+    border-color: #001a4a;
+    background: #001a4a;
+    color: #ffffff;
+}
+
+.order-type-option:hover span {
+    border-color: #001a4a;
+}
+
+/* ============================================
+   PAYMENT METHODS
+   ============================================ */
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.payment-option {
+    flex: 1;
+    min-width: 120px;
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #4a5568;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-option input[type="radio"]:checked + span {
+    border-color: #001a4a;
+    background: #001a4a;
+    color: white;
+}
+
+.payment-option:hover span {
+    border-color: #001a4a;
 }
 
 /* ============================================

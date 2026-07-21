@@ -45,10 +45,13 @@
                         <div class="stat-label">Branches</div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
+
+<div class="text-center py-2">
+    <a href="<?= \baseUrl('login') ?>" style="color: #718096; font-size: 0.85rem; text-decoration: none;">Admin</a>
+</div>
 
 <!-- ============================================ -->
 <!-- ALL FOODS SECTION -->

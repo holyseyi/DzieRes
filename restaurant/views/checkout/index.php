@@ -4,8 +4,10 @@
  *
  * @var array $cartItems
  * @var float $subtotal, $taxAmount, $deliveryFee, $serviceCharge, $couponDiscount, $total
+ * @var array $restaurantLocations
  */
 $user = \auth();
+$restaurantLocations = $restaurantLocations ?? [];
 ?>
 <section class="page-hero">
     <div class="container">
@@ -63,6 +65,28 @@ $user = \auth();
                                     <input type="text" name="delivery_city" class="form-control" placeholder="City"></div>
                                 <div class="col-md-6"><label class="form-label">Phone</label>
                                     <input type="text" name="delivery_phone" class="form-control"></div>
+                            </div>
+                        </div>
+
+                        <div id="pickupFields" style="display:none;">
+                            <div class="row g-3 mt-2">
+                                <div class="col-12">
+                                    <label class="form-label">Pickup Location</label>
+                                    <button type="button" id="locateMeBtn" class="btn btn-outline-gold btn-sm mb-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Use My Location
+                                    </button>
+                                    <select name="pickup_location" id="pickupLocationSelect" class="form-select">
+                                        <option value="">Select nearest location</option>
+                                        <?php foreach ($restaurantLocations as $loc): ?>
+                                            <option value="<?= \escape($loc['name']) ?>" data-lat="<?= $loc['lat'] ?>" data-lng="<?= $loc['lng'] ?>">
+                                                <?= \escape($loc['name']) ?> - <?= \escape($loc['address']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="hidden" name="delivery_lat" id="deliveryLat">
+                                    <input type="hidden" name="delivery_lng" id="deliveryLng">
+                                    <div id="locationStatus" class="form-text text-muted"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -128,3 +152,72 @@ $user = \auth();
         </form>
     </div>
 </section>
+
+<script>
+(function() {
+    const orderTypeInputs = document.querySelectorAll('input[name="order_type"]');
+    const deliveryFields = document.getElementById('deliveryFields');
+    const pickupFields = document.getElementById('pickupFields');
+    const dineInFields = document.getElementById('dineInFields');
+    const locateMeBtn = document.getElementById('locateMeBtn');
+    const pickupSelect = document.getElementById('pickupLocationSelect');
+    const locationStatus = document.getElementById('locationStatus');
+    const restaurantLocations = <?= json_encode($restaurantLocations) ?>;
+
+    function toggleFields() {
+        const type = document.querySelector('input[name="order_type"]:checked').value;
+        if (deliveryFields) deliveryFields.style.display = type === 'delivery' ? 'block' : 'none';
+        if (pickupFields) pickupFields.style.display = type === 'pickup' ? 'block' : 'none';
+        if (dineInFields) dineInFields.style.display = type === 'dine_in' ? 'block' : 'none';
+    }
+
+    orderTypeInputs.forEach(function(input) {
+        input.addEventListener('change', toggleFields);
+    });
+
+    function getDistance(lat1, lng1, lat2, lng2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLng = (lng2 - lng1) * Math.PI / 180;
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLng/2) * Math.sin(dLng/2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    if (locateMeBtn) {
+        locateMeBtn.addEventListener('click', function() {
+            if (!navigator.geolocation) {
+                locationStatus.textContent = 'Geolocation is not supported by your browser.';
+                return;
+            }
+            locationStatus.textContent = 'Detecting your location...';
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+                document.getElementById('deliveryLat').value = userLat;
+                document.getElementById('deliveryLng').value = userLng;
+
+                let nearest = null;
+                let minDist = Infinity;
+                restaurantLocations.forEach(function(loc) {
+                    const d = getDistance(userLat, userLng, loc.lat, loc.lng);
+                    if (d < minDist) {
+                        minDist = d;
+                        nearest = loc;
+                    }
+                });
+
+                if (nearest && pickupSelect) {
+                    pickupSelect.value = nearest.name;
+                    locationStatus.textContent = 'Nearest location: ' + nearest.name + ' (' + nearest.address + ')';
+                } else {
+                    locationStatus.textContent = 'Could not determine nearest location. Please select manually.';
+                }
+            }, function() {
+                locationStatus.textContent = 'Unable to retrieve your location. Please select a location manually.';
+            });
+        });
+    }
+})();
+</script>

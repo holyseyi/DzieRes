@@ -88,7 +88,8 @@ try {
     
     // Ensure default users exist so login/admin works even if the database
     // is recreated or wiped (common on ephemeral/read-only PaaS like Wasmer).
-    if (!$db->fetchColumn('SELECT COUNT(*) FROM users')) {
+    $userCount = (int)$db->query('SELECT COUNT(*) FROM users')->fetchColumn();
+    if ($userCount === 0) {
         $users = [
             ['Admin', 'User', 'admin@dzieres.com', '+233 50 000 0001', password_hash('admin123', PASSWORD_DEFAULT), 1],
             ['Staff', 'User', 'staff@dzieres.com', '+233 50 000 0002', password_hash('staff123', PASSWORD_DEFAULT), 2],
@@ -101,7 +102,8 @@ try {
     }
     
     // Ensure default categories exist if foods were seeded but categories were not.
-    if (!$db->fetchColumn('SELECT COUNT(*) FROM categories')) {
+    $catCount = (int)$db->query('SELECT COUNT(*) FROM categories')->fetchColumn();
+    if ($catCount === 0) {
         $categories = [
             ['Breakfast', 'breakfast'], ['Lunch', 'lunch'], ['Dinner', 'dinner'],
             ['Sides', 'sides'], ['Desserts', 'desserts'], ['Drinks', 'drinks'],
@@ -109,6 +111,30 @@ try {
         $stmt = $db->getConnection()->prepare('INSERT OR IGNORE INTO categories (name, slug, sort_order) VALUES (?, ?, ?)');
         foreach ($categories as $i => $c) {
             $stmt->execute([...$c, $i]);
+        }
+    }
+    
+    // Ensure sample foods exist so the menu/cart/checkout flows work on a fresh
+    // database (common on read-only/Ephemeral PaaS like Wasmer).
+    $foodCount = (int)$db->query('SELECT COUNT(*) FROM foods')->fetchColumn();
+    if ($foodCount === 0) {
+        $foods = [
+            ['Koko With Koose', 'koko-with-koose', 'Delicious koko with koose.', 25, 320, 10],
+            ['Waakye', 'waakye', 'Classic waakye with all the fixings.', 35, 450, 20],
+            ['Jollof Rice', 'jollof-rice', 'Signature jollof rice with chicken.', 40, 520, 25],
+            ['Fufu', 'fufu', 'Fresh fufu with light soup.', 30, 380, 15],
+            ['Banku And Tilapia', 'banku-and-tilapia', 'Grilled tilapia with banku.', 60, 650, 30],
+            ['Red Red', 'red-red', 'Traditional red red with plantain.', 28, 400, 15],
+            ['Kelewele', 'kelewele', 'Spiced fried plantain.', 15, 250, 10],
+            ['Peanut Soup', 'peanut-soup', 'Rich peanut soup with assorted meat.', 35, 420, 20],
+        ];
+        $catId = (int)$db->query("SELECT id FROM categories WHERE slug='breakfast'")->fetchColumn();
+        if (!$catId) {
+            $catId = (int)$db->query('SELECT MIN(id) FROM categories')->fetchColumn();
+        }
+        $stmt = $db->getConnection()->prepare('INSERT INTO foods (category_id, name, slug, description, price, final_price, calories, preparation_time, spice_level, availability, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        foreach ($foods as $f) {
+            $stmt->execute([$catId, $f[0], $f[1], $f[2], $f[3], $f[3], $f[4], $f[5], 'mild', 'available', 'active']);
         }
     }
 } catch (Exception $e) {

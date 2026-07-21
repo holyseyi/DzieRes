@@ -69,8 +69,11 @@ $statusClass = match ($order->status) {
                             <dl class="mt-3 mb-0 small">
                                 <dt>Order Type</dt><dd><?= ucfirst(str_replace('_', ' ', $order->order_type)) ?></dd>
                                 <dt>Payment</dt><dd><?= ucwords(str_replace('_', ' ', $order->payment_method)) ?> (<?= ucfirst($order->payment_status) ?>)</dd>
-                                <?php if ($order->delivery_address): ?>
+                                <?php if ($order->order_type === 'delivery' && $order->delivery_address): ?>
                                     <dt>Address</dt><dd><?= \escape($order->delivery_address) ?>, <?= \escape($order->delivery_city ?? '') ?></dd>
+                                <?php endif; ?>
+                                <?php if ($order->order_type === 'pickup' && $order->pickup_location): ?>
+                                    <dt>Pickup Location</dt><dd><?= \escape($order->pickup_location) ?></dd>
                                 <?php endif; ?>
                                 <?php if ($order->special_notes): ?>
                                     <dt>Notes</dt><dd><?= \escape($order->special_notes) ?></dd>

@@ -72,6 +72,11 @@ class OrderController extends BaseController
             'serviceCharge' => $serviceCharge,
             'couponDiscount' => $couponDiscount,
             'total' => max(0, $total),
+            'restaurantLocations' => [
+                ['name' => 'DzieRes - Osu', 'lat' => 5.5560, 'lng' => -0.1969, 'address' => 'Oxford Street, Osu, Accra'],
+                ['name' => 'DzieRes - East Legon', 'lat' => 5.6527, 'lng' => -0.1786, 'address' => 'East Legon, Accra'],
+                ['name' => 'DzieRes - Labone', 'lat' => 5.5833, 'lng' => -0.2000, 'address' => 'Labone, Accra'],
+            ],
             'metaTitle' => 'Checkout - DzieRes Restaurant',
         ]);
     }
@@ -92,8 +97,31 @@ class OrderController extends BaseController
         $deliveryAddress = \sanitize($_POST['delivery_address'] ?? '');
         $deliveryCity = \sanitize($_POST['delivery_city'] ?? '');
         $deliveryPhone = \sanitize($_POST['delivery_phone'] ?? '');
+        $pickupLocation = \sanitize($_POST['pickup_location'] ?? '');
+        $deliveryLat = $_POST['delivery_lat'] ?? null;
+        $deliveryLng = $_POST['delivery_lng'] ?? null;
         $specialNotes = \sanitize($_POST['special_notes'] ?? '');
         $tableId = (int)($_POST['table_id'] ?? 0);
+        
+        if ($orderType === 'delivery') {
+            if (empty($deliveryAddress) || empty($deliveryCity) || empty($deliveryPhone)) {
+                \sessionFlash('error', 'Please provide delivery address, city, and phone number.');
+                $this->redirect(\baseUrl('checkout'));
+                return;
+            }
+        } elseif ($orderType === 'pickup') {
+            if (empty($pickupLocation)) {
+                \sessionFlash('error', 'Please select a pickup location or use your location.');
+                $this->redirect(\baseUrl('checkout'));
+                return;
+            }
+        } elseif ($orderType === 'dine_in') {
+            if (empty($tableId)) {
+                \sessionFlash('error', 'Please select a table for dine-in.');
+                $this->redirect(\baseUrl('checkout'));
+                return;
+            }
+        }
         
         // Get cart items
         $cartItems = [];
@@ -168,9 +196,10 @@ class OrderController extends BaseController
                 'total_amount' => $total,
                 'payment_status' => 'pending',
                 'payment_method' => $paymentMethod,
-                'delivery_address' => $deliveryAddress,
-                'delivery_city' => $deliveryCity,
-                'delivery_phone' => $deliveryPhone,
+                'delivery_address' => $orderType === 'delivery' ? $deliveryAddress : null,
+                'delivery_city' => $orderType === 'delivery' ? $deliveryCity : null,
+                'delivery_phone' => $orderType === 'delivery' ? $deliveryPhone : null,
+                'pickup_location' => $orderType === 'pickup' ? $pickupLocation : null,
                 'special_notes' => $specialNotes,
                 'is_guest' => $userId ? 0 : 1,
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
