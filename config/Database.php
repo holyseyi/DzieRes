@@ -11,9 +11,9 @@ use PDOException;
 
 class Database
 {
-    private static ?Database $instance = null;
-    private PDO $connection;
-    private array $config;
+    private static $instance = null;
+    private $connection;
+    private $config;
 
     private function __construct()
     {
@@ -21,7 +21,7 @@ class Database
         $this->connect();
     }
 
-    public static function getInstance(): self
+    public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -41,12 +41,10 @@ class Database
                 $this->config['options']
             );
 
-            // Enable WAL mode for better performance. Some hosted SQLite builds
-            // (or read-only filesystems) reject it, so degrade gracefully.
             try {
                 $this->connection->exec('PRAGMA journal_mode = WAL');
             } catch (\Throwable $e) {
-                // ignore - fall back to default rollback journal
+                // ignore
             }
             try {
                 $this->connection->exec('PRAGMA foreign_keys = ON');
@@ -60,13 +58,6 @@ class Database
         }
     }
 
-    /**
-     * Ensure the database file lives in a writable location.
-     * Creates the directory (recursively) and the file itself (so SQLite's
-     * -wal / -shm siblings can be created). If the configured directory is
-     * not writable (common on read-only PaaS like Wasmer), falls back to a
-     * temp directory so the app can still boot.
-     */
     private function resolveWritableDbPath(string $dbPath): string
     {
         $dbDir = dirname($dbPath);
@@ -75,7 +66,6 @@ class Database
             @mkdir($dbDir, 0755, true);
         }
 
-        // If the directory cannot be created/written, fall back to a temp dir.
         if (!is_dir($dbDir) || !is_writable($dbDir)) {
             $fallbackDir = rtrim(sys_get_temp_dir(), '/') . '/dzieres';
             if (!is_dir($fallbackDir)) {
@@ -86,7 +76,6 @@ class Database
             }
         }
 
-        // Make sure the file exists so WAL mode can create -wal/-shm files.
         if (!file_exists($dbPath)) {
             @touch($dbPath);
         }
@@ -94,7 +83,7 @@ class Database
         return $dbPath;
     }
 
-    public function getConnection(): PDO
+    public function getConnection()
     {
         return $this->connection;
     }
