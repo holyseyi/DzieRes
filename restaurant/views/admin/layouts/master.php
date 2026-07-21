@@ -9,10 +9,9 @@
         window.BASE_URL = '<?= \baseUrl() ?>';
     </script>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.min.css" rel="stylesheet">
+    <link href="<?= \asset('vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= \asset('vendor/fontawesome/all.min.css') ?>" rel="stylesheet">
+    <link href="<?= \asset('vendor/fonts/local-fonts.css') ?>" rel="stylesheet">
     <link href="<?= \asset('css/style.css') ?>" rel="stylesheet">
 </head>
 <body>
@@ -141,8 +140,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<?= \asset('vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= \asset('vendor/chart.js/chart.min.js') ?>"></script>
     <script src="<?= \asset('js/main.js') ?>"></script>
     <script src="<?= \asset('js/admin.js') ?>"></script>
     

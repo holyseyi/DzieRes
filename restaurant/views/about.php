@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6" data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop" alt="Restaurant interior" class="img-fluid rounded-4 shadow">
+                <img src="<?= \asset('images/placeholders/about.jpg') ?>" alt="Restaurant interior" class="img-fluid rounded-4 shadow">
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <p class="section-subtitle">Who We Are</p>

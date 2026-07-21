@@ -28,14 +28,15 @@ $restaurantLocations = $restaurantLocations ?? [];
                 <div class="col-lg-8">
                     <!-- Contact -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><i class="fas fa-user me-2 text-gold"></i>Contact Information</h5>
+                        <h5 class="mb-3"><i class="fas fa-user me-2 text-gold"></i>Your Details</h5>
+                        <p class="text-muted small mb-3">No account needed. We'll send your order updates to this phone number.</p>
                         <div class="row g-3">
                             <div class="col-md-6"><label class="form-label">Full Name</label>
-                                <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>"></div>
+                                <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>" placeholder="Your name"></div>
                             <div class="col-md-6"><label class="form-label">Email</label>
-                                <input type="email" name="guest_email" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Phone</label>
-                                <input type="text" name="guest_phone" class="form-control" required></div>
+                                <input type="email" name="guest_email" class="form-control" required placeholder="you@example.com"></div>
+                            <div class="col-md-6"><label class="form-label">Phone Number</label>
+                                <input type="tel" name="guest_phone" class="form-control" required placeholder="+233 50 000 0000"></div>
                         </div>
                     </div>
 

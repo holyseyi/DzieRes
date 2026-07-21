@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-5" data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&h=900&fit=crop" alt="Head Chef" class="img-fluid rounded-4 shadow chef-portrait">
+                <img src="<?= \asset('images/placeholders/chef.jpg') ?>" alt="Head Chef" class="img-fluid rounded-4 shadow chef-portrait">
             </div>
             <div class="col-lg-7" data-aos="fade-left">
                 <p class="section-subtitle">Executive Chef</p>

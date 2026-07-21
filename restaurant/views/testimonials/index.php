@@ -26,7 +26,7 @@
                             <?php if ($t->rating): ?><div class="text-warning mb-2"><?= str_repeat('★', $t->rating) ?><?= str_repeat('☆', 5 - $t->rating) ?></div><?php endif; ?>
                             <p class="testimonial-text"><?= \escape($t->content) ?></p>
                             <div class="testimonial-author">
-                                <img src="<?= \uploadUrl($t->image) ?>" alt="<?= \escape($t->guest_name) ?>" class="author-avatar" onerror="this.src='https://ui-avatars.com/api/?name=<?= urlencode($t->guest_name) ?>&background=c9a84c&color=fff'">
+                                <img src="<?= \uploadUrl($t->image) ?>" alt="<?= \escape($t->guest_name) ?>" class="author-avatar" onerror="this.src='<?= \asset('images/placeholders/testimonial-avatar.jpg') ?>'">
                                 <div>
                                     <h6 class="mb-0"><?= \escape($t->guest_name) ?></h6>
                                     <small class="text-muted"><?= \escape($t->guest_title ?? 'Guest') ?></small>

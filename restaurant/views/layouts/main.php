@@ -18,13 +18,10 @@
         window.BASE_URL = '<?= \baseUrl() ?>';
     </script>
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome 6 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="<?= \asset('vendor/bootstrap/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= \asset('vendor/fontawesome/all.min.css') ?>" rel="stylesheet">
+    <link href="<?= \asset('vendor/fonts/local-fonts.css') ?>" rel="stylesheet">
+    <link href="<?= \asset('vendor/aos/aos.css') ?>" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?= \asset('css/style.css') ?>" rel="stylesheet">
     
@@ -317,9 +314,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<?= \asset('vendor/bootstrap/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= \asset('vendor/aos/aos.js') ?>"></script>
+    <script src="<?= \asset('vendor/chart.js/chart.min.js') ?>"></script>
     <script src="<?= \asset('js/main.js') ?>"></script>
     
     <script>

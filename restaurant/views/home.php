@@ -9,13 +9,14 @@
         <p class="hero-subtitle">Experience Fine Dining at Its Best</p>
         <p class="hero-description">Indulge in exquisite cuisine crafted with passion, served in an elegant atmosphere that transforms every meal into an unforgettable experience.</p>
         <div class="hero-buttons">
-            <a href="<?= \baseUrl('reservations') ?>" class="btn btn-gold btn-lg">
-                <i class="fas fa-calendar-check me-2"></i>Book a Table
-            </a>
-            <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-light btn-lg">
+            <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg">
                 <i class="fas fa-utensils me-2"></i>Order Food
             </a>
+            <a href="<?= \baseUrl('reservations') ?>" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-calendar-check me-2"></i>Book a Table
+            </a>
         </div>
+        <p class="text-white-50 mt-3 small"><i class="fas fa-lock me-1"></i>Secure Checkout &nbsp;·&nbsp; <i class="fas fa-clock me-1"></i>Fast Delivery &nbsp;·&nbsp; <i class="fas fa-star me-1"></i>Fresh Ingredients</p>
     </div>
     
     <div class="hero-stats">
@@ -239,7 +240,7 @@
                 <div class="col-md-6 col-lg-3" data-aos="fade-up">
                     <div class="food-card">
                         <div class="food-image">
-                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Featured Dish">
+                            <img src="<?= \asset('images/placeholders/featured-dish.jpg') ?>" alt="Featured Dish">
                             <div class="food-overlay">
                                 <button class="btn btn-gold btn-sm"><i class="fas fa-shopping-bag me-1"></i>Add to Cart</button>
                             </div>
@@ -354,7 +355,7 @@
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p class="testimonial-text"><?= $t['content'] ?></p>
                         <div class="testimonial-author">
-                            <img src="https://ui-avatars.com/api/?name=<?= urlencode($t['name']) ?>&background=c9a84c&color=fff&size=50" alt="<?= $t['name'] ?>" class="author-avatar">
+                            <img src="<?= \asset('images/placeholders/testimonial-avatar.jpg') ?>" alt="<?= $t['name'] ?>" class="author-avatar">
                             <div>
                                 <h6 class="mb-0"><?= $t['name'] ?></h6>
                                 <small class="text-muted"><?= $t['title'] ?></small>
@@ -394,13 +395,13 @@
             <?php else: ?>
                 <?php 
                 $galleryImages = [
-                    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
-                    'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=400&fit=crop',
+                    \asset('images/placeholders/gallery-1.jpg'),
+                    \asset('images/placeholders/gallery-2.jpg'),
+                    \asset('images/placeholders/gallery-3.jpg'),
+                    \asset('images/placeholders/gallery-4.jpg'),
+                    \asset('images/placeholders/gallery-5.jpg'),
+                    \asset('images/placeholders/gallery-6.jpg'),
+                    \asset('images/placeholders/gallery-7.jpg'),
                 ];
                 foreach ($galleryImages as $img): 
                 ?>
@@ -487,8 +488,7 @@
 <section class="section-padding p-0">
     <div class="container-fluid p-0">
         <div style="height: 400px; width: 100%;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.0!2d-0.186964!3d5.603717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzYnMTMuNCJOIDDCsDExJzEzLjEiVw!5e0!3m2!1sen!2sgh!4v1" 
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <img src="<?= \asset('images/placeholders/map-placeholder.jpg') ?>" alt="Restaurant Location" style="width:100%;height:100%;object-fit:cover;">
         </div>
     </div>
 </section>
