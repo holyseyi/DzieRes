@@ -27,22 +27,14 @@ $user = \auth();
                     <!-- Contact -->
                     <div class="glass-card p-4 mb-4">
                         <h5 class="mb-3"><i class="fas fa-user me-2 text-gold"></i>Contact Information</h5>
-                        <?php if (!$user): ?>
-                            <div class="row g-3">
-                                <div class="col-md-6"><label class="form-label">Full Name</label>
-                                    <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>"></div>
-                                <div class="col-md-6"><label class="form-label">Email</label>
-                                    <input type="email" name="guest_email" class="form-control" required></div>
-                                <div class="col-md-6"><label class="form-label">Phone</label>
-                                    <input type="text" name="guest_phone" class="form-control" required></div>
-                            </div>
-                            <div class="alert alert-info mt-3 mb-0">
-                                <i class="fas fa-info-circle me-1"></i>
-                                <a href="<?= \baseUrl('login') ?>">Login</a> or <a href="<?= \baseUrl('register') ?>">Register</a> to save your details and earn loyalty points.
-                            </div>
-                        <?php else: ?>
-                            <p class="mb-0"><i class="fas fa-circle-check text-success me-2"></i>Ordering as <strong><?= \escape($user->firstname . ' ' . $user->lastname) ?></strong> (<?= \escape($user->email) ?>)</p>
-                        <?php endif; ?>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">Full Name</label>
+                                <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>"></div>
+                            <div class="col-md-6"><label class="form-label">Email</label>
+                                <input type="email" name="guest_email" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Phone</label>
+                                <input type="text" name="guest_phone" class="form-control" required></div>
+                        </div>
                     </div>
 
                     <!-- Order type -->

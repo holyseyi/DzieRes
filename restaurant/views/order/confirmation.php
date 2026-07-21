@@ -10,7 +10,7 @@ $statusClass = match ($order->status) {
     'delivered' => 'success',
     'cancelled', 'rejected' => 'danger',
     'ready' => 'info',
-    default => 'warning'
+    'default' => 'warning'
 };
 ?>
 <section class="section-padding">
@@ -20,7 +20,17 @@ $statusClass = match ($order->status) {
                 <div class="text-center mb-4" data-aos="fade-up">
                     <div class="success-check"><i class="fas fa-check"></i></div>
                     <h2 class="mt-3">Order Confirmed!</h2>
-                    <p class="text-muted">Thank you! Your order <strong>#<?= \escape($order->order_number) ?></strong> has been received.</p>
+                    <p class="text-muted">Thank you! Your order has been received.</p>
+                </div>
+
+                <!-- Receipt / Tracking Code -->
+                <div class="glass-card p-4 mb-4 text-center" style="border: 2px dashed #001a4a;">
+                    <h5 class="mb-2">Your Tracking Code</h5>
+                    <div class="display-4 fw-bold text-gold mb-2" style="letter-spacing: 2px;"><?= \escape($order->order_number) ?></div>
+                    <p class="text-muted mb-3">Use this code to track your order. Save it or screenshot this page.</p>
+                    <button class="btn btn-outline-gold btn-sm" onclick="navigator.clipboard.writeText('<?= \escape($order->order_number) ?>').then(()=>alert('Tracking code copied!'))">
+                        <i class="fas fa-copy me-1"></i>Copy Code
+                    </button>
                 </div>
 
                 <div class="row g-4">

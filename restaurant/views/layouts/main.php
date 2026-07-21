@@ -119,8 +119,9 @@
                         </ul>
                     </div>
                     <?php else: ?>
-                    <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-light btn-sm rounded-pill px-3">Login</a>
-                    <a href="<?= \baseUrl('register') ?>" class="btn btn-gold btn-sm rounded-pill px-3">Sign Up</a>
+                    <button class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">
+                        <i class="fas fa-search-location me-1"></i>Track Order
+                    </button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -280,6 +281,37 @@
     <button id="backToTop" class="btn btn-gold rounded-circle back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Track Order Modal -->
+    <div class="modal fade" id="trackOrderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Track Your Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="trackOrderForm">
+                        <div class="mb-3">
+                            <label class="form-label">Order Tracking Code</label>
+                            <input type="text" name="number" class="form-control" placeholder="e.g. ORD-ABC12345-20260721" required>
+                            <div class="form-text">Enter the tracking code from your receipt.</div>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">Track Order</button>
+                    </form>
+                    <script>
+                        document.getElementById('trackOrderForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            var code = this.number.value.trim();
+                            if (code) {
+                                window.location.href = '<?= \baseUrl('order/track') ?>/' + encodeURIComponent(code);
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
