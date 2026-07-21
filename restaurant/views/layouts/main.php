@@ -119,7 +119,10 @@
                         </ul>
                     </div>
                     <?php else: ?>
-                    <button class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">
+                    <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">
+                        <i class="fas fa-lock me-1"></i>Admin
+                    </a>
+                    <button class="btn btn-gold btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">
                         <i class="fas fa-search-location me-1"></i>Track Order
                     </button>
                     <?php endif; ?>
