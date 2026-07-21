@@ -32,7 +32,7 @@ $faqs = [
                         <div class="accordion-item glass-card border-0 mb-3">
                             <h2 class="accordion-header">
                                 <button class="accordion-button <?= $i > 0 ? 'collapsed' : '' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#faq<?= $i ?>">
-                                    <i class="fas fa-question-circle text-gold me-2"></i><?= \escape($f['q']) ?>
+                                    <?= \icon('question-circle', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i><?= \escape($f['q']) ?>
                                 </button>
                             </h2>
                             <div id="faq<?= $i ?>" class="accordion-collapse collapse <?= $i === 0 ? 'show' : '' ?>" data-bs-parent="#faqAccordion">

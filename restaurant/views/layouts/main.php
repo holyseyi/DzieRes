@@ -65,62 +65,42 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="<?= \baseUrl() ?>">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?= \baseUrl('about') ?>">About Us</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('our-story') ?>">Our Story</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('our-chef') ?>">Our Chef</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item"><a class="nav-link" href="<?= \baseUrl('menu') ?>">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= \baseUrl('about') ?>">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= \baseUrl('reservations') ?>">Reservations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= \baseUrl('events') ?>">Events</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= \baseUrl('contact') ?>">Contact</a></li>
                 </ul>
                 
                 <div class="navbar-actions d-flex align-items-center gap-2">
-                    <!-- Search -->
-                    <button class="btn btn-icon" id="searchToggle" title="Search">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    
-                    <!-- Cart -->
                     <a href="<?= \baseUrl('cart') ?>" class="btn btn-icon position-relative" title="Cart">
-                        <i class="fas fa-shopping-bag"></i>
+                        <?= \icon('cart') ?>
                         <span class="cart-badge" id="cartCount"><?= \getCartCount() ?></span>
                     </a>
                     
-                    <!-- Theme Toggle -->
-                    <button class="btn btn-icon" id="themeToggle" title="Toggle theme">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <!-- Auth -->
                     <?php if (\auth()): ?>
                     <div class="dropdown">
                         <button class="btn btn-icon dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fas fa-user"></i>
+                            <?= \icon('user') ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account') ?>"><i class="fas fa-dashboard me-2"></i>Dashboard</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/orders') ?>"><i class="fas fa-receipt me-2"></i>My Orders</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/favorites') ?>"><i class="fas fa-heart me-2"></i>Favorites</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/loyalty') ?>"><i class="fas fa-gem me-2"></i>Loyalty Points</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('account') ?>"><?= \icon('home', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Dashboard</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('account/orders') ?>"><?= \icon('clock', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>My Orders</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('account/favorites') ?>"><?= \icon('heart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Favorites</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('account/loyalty') ?>"><?= \icon('star', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Loyalty Points</a></li>
                             <?php if (\isAdmin()): ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('admin') ?>"><i class="fas fa-shield-alt me-2"></i>Admin Panel</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('admin') ?>"><?= \icon('cog', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Admin Panel</a></li>
                             <?php endif; ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('logout') ?>"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="<?= \baseUrl('logout') ?>"><?= \icon('sign-out', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Logout</a></li>
                         </ul>
                     </div>
                     <?php else: ?>
                     <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">
-                        <i class="fas fa-lock me-1"></i>Admin
+                        <?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;']) ?>Admin
                     </a>
                     <button class="btn btn-gold btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">
-                        <i class="fas fa-search-location me-1"></i>Track Order
+                        <?= \icon('search-location', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;']) ?>Track Order
                     </button>
                     <?php endif; ?>
                 </div>
@@ -138,7 +118,7 @@
                         <input type="text" name="search" class="form-control search-input" 
                                placeholder="Search menu items..." autocomplete="off" id="globalSearch">
                         <button class="btn btn-gold" type="submit">
-                            <i class="fas fa-search"></i>
+                            <?= \icon('search', []) ?>></i>
                         </button>
                     </div>
                 </form>
@@ -154,7 +134,7 @@
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
         <div class="toast show align-items-center text-bg-success border-0" role="alert">
             <div class="d-flex">
-                <div class="toast-body"><i class="fas fa-check-circle me-2"></i><?= \escape($flash) ?></div>
+                <div class="toast-body"><?= \icon('check', ['style' => 'width:1.2em;height:1.2em;margin-right:0.5rem;vertical-align:-0.15em;']) ?><?= \escape($flash) ?></div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
@@ -165,7 +145,7 @@
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
         <div class="toast show align-items-center text-bg-danger border-0" role="alert">
             <div class="d-flex">
-                <div class="toast-body"><i class="fas fa-exclamation-circle me-2"></i><?= \escape($flash) ?></div>
+                <div class="toast-body"><?= \icon('exclamation', ['style' => 'width:1.2em;height:1.2em;margin-right:0.5rem;vertical-align:-0.15em;']) ?><?= \escape($flash) ?></div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
@@ -176,7 +156,7 @@
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
         <div class="toast show align-items-center text-bg-info border-0" role="alert">
             <div class="d-flex">
-                <div class="toast-body"><i class="fas fa-info-circle me-2"></i><?= \escape($flash) ?></div>
+                <div class="toast-body"><?= \icon('info', ['style' => 'width:1.2em;height:1.2em;margin-right:0.5rem;vertical-align:-0.15em;']) ?><?= \escape($flash) ?></div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
@@ -201,61 +181,25 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="footer-brand">
-                            <h3 class="brand-text">Dzie<span class="text-gold">Res</span></h3>
-                            <p class="mt-3 text-muted"><?= \escape(\getSetting('restaurant_tagline', 'Where Every Meal Tells a Story')) ?>. Experience the finest cuisine in an elegant atmosphere, crafted with passion and served with excellence.</p>
-                            <div class="social-links mt-3">
-                                <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                                <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
+                    <div class="col-lg-6">
+                        <h3 class="brand-text">Dzie<span class="text-gold">Res</span></h3>
+                        <p class="text-muted mt-2"><?= \escape(\getSetting('restaurant_tagline', 'Where Every Meal Tells a Story')) ?>. Experience the finest cuisine in an elegant atmosphere.</p>
                     </div>
                     
-                    <div class="col-lg-2 col-md-4">
-                        <h5 class="footer-title">Quick Links</h5>
-                        <ul class="footer-links">
-                            <li><a href="<?= \baseUrl('about') ?>">About Us</a></li>
-                            <li><a href="<?= \baseUrl('menu') ?>">Our Menu</a></li>
-                            <li><a href="<?= \baseUrl('reservations') ?>">Reservations</a></li>
-                            <li><a href="<?= \baseUrl('events') ?>">Events</a></li>
-                            <li><a href="<?= \baseUrl('gallery') ?>">Gallery</a></li>
-                            <li><a href="<?= \baseUrl('blog') ?>">Blog</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-lg-2 col-md-4">
-                        <h5 class="footer-title">Support</h5>
-                        <ul class="footer-links">
-                            <li><a href="<?= \baseUrl('faqs') ?>">FAQs</a></li>
-                            <li><a href="<?= \baseUrl('contact') ?>">Contact Us</a></li>
-                            <li><a href="<?= \baseUrl('careers') ?>">Careers</a></li>
-                            <li><a href="<?= \baseUrl('privacy-policy') ?>">Privacy Policy</a></li>
-                            <li><a href="<?= \baseUrl('terms') ?>">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-4">
-                        <h5 class="footer-title">Contact Info</h5>
+                    <div class="col-lg-6">
+                        <h5 class="footer-title">Contact</h5>
                         <ul class="footer-contact">
                             <li>
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="icon icon-map-marker" style="width:1.1em;height:1.1em;color:var(--gold);margin-top:4px;flex-shrink:0;"></i>
                                 <span><?= \escape(\getSetting('restaurant_address', '123 Independence Avenue, Accra, Ghana')) ?></span>
                             </li>
                             <li>
-                                <i class="fas fa-phone"></i>
+                                <i class="icon icon-phone" style="width:1.1em;height:1.1em;color:var(--gold);margin-top:4px;flex-shrink:0;"></i>
                                 <span><?= \escape(\getSetting('restaurant_phone', '+233 50 000 0000')) ?></span>
                             </li>
                             <li>
-                                <i class="fas fa-envelope"></i>
+                                <i class="icon icon-message" style="width:1.1em;height:1.1em;color:var(--gold);margin-top:4px;flex-shrink:0;"></i>
                                 <span><?= \escape(\getSetting('restaurant_email', 'info@dzieres.com')) ?></span>
-                            </li>
-                            <li>
-                                <i class="fas fa-clock"></i>
-                                <span><?= \escape(\getSetting('opening_hours', 'Mon - Sun: 7:00 AM - 11:00 PM')) ?></span>
                             </li>
                         </ul>
                     </div>
@@ -265,21 +209,14 @@
         
         <div class="footer-bottom">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <p class="mb-0">&copy; <?= date('Y') ?> DzieRes Restaurant. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <p class="mb-0">Crafted with <i class="fas fa-heart text-danger"></i> in Accra</p>
-                    </div>
-                </div>
+                <p class="mb-0 text-center">&copy; <?= date('Y') ?> DzieRes Restaurant. Crafted with <i class="icon icon-heart" style="width:1em;height:1em;color:#dc3545;vertical-align:-0.15em;"></i> in Accra</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top -->
     <button id="backToTop" class="btn btn-gold rounded-circle back-to-top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
+        <?= \icon('arrow-up', ['width' => '24', 'height' => '24']) ?>
     </button>
 
     <!-- Track Order Modal -->

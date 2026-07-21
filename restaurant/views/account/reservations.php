@@ -26,9 +26,9 @@
                                         <span class="badge bg-warning text-dark"><?= ucfirst($r->status) ?></span>
                                     </div>
                                     <div class="small text-muted mt-2">
-                                        <div><i class="far fa-calendar me-1"></i><?= \formatDate($r->reservation_date) ?> at <?= \formatTime($r->reservation_time) ?></div>
-                                        <div><i class="fas fa-users me-1"></i><?= $r->number_of_guests ?> guests</div>
-                                        <?php if ($r->table_number): ?><div><i class="fas fa-chair me-1"></i>Table <?= \escape($r->table_number) ?></div><?php endif; ?>
+                                        <div><?= \icon('calendar', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \formatDate($r->reservation_date) ?> at <?= \formatTime($r->reservation_time) ?></div>
+                                        <div><?= \icon('user-plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $r->number_of_guests ?> guests</div>
+                                        <?php if ($r->table_number): ?><div><?= \icon('chair', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Table <?= \escape($r->table_number) ?></div><?php endif; ?>
                                     </div>
                                 </div>
                             </div>

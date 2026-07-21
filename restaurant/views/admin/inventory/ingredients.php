@@ -8,11 +8,11 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Ingredients</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#ingModal"><i class="fas fa-plus me-1"></i>Add Ingredient</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#ingModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Ingredient</button>
 </div>
 
 <div class="card border-0 shadow-sm mb-4">
-    <div class="card-header bg-white"><h6 class="mb-0"><i class="fas fa-plus-circle me-2 text-gold"></i>Add Stock / Purchase</h6></div>
+    <div class="card-header bg-white"><h6 class="mb-0"><?= \icon('plus-circle', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Add Stock / Purchase</h6></div>
     <div class="card-body">
         <form method="POST" action="<?= \baseUrl('admin/inventory/stock/add') ?>" class="row g-2 align-items-end">
             <?= \csrfField() ?>

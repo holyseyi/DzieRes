@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="text-center mb-4">
-                    <div class="success-check"><i class="fas fa-check"></i></div>
+                    <div class="success-check"><?= \icon('check', []) ?>></i></div>
                     <h2 class="mt-3">Reservation Requested!</h2>
                     <p class="text-muted">Reference: <strong>#<?= \escape($reservation->reservation_number) ?></strong></p>
                 </div>

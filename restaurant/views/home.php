@@ -1,5 +1,5 @@
 <!-- ============================================ -->
-<!-- HERO SECTION -->
+<!-- HERO -->
 <!-- ============================================ -->
 <section class="hero-section" id="home">
     <div class="hero-bg"></div>
@@ -7,57 +7,25 @@
         <div class="hero-badge">Welcome to DzieRes</div>
         <h1 class="hero-title">Where Every Meal<br>Tells a Story</h1>
         <p class="hero-subtitle">Experience Fine Dining at Its Best</p>
-        <p class="hero-description">Indulge in exquisite cuisine crafted with passion, served in an elegant atmosphere that transforms every meal into an unforgettable experience.</p>
         <div class="hero-buttons">
             <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg">
-                <i class="fas fa-utensils me-2"></i>Order Food
+                <?= \icon('utensils', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>Order Food
             </a>
             <a href="<?= \baseUrl('reservations') ?>" class="btn btn-outline-light btn-lg">
-                <i class="fas fa-calendar-check me-2"></i>Book a Table
+                <?= \icon('calendar-check', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>Book a Table
             </a>
-        </div>
-        <p class="text-white-50 mt-3 small"><i class="fas fa-lock me-1"></i>Secure Checkout &nbsp;·&nbsp; <i class="fas fa-clock me-1"></i>Fast Delivery &nbsp;·&nbsp; <i class="fas fa-star me-1"></i>Fresh Ingredients</p>
-    </div>
-    
-    <div class="hero-stats">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <div class="hero-stat-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="stat-number" data-count="<?= $stats['years']->count ?? 5 ?>">0</div>
-                        <div class="stat-label">Years in Business</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="hero-stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number" data-count="<?= $stats['meals_served']->count ?? 50000 ?>">0</div>
-                        <div class="stat-label">Meals Served</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="hero-stat-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-number" data-count="<?= $stats['happy_customers']->count ?? 10000 ?>">0</div>
-                        <div class="stat-label">Happy Customers</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="hero-stat-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-number" data-count="<?= $stats['branches']->count ?? 3 ?>">0</div>
-                        <div class="stat-label">Branches</div>
-                    </div>
-                </div>
         </div>
     </div>
 </section>
 
 <!-- ============================================ -->
-<!-- ALL FOODS SECTION -->
+<!-- POPULAR MENU -->
 <!-- ============================================ -->
 <section class="section-padding" id="menu">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <p class="section-subtitle">Discover Our Menu</p>
-            <h2 class="section-title">All Foods</h2>
+            <p class="section-subtitle">Our Menu</p>
+            <h2 class="section-title">Popular Dishes</h2>
             <div class="section-divider mx-auto"></div>
             <p class="text-muted">Explore our complete selection of dishes</p>
         </div>
@@ -71,12 +39,9 @@
                             <a href="<?= \baseUrl('menu/' . $food->slug) ?>">
                                 <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>" loading="lazy">
                             </a>
-                            <?php if ($food->discount_percent > 0): ?>
-                                <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
-                            <?php endif; ?>
                             <div class="food-overlay">
                                 <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                    <i class="fas fa-shopping-bag me-1"></i>Add to Cart
+                                    <?= \icon('cart', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add to Cart
                                 </button>
                             </div>
                         </div>
@@ -88,20 +53,13 @@
                                 </a>
                             </h5>
                             <p class="food-description"><?= \truncate($food->description ?? '', 70) ?></p>
-                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                <span class="badge bg-light text-dark"><i class="far fa-clock me-1"></i><?= $food->preparation_time ?? 15 ?> min</span>
-                                <span class="badge bg-light text-dark"><i class="fas fa-fire me-1"></i><?= $food->calories ?? 0 ?> cal</span>
-                            </div>
                         </div>
                         <div class="food-footer">
                             <div class="food-price">
                                 <?= \formatPrice($food->final_price ?? $food->price) ?>
-                                <?php if ($food->discount_percent > 0): ?>
-                                    <span class="original-price"><?= \formatPrice($food->price) ?></span>
-                                <?php endif; ?>
                             </div>
                             <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                                <i class="far fa-heart"></i>
+                                <?= \icon('heart', []) ?>
                             </button>
                         </div>
                     </div>
@@ -109,7 +67,7 @@
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="col-12 text-center py-5">
-                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <?= \icon('utensils', ['style' => 'width:3em;height:3em;color:#6c757d;']) ?>
                     <p class="text-muted">No menu items available yet.</p>
                 </div>
             <?php endif; ?>
@@ -117,201 +75,11 @@
         
         <div class="text-center mt-5">
             <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg">
-                <i class="fas fa-utensils me-2"></i>View Full Menu
+                <?= \icon('utensils', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>View Full Menu
             </a>
         </div>
     </div>
 </section>
-
-<!-- ============================================ -->
-<!-- TODAY'S SPECIAL -->
-<!-- ============================================ -->
-<?php if (!empty($todaysSpecial)): ?>
-<section class="section-padding bg-light-section">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <p class="section-subtitle">Chef's Selection</p>
-            <h2 class="section-title">Today's Special</h2>
-            <div class="section-divider mx-auto"></div>
-        </div>
-        
-        <div class="row g-4">
-            <?php foreach ($todaysSpecial as $food): ?>
-            <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                <div class="food-card">
-                    <div class="food-image">
-                        <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
-                        <div class="food-badge">
-                            <span class="badge bg-gold">Today's Special</span>
-                        </div>
-                        <?php if ($food->discount_percent > 0): ?>
-                        <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
-                        <?php endif; ?>
-                        <div class="food-overlay">
-                            <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                <i class="fas fa-shopping-bag me-1"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="food-body">
-                        <p class="food-category"><?= \escape($food->category_name ?? '') ?></p>
-                        <h5 class="food-name"><?= \escape($food->name) ?></h5>
-                        <p class="food-description"><?= \truncate($food->description ?? '', 80) ?></p>
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="badge bg-light text-dark"><i class="far fa-clock me-1"></i><?= $food->preparation_time ?? 15 ?> min</span>
-                            <span class="badge bg-light text-dark"><i class="fas fa-fire me-1"></i><?= $food->calories ?? 0 ?> cal</span>
-                        </div>
-                    </div>
-                    <div class="food-footer">
-                        <div class="food-price">
-                            <?= \formatPrice($food->final_price ?? $food->price) ?>
-                            <?php if ($food->discount_percent > 0): ?>
-                            <span class="original-price"><?= \formatPrice($food->price) ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
-<!-- ============================================ -->
-<!-- FEATURED MEALS -->
-<!-- ============================================ -->
-<section class="section-padding">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-5" data-aos="fade-up">
-            <div>
-                <p class="section-subtitle mb-0">Premium Selection</p>
-                <h2 class="section-title mb-0">Featured Meals</h2>
-            </div>
-            <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-gold d-none d-md-inline-flex">
-                View All Menu <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
-        
-        <div class="row g-4">
-            <?php if (!empty($featuredMeals)): ?>
-                <?php foreach ($featuredMeals as $food): ?>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                    <div class="food-card">
-                        <div class="food-image">
-                            <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
-                            <?php if ($food->discount_percent > 0): ?>
-                            <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
-                            <?php endif; ?>
-                            <div class="food-overlay">
-                                <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                    <i class="fas fa-shopping-bag me-1"></i>Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                        <div class="food-body">
-                            <p class="food-category"><?= \escape($food->category_name ?? '') ?></p>
-                            <h5 class="food-name"><?= \escape($food->name) ?></h5>
-                            <p class="food-description"><?= \truncate($food->description ?? '', 80) ?></p>
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <span class="badge bg-light text-dark"><i class="far fa-clock me-1"></i><?= $food->preparation_time ?? 15 ?> min</span>
-                                <span class="badge bg-light text-dark"><i class="fas fa-fire me-1"></i><?= $food->calories ?? 0 ?> cal</span>
-                            </div>
-                        </div>
-                        <div class="food-footer">
-                            <div class="food-price">
-                                <?= \formatPrice($food->final_price ?? $food->price) ?>
-                                <?php if ($food->discount_percent > 0): ?>
-                                <span class="original-price"><?= \formatPrice($food->price) ?></span>
-                                <?php endif; ?>
-                            </div>
-                            <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <?php for ($i = 1; $i <= 4; $i++): ?>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                    <div class="food-card">
-                        <div class="food-image">
-                            <img src="<?= \asset('images/placeholders/featured-dish.jpg') ?>" alt="Featured Dish">
-                            <div class="food-overlay">
-                                <button class="btn btn-gold btn-sm"><i class="fas fa-shopping-bag me-1"></i>Add to Cart</button>
-                            </div>
-                        </div>
-                        <div class="food-body">
-                            <p class="food-category">Category</p>
-                            <h5 class="food-name">Signature Dish Name</h5>
-                            <p class="food-description">A delightful culinary creation that will tantalize your taste buds.</p>
-                        </div>
-                        <div class="food-footer">
-                            <div class="food-price">₵45.00</div>
-                            <button class="btn btn-light-gold btn-sm"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <?php endfor; ?>
-            <?php endif; ?>
-        </div>
-        
-        <div class="text-center mt-4 d-md-none">
-            <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-gold">View All Menu <i class="fas fa-arrow-right ms-2"></i></a>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================ -->
-<!-- CHEF RECOMMENDATIONS -->
-<!-- ============================================ -->
-<?php if (!empty($chefRecommendations)): ?>
-<section class="section-padding bg-dark-section">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <p class="section-subtitle">From Our Kitchen</p>
-            <h2 class="section-title text-white">Chef's Recommendations</h2>
-            <div class="section-divider mx-auto"></div>
-            <p class="text-white-50">Handpicked by our master chefs for an extraordinary dining experience</p>
-        </div>
-        
-        <div class="row g-4">
-            <?php foreach ($chefRecommendations as $food): ?>
-            <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                <div class="food-card">
-                    <div class="food-image">
-                        <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
-                        <div class="food-badge">
-                            <span class="badge bg-warning text-dark">Chef's Pick</span>
-                        </div>
-                        <div class="food-overlay">
-                            <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                <i class="fas fa-shopping-bag me-1"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="food-body">
-                        <p class="food-category"><?= \escape($food->category_name ?? '') ?></p>
-                        <h5 class="food-name"><?= \escape($food->name) ?></h5>
-                        <p class="food-description"><?= \truncate($food->description ?? '', 80) ?></p>
-                    </div>
-                    <div class="food-footer">
-                        <div class="food-price"><?= \formatPrice($food->final_price ?? $food->price) ?></div>
-                        <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
 
 <!-- ============================================ -->
 <!-- TESTIMONIALS -->
@@ -329,7 +97,7 @@
                 <?php foreach ($testimonials as $testimonial): ?>
                 <div class="col-md-6 col-lg-4" data-aos="fade-up">
                     <div class="testimonial-card">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="quote-icon"><?= \icon('quote-left', []) ?></div>
                         <p class="testimonial-text"><?= \escape($testimonial->content) ?></p>
                         <div class="testimonial-author">
                             <img src="<?= \uploadUrl($testimonial->image) ?>" alt="<?= \escape($testimonial->guest_name) ?>" class="author-avatar">
@@ -352,7 +120,7 @@
                 ?>
                 <div class="col-md-6 col-lg-4" data-aos="fade-up">
                     <div class="testimonial-card">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="quote-icon"><?= \icon('quote-left', []) ?></div>
                         <p class="testimonial-text"><?= $t['content'] ?></p>
                         <div class="testimonial-author">
                             <img src="<?= \asset('images/placeholders/testimonial-avatar.jpg') ?>" alt="<?= $t['name'] ?>" class="author-avatar">
@@ -370,54 +138,6 @@
 </section>
 
 <!-- ============================================ -->
-<!-- GALLERY -->
-<!-- ============================================ -->
-<section class="section-padding">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <p class="section-subtitle">Visual Journey</p>
-            <h2 class="section-title">Our Gallery</h2>
-            <div class="section-divider mx-auto"></div>
-        </div>
-    </div>
-    
-    <div class="container-fluid px-3">
-        <div class="gallery-grid" data-aos="fade-up">
-            <?php if (!empty($gallery)): ?>
-                <?php foreach ($gallery as $index => $image): ?>
-                <div class="gallery-item" onclick="openLightbox('<?= \uploadUrl($image->image) ?>', '<?= \escape($image->title ?? '') ?>')">
-                    <img src="<?= \uploadUrl($image->image) ?>" alt="<?= \escape($image->title ?? 'Gallery Image') ?>">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus fa-2x text-white"></i>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <?php 
-                $galleryImages = [
-                    \asset('images/placeholders/gallery-1.jpg'),
-                    \asset('images/placeholders/gallery-2.jpg'),
-                    \asset('images/placeholders/gallery-3.jpg'),
-                    \asset('images/placeholders/gallery-4.jpg'),
-                    \asset('images/placeholders/gallery-5.jpg'),
-                    \asset('images/placeholders/gallery-6.jpg'),
-                    \asset('images/placeholders/gallery-7.jpg'),
-                ];
-                foreach ($galleryImages as $img): 
-                ?>
-                <div class="gallery-item" onclick="openLightbox('<?= $img ?>')">
-                    <img src="<?= $img ?>" alt="Gallery Image">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus fa-2x text-white"></i>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================ -->
 <!-- NEWSLETTER -->
 <!-- ============================================ -->
 <section class="newsletter-section">
@@ -425,70 +145,17 @@
         <div class="newsletter-content text-center" data-aos="fade-up">
             <p class="section-subtitle">Stay Connected</p>
             <h2 class="section-title text-white mb-3">Subscribe to Our Newsletter</h2>
-            <p class="text-white-50 mb-4">Get exclusive offers, new menu updates, and special event invitations delivered to your inbox.</p>
+            <p class="text-white-50 mb-4">Get exclusive offers and new menu updates delivered to your inbox.</p>
             
             <form class="newsletter-form" method="POST" action="<?= \baseUrl('newsletter/subscribe') ?>">
                 <?= \csrfField() ?>
                 <div class="input-group">
                     <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
                     <button class="btn btn-gold" type="submit">
-                        <i class="fas fa-paper-plane me-2"></i>Subscribe
+                        <?= \icon('send', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>Subscribe
                     </button>
                 </div>
             </form>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================ -->
-<!-- BLOG PREVIEW -->
-<!-- ============================================ -->
-<?php if (!empty($blogPosts)): ?>
-<section class="section-padding bg-light-section">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-5" data-aos="fade-up">
-            <div>
-                <p class="section-subtitle mb-0">Latest Updates</p>
-                <h2 class="section-title mb-0">From Our Blog</h2>
-            </div>
-            <a href="<?= \baseUrl('blog') ?>" class="btn btn-outline-gold d-none d-md-inline-flex">
-                View All Posts <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
-        
-        <div class="row g-4">
-            <?php foreach ($blogPosts as $post): ?>
-            <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                <div class="food-card">
-                    <div class="food-image" style="height: 200px;">
-                        <img src="<?= \uploadUrl($post->image) ?>" alt="<?= \escape($post->title) ?>">
-                    </div>
-                    <div class="food-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="badge bg-gold"><?= \escape($post->category_name ?? 'General') ?></span>
-                            <small class="text-muted"><?= \formatDate($post->published_at ?? $post->created_at) ?></small>
-                        </div>
-                        <h5 class="food-name"><?= \escape($post->title) ?></h5>
-                        <p class="food-description"><?= \truncate($post->excerpt ?? $post->content ?? '', 100) ?></p>
-                        <a href="<?= \baseUrl('blog/' . $post->slug) ?>" class="btn btn-link text-gold p-0">
-                            Read More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
-<!-- ============================================ -->
-<!-- GOOGLE MAPS -->
-<!-- ============================================ -->
-<section class="section-padding p-0">
-    <div class="container-fluid p-0">
-        <div style="height: 400px; width: 100%;">
-            <img src="<?= \asset('images/placeholders/map-placeholder.jpg') ?>" alt="Restaurant Location" style="width:100%;height:100%;object-fit:cover;">
         </div>
     </div>
 </section>

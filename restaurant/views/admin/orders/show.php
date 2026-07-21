@@ -10,10 +10,10 @@ $statuses = ['pending', 'accepted', 'preparing', 'cooking', 'ready', 'delivered'
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <a href="<?= \baseUrl('admin/orders') ?>" class="text-muted small"><i class="fas fa-arrow-left me-1"></i>Back to Orders</a>
+        <a href="<?= \baseUrl('admin/orders') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Back to Orders</a>
         <h4 class="mb-0 mt-1">Order #<?= \escape($order->order_number) ?></h4>
     </div>
-    <button class="btn btn-outline-gold" onclick="window.print()"><i class="fas fa-print me-1"></i>Print Receipt</button>
+    <button class="btn btn-outline-gold" onclick="window.print()"><?= \icon('print', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Print Receipt</button>
 </div>
 
 <div class="row g-4">

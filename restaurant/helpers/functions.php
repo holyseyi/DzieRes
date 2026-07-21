@@ -766,6 +766,98 @@ function asset(string $path): string
     return baseUrl('assets/' . ltrim($path, '/'));
 }
 
+function icon(string $name, array $attrs = []): string
+{
+    static $map = [
+        'search' => 'search.svg',
+        'cart' => 'cart.svg',
+        'message' => 'message.svg',
+        'send' => 'send.svg',
+        'user' => 'user.svg',
+        'heart' => 'heart.svg',
+        'lock' => 'lock.svg',
+        'clock' => 'clock.svg',
+        'star' => 'star.svg',
+        'utensils' => 'utensils.svg',
+        'calendar-check' => 'calendar-check.svg',
+        'user-plus' => 'user-plus.svg',
+        'bell' => 'bell.svg',
+        'bars' => 'bars.svg',
+        'cog' => 'cog.svg',
+        'sign-out' => 'sign-out.svg',
+        'home' => 'home.svg',
+        'map-marker' => 'map-marker.svg',
+        'phone' => 'phone.svg',
+        'search-location' => 'search-location.svg',
+        'times' => 'times.svg',
+        'check' => 'check.svg',
+        'exclamation' => 'exclamation.svg',
+        'info' => 'info.svg',
+        'quote-left' => 'quote-left.svg',
+        'gem' => 'gem.svg',
+        'shield' => 'shield.svg',
+        'moon' => 'moon.svg',
+        'search-plus' => 'search-plus.svg',
+        'receipt' => 'receipt.svg',
+        'times-circle' => 'times.svg',
+        'times' => 'times.svg',
+        'exclamation-triangle' => 'exclamation.svg',
+        'gauge' => 'gauge.svg',
+        'leaf' => 'leaf.svg',
+        'location-dot' => 'location-dot.svg',
+        'bookmark' => 'bookmark.svg',
+        'circle' => 'circle.svg',
+        'briefcase' => 'briefcase.svg',
+        'paint-brush' => 'utensils.svg',
+        'hand-holding-heart' => 'heart.svg',
+        'building' => 'home.svg',
+        'store' => 'home.svg',
+        'warehouse' => 'box.svg',
+        'truck-loading' => 'cart.svg',
+        'clipboard-check' => 'check.svg',
+        'tasks' => 'check.svg',
+        'user-check' => 'user.svg',
+        'user-edit' => 'user.svg',
+        'user-times' => 'user.svg',
+        'file-invoice' => 'receipt.svg',
+        'print' => 'receipt.svg',
+        'ban' => 'times.svg',
+        'redo' => 'arrow-up.svg',
+        'sync' => 'arrow-up.svg',
+        'undo' => 'sign-out.svg',
+        'filter' => 'search.svg',
+        'plus' => 'plus.svg',
+        'edit' => 'cog.svg',
+        'trash' => 'trash.svg',
+        'eye' => 'search.svg',
+        'download' => 'download.svg',
+        'upload' => 'send.svg',
+        'file-alt' => 'receipt.svg',
+        'home' => 'home.svg',
+        'globe' => 'home.svg',
+        'sort-amount-down' => 'chart-bar.svg',
+        'calendar' => 'calendar-check.svg',
+        'fire' => 'fire.svg',
+        'plus-circle' => 'plus-circle.svg',
+        'chart-area' => 'chart-area.svg',
+        'chart-line' => 'chart-line.svg',
+        'chart-pie' => 'chart-pie.svg',
+        'arrow-left' => 'arrow-left.svg',
+        'kitchen-set' => 'kitchen-set.svg',
+    ];
+
+    $file = $map[$name] ?? 'search.svg';
+    $src = asset('images/icons/' . $file);
+
+    $html = '<img src="' . $src . '" alt="' . $name . '" class="icon icon-' . $name . '"';
+    foreach ($attrs as $k => $v) {
+        $html .= ' ' . $k . '="' . htmlspecialchars($v, ENT_QUOTES) . '"';
+    }
+    $html .= '>';
+
+    return $html;
+}
+
 function uploadUrl(?string $path): string
 {
     if (empty($path)) {

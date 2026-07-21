@@ -24,8 +24,8 @@
         <h1 class="error-title">Page Not Found</h1>
         <p class="error-text">The page you're looking for doesn't exist or has been moved.</p>
         <div class="d-flex gap-3 justify-content-center">
-            <a href="<?= \baseUrl() ?>" class="btn-gold"><i class="fas fa-home me-1"></i>Go Home</a>
-            <a href="<?= \baseUrl('menu') ?>" class="btn-gold" style="background: transparent; border: 2px solid #001a4a; -webkit-text-fill-color: #001a4a;"><i class="fas fa-utensils me-1"></i>View Menu</a>
+            <a href="<?= \baseUrl() ?>" class="btn-gold"><?= \icon('home', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Go Home</a>
+            <a href="<?= \baseUrl('menu') ?>" class="btn-gold" style="background: transparent; border: 2px solid #001a4a; -webkit-text-fill-color: #001a4a;"><?= \icon('utensils', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>View Menu</a>
         </div>
     </div>
 </body>

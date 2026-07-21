@@ -28,14 +28,14 @@ if ($order->status === 'cancelled' || $order->status === 'rejected') {
             <div class="col-lg-8">
                 <?php if ($currentIndex === -1): ?>
                     <div class="alert alert-danger text-center">
-                        <i class="fas fa-times-circle fa-2x mb-2"></i>
+                        <?= \icon('times', ['style' => 'width:2em;height:2em;']) ?>></i>
                         <h4>This order was <?= ucfirst($order->status) ?></h4>
                     </div>
                 <?php else: ?>
                     <div class="order-tracker mb-5">
                         <?php $i = 0; foreach ($steps as $key => $label): ?>
                             <div class="tracker-step <?= $i <= $currentIndex ? 'active' : '' ?>">
-                                <div class="tracker-icon"><i class="fas fa-<?= $i <= $currentIndex ? 'check' : 'circle' ?>"></i></div>
+                                <div class="tracker-icon"><?= \icon($i <= $currentIndex ? 'check' : 'circle', ['style' => 'width:2em;height:2em;']) ?></div>
                                 <span><?= $label ?></span>
                             </div>
                             <?php if ($i < count($steps) - 1): ?><div class="tracker-line <?= $i < $currentIndex ? 'active' : '' ?>"></div><?php endif; ?>

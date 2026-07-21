@@ -28,7 +28,7 @@ $restaurantLocations = $restaurantLocations ?? [];
                 <div class="col-lg-8">
                     <!-- Contact -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><i class="fas fa-user me-2 text-gold"></i>Your Details</h5>
+                        <h5 class="mb-3"><?= \icon('user', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Your Details</h5>
                         <p class="text-muted small mb-3">No account needed. We'll send your order updates to this phone number.</p>
                         <div class="row g-3">
                             <div class="col-md-6"><label class="form-label">Full Name</label>
@@ -42,19 +42,19 @@ $restaurantLocations = $restaurantLocations ?? [];
 
                     <!-- Order type -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><i class="fas fa-box me-2 text-gold"></i>Order Type</h5>
+                        <h5 class="mb-3"><?= \icon('box', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Order Type</h5>
                         <div class="order-type-selector">
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="delivery" checked>
-                                <span><i class="fas fa-motorcycle"></i> Delivery</span>
+                                <span><?= \icon('motorcycle', []) ?>></i> Delivery</span>
                             </label>
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="pickup">
-                                <span><i class="fas fa-shopping-bag"></i> Pickup</span>
+                                <span><?= \icon('cart', []) ?>></i> Pickup</span>
                             </label>
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="dine_in">
-                                <span><i class="fas fa-chair"></i> Dine In</span>
+                                <span><?= \icon('chair', []) ?>></i> Dine In</span>
                             </label>
                         </div>
 
@@ -74,7 +74,7 @@ $restaurantLocations = $restaurantLocations ?? [];
                                 <div class="col-12">
                                     <label class="form-label">Pickup Location</label>
                                     <button type="button" id="locateMeBtn" class="btn btn-outline-gold btn-sm mb-2">
-                                        <i class="fas fa-map-marker-alt me-1"></i>Use My Location
+                                        <?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Use My Location
                                     </button>
                                     <select name="pickup_location" id="pickupLocationSelect" class="form-select">
                                         <option value="">Select nearest location</option>
@@ -109,21 +109,21 @@ $restaurantLocations = $restaurantLocations ?? [];
 
                     <!-- Payment -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><i class="fas fa-credit-card me-2 text-gold"></i>Payment Method</h5>
+                        <h5 class="mb-3"><?= \icon('credit-card', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Payment Method</h5>
                         <div class="payment-methods">
                             <?php foreach (['cash' => 'Cash', 'card' => 'Card', 'mobile_money' => 'Mobile Money', 'pay_on_delivery' => 'Pay on Delivery'] as $val => $label): ?>
                                 <label class="payment-option">
                                     <input type="radio" name="payment_method" value="<?= $val ?>" <?= $val === 'cash' ? 'checked' : '' ?>>
-                                    <span><i class="fas fa-money-bill-wave me-1"></i><?= $label ?></span>
+                                    <span><?= \icon('money-bill-wave', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $label ?></span>
                                 </label>
                             <?php endforeach; ?>
                         </div>
-                        <p class="text-muted small mt-2 mb-0"><i class="fas fa-lock me-1"></i>This is a demo gateway. No real payment is processed.</p>
+                        <p class="text-muted small mt-2 mb-0"><?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>This is a demo gateway. No real payment is processed.</p>
                     </div>
 
                     <!-- Notes -->
                     <div class="glass-card p-4">
-                        <h5 class="mb-3"><i class="fas fa-note-sticky me-2 text-gold"></i>Special Instructions</h5>
+                        <h5 class="mb-3"><?= \icon('note-sticky', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Special Instructions</h5>
                         <textarea name="special_notes" class="form-control" rows="3" placeholder="Allergies, preferences, etc."></textarea>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
     <div class="container">
         <?php if (empty($cartItems)): ?>
             <div class="text-center py-5">
-                <i class="fas fa-shopping-bag fa-4x text-muted mb-3"></i>
+                <?= \icon('cart', ['style' => 'width:4em;height:4em;color:#6c757d;']) ?>></i>
                 <h4>Your cart is empty</h4>
                 <p class="text-muted">Add some delicious items to get started.</p>
                 <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg mt-2">Browse Menu</a>
@@ -52,13 +52,13 @@
                                     <strong><?= \formatPrice($item->total_price) ?></strong>
                                 </div>
                                 <button class="cart-item-remove remove-item" data-id="<?= $item->food_id ?>" title="Remove">
-                                    <i class="fas fa-trash"></i>
+                                    <?= \icon('trash', []) ?>></i>
                                 </button>
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="mt-3">
-                        <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-gold"><i class="fas fa-arrow-left me-2"></i>Continue Shopping</a>
+                        <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-gold"><?= \icon('arrow-left', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>></i>Continue Shopping</a>
                     </div>
                 </div>
 

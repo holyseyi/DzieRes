@@ -38,6 +38,6 @@
     <p class="text-center small text-muted mb-0">Thank you for dining with us!</p>
 </div>
 <div class="text-center mt-3 no-print">
-    <button class="btn btn-gold" onclick="window.print()"><i class="fas fa-print me-1"></i>Print Receipt</button>
+    <button class="btn btn-gold" onclick="window.print()"><?= \icon('print', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Print Receipt</button>
     <a href="<?= \baseUrl('admin/orders/' . $order->id) ?>" class="btn btn-outline-secondary">Back</a>
 </div>

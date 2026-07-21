@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Gallery</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#galleryModal"><i class="fas fa-upload me-1"></i>Upload Image</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#galleryModal"><?= \icon('upload', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Upload Image</button>
 </div>
 
 <div class="row g-3">
@@ -19,7 +19,7 @@
                     <div class="small text-truncate"><?= \escape($img->title ?? 'Untitled') ?></div>
                     <div class="d-flex justify-content-between align-items-center mt-2">
                         <span class="badge bg-light text-dark"><?= ucfirst($img->category ?? 'food') ?></span>
-                        <button class="btn btn-sm btn-outline-danger gallery-del" data-id="<?= $img->id ?>"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-outline-danger gallery-del" data-id="<?= $img->id ?>"><?= \icon('trash', []) ?>></i></button>
                     </div>
                 </div>
             </div>

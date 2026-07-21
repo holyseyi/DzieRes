@@ -58,28 +58,28 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                 <div class="row g-3 mb-4">
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <i class="fas fa-clock text-gold"></i>
+                            <?= \icon('clock', ['class=" text-gold"']) ?>></i>
                             <div class="fw-bold"><?= $food->preparation_time ?? 15 ?> min</div>
                             <small class="text-muted">Prep Time</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <i class="fas fa-fire text-gold"></i>
+                            <?= \icon('fire', ['class=" text-gold"']) ?>></i>
                             <div class="fw-bold"><?= $food->calories ?? 0 ?></div>
                             <small class="text-muted">Calories</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <i class="fas fa-pepper-hot text-gold"></i>
+                            <?= \icon('pepper-hot', ['class=" text-gold"']) ?>></i>
                             <div class="fw-bold text-capitalize"><?= str_replace('_', ' ', $food->spice_level ?? 'mild') ?></div>
                             <small class="text-muted">Spice</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <i class="fas fa-utensils text-gold"></i>
+                            <?= \icon('utensils', ['class=" text-gold"']) ?>></i>
                             <div class="fw-bold text-capitalize"><?= $food->unit ?? 'plate' ?></div>
                             <small class="text-muted">Serving</small>
                         </div>
@@ -112,10 +112,10 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                             <button type="button" class="qty-btn" data-action="inc">+</button>
                         </div>
                         <button class="btn btn-gold btn-lg flex-grow-1 add-to-cart" data-food-id="<?= $food->id ?>" data-quantity-input="detailQty">
-                            <i class="fas fa-shopping-bag me-2"></i>Add to Cart
+                            <?= \icon('cart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>></i>Add to Cart
                         </button>
                         <button class="btn btn-light-gold btn-lg favorite-btn" data-food-id="<?= $food->id ?>">
-                            <i class="far fa-heart"></i>
+                            <?= \icon('heart', []) ?>></i>
                         </button>
                     </div>
                 <?php else: ?>
@@ -208,7 +208,7 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                                 </div>
                                 <div class="food-footer">
                                     <div class="food-price"><?= \formatPrice($rf->final_price ?? $rf->price) ?></div>
-                                    <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $rf->id ?>"><i class="fas fa-shopping-bag"></i></button>
+                                    <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $rf->id ?>"><?= \icon('cart', []) ?>></i></button>
                                 </div>
                             </div>
                         </div>

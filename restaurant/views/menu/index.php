@@ -61,7 +61,7 @@ $currentCategory = $currentCategory ?? '';
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <button type="submit" class="btn btn-gold w-100"><i class="fas fa-filter"></i></button>
+                    <button type="submit" class="btn btn-gold w-100"><?= \icon('filter', []) ?>></i></button>
                 </div>
             </form>
         </div>
@@ -91,7 +91,7 @@ $currentCategory = $currentCategory ?? '';
                                 <?php endif; ?>
                                 <div class="food-overlay">
                                     <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                        <i class="fas fa-shopping-bag me-1"></i>Add to Cart
+                                        <?= \icon('cart', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add to Cart
                                     </button>
                                 </div>
                             </div>
@@ -104,8 +104,8 @@ $currentCategory = $currentCategory ?? '';
                                 </h5>
                                 <p class="food-description"><?= \truncate($food->description ?? '', 70) ?></p>
                                 <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                    <span class="badge bg-light text-dark"><i class="far fa-clock me-1"></i><?= $food->preparation_time ?? 15 ?> min</span>
-                                    <span class="badge bg-light text-dark"><i class="fas fa-fire me-1"></i><?= $food->calories ?? 0 ?> cal</span>
+                                    <span class="badge bg-light text-dark"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $food->preparation_time ?? 15 ?> min</span>
+                                    <span class="badge bg-light text-dark"><?= \icon('fire', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $food->calories ?? 0 ?> cal</span>
                                     <?php if ($food->spice_level && $food->spice_level !== 'mild'): ?>
                                         <span class="badge bg-danger-subtle text-danger"><?= ucwords(str_replace('_', ' ', $food->spice_level)) ?></span>
                                     <?php endif; ?>
@@ -119,7 +119,7 @@ $currentCategory = $currentCategory ?? '';
                                     <?php endif; ?>
                                 </div>
                                 <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                                    <i class="far fa-heart"></i>
+                                    <?= \icon('heart', []) ?>></i>
                                 </button>
                             </div>
                         </div>
@@ -127,7 +127,7 @@ $currentCategory = $currentCategory ?? '';
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="col-12 text-center py-5">
-                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <?= \icon('utensils', ['style' => 'width:3em;height:3em;color:#6c757d;']) ?>></i>
                     <p class="text-muted">No menu items found. Try adjusting your filters.</p>
                 </div>
             <?php endif; ?>

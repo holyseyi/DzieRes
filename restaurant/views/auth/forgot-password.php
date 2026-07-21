@@ -18,7 +18,7 @@
                         <div class="mb-3">
                             <label class="form-label">Email Address</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <span class="input-group-text"><?= \icon('message', []) ?>></i></span>
                                 <input type="email" name="email" class="form-control" required placeholder="you@example.com">
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                     </form>
 
                     <div class="text-center mt-4">
-                        <a href="<?= \baseUrl('login') ?>" class="text-gold"><i class="fas fa-arrow-left me-1"></i>Back to Login</a>
+                        <a href="<?= \baseUrl('login') ?>" class="text-gold"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Back to Login</a>
                     </div>
                 </div>
             </div>

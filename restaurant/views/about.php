@@ -40,13 +40,13 @@
         <div class="row g-4 text-center">
             <?php foreach ([
                 ['icon' => 'leaf', 'title' => 'Fresh Ingredients', 'text' => 'We source the finest local and seasonal produce daily.'],
-                ['icon' => 'award', 'title' => 'Award Winning', 'text' => 'Recognized for culinary excellence and service.'],
+                ['icon' => 'star', 'title' => 'Award Winning', 'text' => 'Recognized for culinary excellence and service.'],
                 ['icon' => 'heart', 'title' => 'Made With Love', 'text' => 'Every plate is prepared with passion and care.'],
-                ['icon' => 'users', 'title' => 'Community First', 'text' => 'We support local farmers and our community.'],
+                ['icon' => 'user-plus', 'title' => 'Community First', 'text' => 'We support local farmers and our community.'],
             ] as $v): ?>
                 <div class="col-md-3" data-aos="fade-up">
                     <div class="glass-card p-4 h-100">
-                        <i class="fas fa-<?= $v['icon'] ?> fa-2x text-gold mb-3"></i>
+                        <?= \icon($v['icon'], ['style' => 'width:2.5em;height:2.5em;color:var(--gold);margin-bottom:1rem;display:inline-block;']) ?>
                         <h5><?= $v['title'] ?></h5>
                         <p class="text-muted small mb-0"><?= $v['text'] ?></p>
                     </div>

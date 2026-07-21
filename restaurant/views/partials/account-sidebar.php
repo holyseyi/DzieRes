@@ -4,15 +4,15 @@
  */
 $current = $_SERVER['REQUEST_URI'] ?? '';
 $links = [
-    'account' => ['label' => 'Dashboard', 'icon' => 'fa-gauge'],
-    'account/orders' => ['label' => 'Orders', 'icon' => 'fa-receipt'],
-    'account/reservations' => ['label' => 'Reservations', 'icon' => 'fa-calendar-check'],
-    'account/favorites' => ['label' => 'Favorites', 'icon' => 'fa-heart'],
-    'account/wishlist' => ['label' => 'Wishlist', 'icon' => 'fa-bookmark'],
-    'account/reviews' => ['label' => 'Reviews', 'icon' => 'fa-star'],
-    'account/loyalty' => ['label' => 'Loyalty', 'icon' => 'fa-gem'],
-    'account/addresses' => ['label' => 'Addresses', 'icon' => 'fa-location-dot'],
-    'account/profile' => ['label' => 'Profile', 'icon' => 'fa-user'],
+    'account' => ['label' => 'Dashboard', 'icon' => 'home'],
+    'account/orders' => ['label' => 'Orders', 'icon' => 'receipt'],
+    'account/reservations' => ['label' => 'Reservations', 'icon' => 'calendar-check'],
+    'account/favorites' => ['label' => 'Favorites', 'icon' => 'heart'],
+    'account/wishlist' => ['label' => 'Wishlist', 'icon' => 'star'],
+    'account/reviews' => ['label' => 'Reviews', 'icon' => 'star'],
+    'account/loyalty' => ['label' => 'Loyalty', 'icon' => 'gem'],
+    'account/addresses' => ['label' => 'Addresses', 'icon' => 'map-marker'],
+    'account/profile' => ['label' => 'Profile', 'icon' => 'user'],
 ];
 ?>
 <div class="account-sidebar glass-card p-3">
@@ -24,9 +24,9 @@ $links = [
     <nav class="account-nav">
         <?php foreach ($links as $url => $l): ?>
             <a href="<?= \baseUrl($url) ?>" class="account-nav-link <?= strpos($current, '/' . ltrim($url, '/')) !== false ? 'active' : '' ?>">
-                <i class="fas <?= $l['icon'] ?> me-2"></i><?= $l['label'] ?>
+                <?= \icon($l['icon'], ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?> <?= $l['label'] ?>
             </a>
         <?php endforeach; ?>
-        <a href="<?= \baseUrl('logout') ?>" class="account-nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+        <a href="<?= \baseUrl('logout') ?>" class="account-nav-link text-danger"><?= \icon('sign-out', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?> Logout</a>
     </nav>
 </div>

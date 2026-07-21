@@ -15,7 +15,7 @@
             <div class="col-lg-3"><?php \partial('account-sidebar', ['user' => \auth()]); ?></div>
             <div class="col-lg-9">
                 <div class="loyalty-banner glass-card p-4 mb-4 text-center">
-                    <i class="fas fa-gem fa-2x text-gold mb-2"></i>
+                    <?= \icon('gem', ['style' => 'width:2em;height:2em;', 'class' => 'text-gold']) ?>></i>
                     <div class="stat-number text-gold" data-count="<?= $points ?>">0</div>
                     <p class="mb-0 text-muted">Available Loyalty Points</p>
                     <small class="text-muted"><?= \config('loyalty.points_per_ghs', 10) ?> points earned per ₵1 spent</small>

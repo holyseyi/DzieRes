@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Employees</h4>
-    <a href="<?= \baseUrl('admin/employees/create') ?>" class="btn btn-gold"><i class="fas fa-plus me-1"></i>Add Employee</a>
+    <a href="<?= \baseUrl('admin/employees/create') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Employee</a>
 </div>
 
 <div class="row g-3">

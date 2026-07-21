@@ -22,7 +22,7 @@
                 <?php foreach ($testimonials as $t): ?>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up">
                         <div class="testimonial-card h-100">
-                            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                            <div class="quote-icon"><?= \icon('quote-left', []) ?>></i></div>
                             <?php if ($t->rating): ?><div class="text-warning mb-2"><?= str_repeat('★', $t->rating) ?><?= str_repeat('☆', 5 - $t->rating) ?></div><?php endif; ?>
                             <p class="testimonial-text"><?= \escape($t->content) ?></p>
                             <div class="testimonial-author">

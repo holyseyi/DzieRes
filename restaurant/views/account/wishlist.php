@@ -21,7 +21,7 @@
                                         <a href="<?= \baseUrl('menu/' . ($w->slug ?? '')) ?>"><img src="<?= \uploadUrl($w->image) ?>" alt="<?= \escape($w->name) ?>"></a>
                                     </div>
                                     <div class="food-body"><h6 class="food-name"><a href="<?= \baseUrl('menu/' . ($w->slug ?? '')) ?>" class="text-decoration-none text-reset"><?= \escape($w->name) ?></a></h6></div>
-                                    <div class="food-footer"><div class="food-price"><?= \formatPrice($w->final_price) ?></div><button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $w->food_id ?>"><i class="fas fa-shopping-bag"></i></button></div>
+                                    <div class="food-footer"><div class="food-price"><?= \formatPrice($w->final_price) ?></div><button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $w->food_id ?>"><?= \icon('cart', []) ?>></i></button></div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

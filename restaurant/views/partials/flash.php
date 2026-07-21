@@ -17,16 +17,16 @@
                     default => 'text-bg-secondary'
                 };
                 $icon = match ($type) {
-                    'success' => 'fa-check-circle',
-                    'error' => 'fa-exclamation-circle',
-                    'warning' => 'fa-exclamation-triangle',
-                    'info' => 'fa-info-circle',
-                    default => 'fa-circle-info'
+                    'success' => 'check',
+                    'error' => 'exclamation',
+                    'warning' => 'exclamation',
+                    'info' => 'info',
+                    default => 'info',
                 };
                 ?>
                 <div class="toast show align-items-center border-0 <?= $bg ?>" role="alert" data-bs-delay="5000">
                     <div class="d-flex">
-                        <div class="toast-body"><i class="fas <?= $icon ?> me-2"></i><?= \escape($message) ?></div>
+                        <div class="toast-body"><?= \icon($icon, ['style' => 'width:1.2em;height:1.2em;margin-right:0.5rem;vertical-align:-0.15em;']) ?><?= \escape($message) ?></div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
                     </div>
                 </div>

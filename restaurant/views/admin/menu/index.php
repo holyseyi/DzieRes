@@ -1,14 +1,6 @@
-<?php
-/**
- * Admin: Menu Index
- *
- * @var array $foods
- * @var array $categories
- */
-?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Menu Items</h4>
-    <a href="<?= \baseUrl('admin/menu/create') ?>" class="btn btn-gold"><i class="fas fa-plus me-1"></i>Add Item</a>
+    <a href="<?= \baseUrl('admin/menu/create') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Item</a>
 </div>
 
 <div class="card border-0 shadow-sm">
@@ -26,12 +18,12 @@
                             <td><span class="badge bg-<?= $f->status==='active'?'success':'secondary' ?>"><?= ucfirst($f->status) ?></span></td>
                             <td>
                                 <?php if ($f->is_featured): ?><span class="badge bg-info" title="Featured">★</span><?php endif; ?>
-                                <?php if ($f->is_todays_special): ?><span class="badge bg-warning" title="Today's Special">TS</span><?php endif; ?>
+                                <?php if ($f->is_todays_special): ?><span class="badge bg-warning text-dark" title="Today's Special">TS</span><?php endif; ?>
                                 <?php if ($f->is_chef_recommendation): ?><span class="badge bg-primary" title="Chef's Pick">CP</span><?php endif; ?>
                             </td>
                             <td>
-                                <a href="<?= \baseUrl('admin/menu/' . $f->id . '/edit') ?>" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
-                                <button class="btn btn-sm btn-outline-danger menu-delete" data-id="<?= $f->id ?>"><i class="fas fa-trash"></i></button>
+                                <a href="<?= \baseUrl('admin/menu/' . $f->id . '/edit') ?>" class="btn btn-sm btn-outline-secondary"><?= \icon('edit', []) ?></a>
+                                <button class="btn btn-sm btn-outline-danger menu-delete" data-id="<?= $f->id ?>"><?= \icon('trash', []) ?></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

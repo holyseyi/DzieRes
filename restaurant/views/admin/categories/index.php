@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Categories</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#catModal"><i class="fas fa-plus me-1"></i>Add Category</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#catModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Category</button>
 </div>
 
 <div class="row g-3">
@@ -16,7 +16,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-0"><i class="fas fa-<?= \escape($c->icon ?? 'utensils') ?> text-gold me-2"></i><?= \escape($c->name) ?></h6>
+                        <h6 class="mb-0"><?= \icon(\escape($c->icon ?? 'utensils'), ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;color:var(--gold);vertical-align:-0.15em;']) ?><?= \escape($c->name) ?></h6>
                         <span class="badge bg-light text-dark"><?= $c->food_count ?? 0 ?> items</span>
                     </div>
                     <p class="small text-muted mt-2 mb-2"><?= \escape($c->description ?? '') ?></p>

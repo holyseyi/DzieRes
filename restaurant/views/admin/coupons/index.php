@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Coupons</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#couponModal"><i class="fas fa-plus me-1"></i>Add Coupon</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#couponModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Coupon</button>
 </div>
 
 <div class="card border-0 shadow-sm">
@@ -24,7 +24,7 @@
                             <td><?= \formatPrice($c->min_order_amount) ?></td>
                             <td><?= $c->used_count ?>/<?= $c->usage_limit ?></td>
                             <td><span class="badge bg-<?= \matchStatusColor($c->status) ?>"><?= ucfirst($c->status) ?></span></td>
-                            <td><button class="btn btn-sm btn-outline-danger coupon-del" data-id="<?= $c->id ?>"><i class="fas fa-trash"></i></button></td>
+                            <td><button class="btn btn-sm btn-outline-danger coupon-del" data-id="<?= $c->id ?>"><?= \icon('trash', []) ?>></i></button></td>
                         </tr>
                     <?php endforeach; ?>
                     <?php if (empty($coupons)): ?><tr><td colspan="7" class="text-center text-muted py-4">No coupons.</td></tr><?php endif; ?>

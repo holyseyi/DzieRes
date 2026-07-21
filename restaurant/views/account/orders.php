@@ -33,7 +33,7 @@
                         </div>
                     <?php else: ?>
                         <div class="text-center py-4">
-                            <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
+                            <?= \icon('receipt', ['style' => 'width:3em;height:3em;color:#6c757d;']) ?>></i>
                             <p class="text-muted">You have no orders yet.</p>
                             <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold">Order Now</a>
                         </div>

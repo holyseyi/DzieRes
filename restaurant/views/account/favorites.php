@@ -19,10 +19,10 @@
                                 <div class="food-card">
                                     <div class="food-image">
                                         <a href="<?= \baseUrl('menu/' . $f->slug) ?>"><img src="<?= \uploadUrl($f->image) ?>" alt="<?= \escape($f->name) ?>"></a>
-                                        <button class="btn btn-sm btn-light-gold favorite-btn active position-absolute top-0 end-0 m-2" data-food-id="<?= $f->id ?>"><i class="fas fa-heart"></i></button>
+                                        <button class="btn btn-sm btn-light-gold favorite-btn active position-absolute top-0 end-0 m-2" data-food-id="<?= $f->id ?>"><?= \icon('heart', []) ?>></i></button>
                                     </div>
                                     <div class="food-body"><p class="food-category"><?= \escape($f->category_name ?? '') ?></p><h6 class="food-name"><a href="<?= \baseUrl('menu/' . $f->slug) ?>" class="text-decoration-none text-reset"><?= \escape($f->name) ?></a></h6></div>
-                                    <div class="food-footer"><div class="food-price"><?= \formatPrice($f->final_price ?? $f->price) ?></div><button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $f->id ?>"><i class="fas fa-shopping-bag"></i></button></div>
+                                    <div class="food-footer"><div class="food-price"><?= \formatPrice($f->final_price ?? $f->price) ?></div><button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $f->id ?>"><?= \icon('cart', []) ?>></i></button></div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

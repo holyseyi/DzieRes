@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="stat-card-admin">
             <div class="stat-icon bg-warning bg-opacity-10 text-warning">
-                <i class="fas fa-receipt"></i>
+                <?= \icon('receipt', []) ?>></i>
             </div>
             <div class="stat-number"><?= number_format($totalOrders) ?></div>
             <div class="text-muted">Total Orders</div>
@@ -12,7 +12,7 @@
     <div class="col-md-3">
         <div class="stat-card-admin">
             <div class="stat-icon bg-success bg-opacity-10 text-success">
-                <i class="fas fa-money-bill-wave"></i>
+                <?= \icon('money-bill-wave', []) ?>></i>
             </div>
             <div class="stat-number"><?= \formatPrice($totalRevenue) ?></div>
             <div class="text-muted">Total Revenue</div>
@@ -22,7 +22,7 @@
     <div class="col-md-3">
         <div class="stat-card-admin">
             <div class="stat-icon bg-info bg-opacity-10 text-info">
-                <i class="fas fa-users"></i>
+                <?= \icon('user-plus', []) ?>></i>
             </div>
             <div class="stat-number"><?= number_format($totalCustomers) ?></div>
             <div class="text-muted">Customers</div>
@@ -32,7 +32,7 @@
     <div class="col-md-3">
         <div class="stat-card-admin">
             <div class="stat-icon bg-danger bg-opacity-10 text-danger">
-                <i class="fas fa-exclamation-triangle"></i>
+                <?= \icon('exclamation-triangle', []) ?>></i>
             </div>
             <div class="stat-number"><?= $lowStockItems ?></div>
             <div class="text-muted">Low Stock Items</div>
@@ -45,7 +45,7 @@
     <div class="col-md-8">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
-                <h6 class="mb-0"><i class="fas fa-chart-line me-2 text-gold"></i>Revenue Overview</h6>
+                <h6 class="mb-0"><?= \icon('chart-line', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Revenue Overview</h6>
                 <div class="btn-group btn-group-sm">
                     <button class="btn btn-outline-secondary active" data-period="7">7 Days</button>
                     <button class="btn btn-outline-secondary" data-period="30">30 Days</button>
@@ -59,7 +59,7 @@
     <div class="col-md-4">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom py-3">
-                <h6 class="mb-0"><i class="fas fa-chart-pie me-2 text-gold"></i>Popular Categories</h6>
+                <h6 class="mb-0"><?= \icon('chart-pie', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Popular Categories</h6>
             </div>
             <div class="card-body">
                 <canvas id="categoryChart" height="250"></canvas>
@@ -72,7 +72,7 @@
     <div class="col-md-6">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
-                <h6 class="mb-0"><i class="fas fa-clock me-2 text-gold"></i>Recent Orders</h6>
+                <h6 class="mb-0"><?= \icon('clock', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Recent Orders</h6>
                 <a href="<?= \baseUrl('admin/orders') ?>" class="btn btn-sm btn-gold">View All</a>
             </div>
             <div class="card-body p-0">
@@ -110,7 +110,7 @@
     <div class="col-md-6">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
-                <h6 class="mb-0"><i class="fas fa-calendar-check me-2 text-gold"></i>Upcoming Reservations</h6>
+                <h6 class="mb-0"><?= \icon('calendar-check', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Upcoming Reservations</h6>
                 <a href="<?= \baseUrl('admin/reservations') ?>" class="btn btn-sm btn-gold">View All</a>
             </div>
             <div class="card-body p-0">
