@@ -51,59 +51,74 @@
 </section>
 
 <!-- ============================================ -->
-<!-- CATEGORIES SECTION -->
+<!-- ALL FOODS SECTION -->
 <!-- ============================================ -->
-<section class="section-padding">
+<section class="section-padding" id="menu">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <p class="section-subtitle">Explore Our Menu</p>
-            <h2 class="section-title">Browse Categories</h2>
+            <p class="section-subtitle">Discover Our Menu</p>
+            <h2 class="section-title">All Foods</h2>
             <div class="section-divider mx-auto"></div>
-            <p class="text-muted">Discover our diverse selection of culinary delights</p>
+            <p class="text-muted">Explore our complete selection of dishes</p>
         </div>
         
         <div class="row g-4">
-            <?php if (!empty($categories)): ?>
-                <?php foreach ($categories as $category): ?>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="<?= $loop = $loop ?? 0; $loop++; echo ($loop * 50) ?>">
-                    <a href="<?= \baseUrl('menu/category/' . $category->slug) ?>" class="text-decoration-none">
-                        <div class="glass-card text-center p-4 card-hover">
-                            <div class="mb-3">
-                                <i class="fas fa-<?= $category->icon ?? 'utensils' ?> fa-3x text-gold"></i>
+            <?php if (!empty($allFoods)): ?>
+                <?php foreach ($allFoods as $food): ?>
+                <div class="col-md-6 col-lg-4 col-xl-3" data-aos="fade-up">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <a href="<?= \baseUrl('menu/' . $food->slug) ?>">
+                                <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>" loading="lazy">
+                            </a>
+                            <?php if ($food->discount_percent > 0): ?>
+                                <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
+                            <?php endif; ?>
+                            <div class="food-overlay">
+                                <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
+                                    <i class="fas fa-shopping-bag me-1"></i>Add to Cart
+                                </button>
                             </div>
-                            <h5 class="mb-1"><?= \escape($category->name) ?></h5>
-                            <small class="text-muted"><?= $category->food_count ?? 0 ?> Items</small>
                         </div>
-                    </a>
+                        <div class="food-body">
+                            <p class="food-category"><?= \escape($food->category_name ?? '') ?></p>
+                            <h5 class="food-name">
+                                <a href="<?= \baseUrl('menu/' . $food->slug) ?>" class="text-decoration-none text-reset stretched-link-target">
+                                    <?= \escape($food->name) ?>
+                                </a>
+                            </h5>
+                            <p class="food-description"><?= \truncate($food->description ?? '', 70) ?></p>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge bg-light text-dark"><i class="far fa-clock me-1"></i><?= $food->preparation_time ?? 15 ?> min</span>
+                                <span class="badge bg-light text-dark"><i class="fas fa-fire me-1"></i><?= $food->calories ?? 0 ?> cal</span>
+                            </div>
+                        </div>
+                        <div class="food-footer">
+                            <div class="food-price">
+                                <?= \formatPrice($food->final_price ?? $food->price) ?>
+                                <?php if ($food->discount_percent > 0): ?>
+                                    <span class="original-price"><?= \formatPrice($food->price) ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <?php 
-                $defaultCategories = [
-                    ['name' => 'Breakfast', 'icon' => 'coffee', 'count' => 12],
-                    ['name' => 'Lunch', 'icon' => 'hamburger', 'count' => 18],
-                    ['name' => 'Dinner', 'icon' => 'wine-glass-alt', 'count' => 15],
-                    ['name' => 'Desserts', 'icon' => 'ice-cream', 'count' => 10],
-                    ['name' => 'Drinks', 'icon' => 'glass-cheers', 'count' => 20],
-                    ['name' => 'Seafood', 'icon' => 'fish', 'count' => 8],
-                    ['name' => 'Pizza', 'icon' => 'pizza-slice', 'count' => 6],
-                    ['name' => 'Local Meals', 'icon' => 'drumstick-bite', 'count' => 14],
-                ];
-                foreach ($defaultCategories as $cat): 
-                ?>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up">
-                    <a href="<?= \baseUrl('menu') ?>" class="text-decoration-none">
-                        <div class="glass-card text-center p-4 card-hover">
-                            <div class="mb-3">
-                                <i class="fas fa-<?= $cat['icon'] ?> fa-3x text-gold"></i>
-                            </div>
-                            <h5 class="mb-1"><?= $cat['name'] ?></h5>
-                            <small class="text-muted"><?= $cat['count'] ?> Items</small>
-                        </div>
-                    </a>
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No menu items available yet.</p>
                 </div>
-                <?php endforeach; ?>
             <?php endif; ?>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg">
+                <i class="fas fa-utensils me-2"></i>View Full Menu
+            </a>
         </div>
     </div>
 </section>
@@ -125,7 +140,7 @@
             <div class="col-md-6 col-lg-3" data-aos="fade-up">
                 <div class="food-card">
                     <div class="food-image">
-                        <img src="<?= \uploadUrl($food->image) ?>" alt="<?= \escape($food->name) ?>">
+                        <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
                         <div class="food-badge">
                             <span class="badge bg-gold">Today's Special</span>
                         </div>
@@ -187,7 +202,7 @@
                 <div class="col-md-6 col-lg-3" data-aos="fade-up">
                     <div class="food-card">
                         <div class="food-image">
-                            <img src="<?= \uploadUrl($food->image) ?>" alt="<?= \escape($food->name) ?>">
+                            <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
                             <?php if ($food->discount_percent > 0): ?>
                             <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
                             <?php endif; ?>
@@ -269,7 +284,7 @@
             <div class="col-md-6 col-lg-3" data-aos="fade-up">
                 <div class="food-card">
                     <div class="food-image">
-                        <img src="<?= \uploadUrl($food->image) ?>" alt="<?= \escape($food->name) ?>">
+                        <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>">
                         <div class="food-badge">
                             <span class="badge bg-warning text-dark">Chef's Pick</span>
                         </div>

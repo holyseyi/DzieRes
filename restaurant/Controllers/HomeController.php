@@ -50,6 +50,15 @@ class HomeController extends BaseController
              ORDER BY c.sort_order ASC"
         );
         
+        // Get all foods for the home page
+        $allFoods = $db->fetchAll(
+            "SELECT f.*, c.name as category_name, c.slug as category_slug 
+             FROM foods f 
+             JOIN categories c ON f.category_id = c.id 
+             WHERE f.status = 'active' AND f.availability = 'available'
+             ORDER BY f.sort_order ASC, f.name ASC"
+        );
+        
         // Get testimonials
         $testimonials = $db->fetchAll(
             "SELECT * FROM testimonials WHERE status = 'active' AND is_featured = 1 ORDER BY sort_order ASC LIMIT 6"
@@ -85,6 +94,7 @@ class HomeController extends BaseController
             'todaysSpecial' => $todaysSpecial,
             'chefRecommendations' => $chefRecommendations,
             'categories' => $categories,
+            'allFoods' => $allFoods,
             'testimonials' => $testimonials,
             'gallery' => $gallery,
             'blogPosts' => $blogPosts,
