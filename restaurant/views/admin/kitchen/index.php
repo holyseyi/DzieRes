@@ -7,11 +7,11 @@
 <style>
 .kitchen-board { background: #0d0d14; min-height: calc(100vh - 120px); padding: 20px; }
 .kitchen-col { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 16px; }
-.kitchen-col h5 { color: #fff; border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-bottom: 16px; }
-.kds-card { background: #16161f; border-radius: 12px; padding: 16px; margin-bottom: 14px; border-left: 5px solid #c9a84c; }
+.kitchen-col h5 { color: #fff; border-bottom: 2px solid #001a4a; padding-bottom: 10px; margin-bottom: 16px; }
+.kds-card { background: #16161f; border-radius: 12px; padding: 16px; margin-bottom: 14px; border-left: 5px solid #001a4a; }
 .kds-card.priority { border-left-color: #e74c3c; }
 .kds-card.ready { border-left-color: #2ecc71; }
-.kds-order-no { font-size: 1.4rem; font-weight: 700; color: #c9a84c; }
+.kds-order-no { font-size: 1.4rem; font-weight: 700; color: #003380; }
 .kds-timer { font-size: 0.9rem; color: #aaa; }
 .kds-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.08); color: #eee; }
 .kds-actions .btn { margin-top: 10px; }

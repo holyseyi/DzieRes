@@ -25,7 +25,7 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
         <div class="row g-5">
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="food-detail-image rounded-4 overflow-hidden shadow">
-                    <img src="<?= \uploadUrl($food->image) ?>" alt="<?= \escape($food->name) ?>" class="img-fluid w-100">
+                    <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>" class="img-fluid w-100">
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
@@ -199,7 +199,7 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                             <div class="food-card">
                                 <div class="food-image">
                                     <a href="<?= \baseUrl('menu/' . $rf->slug) ?>">
-                                        <img src="<?= \uploadUrl($rf->image) ?>" alt="<?= \escape($rf->name) ?>" loading="lazy">
+                                        <img src="<?= \menuImageUrl($rf) ?>" alt="<?= \escape($rf->name) ?>" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="food-body">

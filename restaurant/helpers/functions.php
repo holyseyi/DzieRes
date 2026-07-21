@@ -774,6 +774,24 @@ function uploadUrl(?string $path): string
     return baseUrl($path);
 }
 
+function menuImageUrl(object $food): string
+{
+    $image = $food->image ?? '';
+    if (!empty($image)) {
+        return uploadUrl($image);
+    }
+
+    $slug = $food->slug ?? '';
+    $menuDir = __DIR__ . '/../assets/images/menu/';
+    if ($slug && is_dir($menuDir)) {
+        foreach (glob($menuDir . $slug . '-*.{jpg,jpeg,png,webp}', GLOB_BRACE) as $file) {
+            return asset('images/menu/' . basename($file));
+        }
+    }
+
+    return asset('images/food-placeholder.svg');
+}
+
 // ============================================
 // ERROR HANDLING
 // ============================================

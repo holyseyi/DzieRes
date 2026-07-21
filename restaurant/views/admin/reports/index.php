@@ -63,7 +63,7 @@ function loadReports(range){
         window._reportChart.destroy();
         window._reportChart = new Chart(ctx, {
             type:'bar',
-            data:{ labels, datasets:[{ label:'Orders', data:vals, backgroundColor:'#c9a84c' }] },
+            data:{ labels, datasets:[{ label:'Orders', data:vals, backgroundColor:'#001a4a' }] },
             options:{ responsive:true, plugins:{ legend:{display:false} } }
         });
     });

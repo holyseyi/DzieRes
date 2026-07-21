@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             datasets: [{
                                 label: 'Revenue',
                                 data: data.data.revenue.map(d => d.revenue),
-                                borderColor: '#c9a84c',
-                                backgroundColor: 'rgba(201, 168, 76, 0.1)',
+                                borderColor: '#001a4a',
+                                backgroundColor: 'rgba(0, 26, 74, 0.1)',
                                 fill: true,
                                 tension: 0.4
                             }]
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             labels: data.data.popularCategories.map(c => c.name),
                             datasets: [{
                                 data: data.data.popularCategories.map(c => c.order_count),
-                                backgroundColor: ['#c9a84c', '#e17055', '#00b894', '#0984e3', '#6c5ce7']
+                                backgroundColor: ['#001a4a', '#003380', '#000d26', '#1a365d', '#2a4a7f']
                             }]
                         },
                         options: {

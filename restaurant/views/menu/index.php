@@ -84,7 +84,7 @@ $currentCategory = $currentCategory ?? '';
                         <div class="food-card">
                             <div class="food-image">
                                 <a href="<?= \baseUrl('menu/' . $food->slug) ?>">
-                                    <img src="<?= \uploadUrl($food->image) ?>" alt="<?= \escape($food->name) ?>" loading="lazy">
+                                    <img src="<?= \menuImageUrl($food) ?>" alt="<?= \escape($food->name) ?>" loading="lazy">
                                 </a>
                                 <?php if ($food->discount_percent > 0): ?>
                                     <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
