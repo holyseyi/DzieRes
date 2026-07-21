@@ -2,7 +2,7 @@
 /**
  * Offline Readiness Check
  *
- * Run this from the project root: php restaurant/check-offline.php
+ * Run this from the project root: php check-offline.php
  */
 
 $errors = [];
@@ -10,17 +10,17 @@ $warnings = [];
 
 // Check vendor assets
 $vendorFiles = [
-    'restaurant/assets/vendor/bootstrap/bootstrap.min.css',
-    'restaurant/assets/vendor/bootstrap/bootstrap.bundle.min.js',
-    'restaurant/assets/vendor/fontawesome/all.min.css',
-    'restaurant/assets/vendor/fontawesome/webfonts/fa-solid-900.woff2',
-    'restaurant/assets/vendor/aos/aos.css',
-    'restaurant/assets/vendor/aos/aos.js',
-    'restaurant/assets/vendor/chart.js/chart.min.js',
-    'restaurant/assets/vendor/fonts/local-fonts.css',
-    'restaurant/assets/vendor/fonts/inter/400.ttf',
-    'restaurant/assets/vendor/fonts/playfairdisplay/400.ttf',
-    'restaurant/assets/vendor/fonts/dancingscript/400.ttf',
+    'assets/vendor/bootstrap/bootstrap.min.css',
+    'assets/vendor/bootstrap/bootstrap.bundle.min.js',
+    'assets/vendor/fontawesome/all.min.css',
+    'assets/vendor/fontawesome/webfonts/fa-solid-900.woff2',
+    'assets/vendor/aos/aos.css',
+    'assets/vendor/aos/aos.js',
+    'assets/vendor/chart.js/chart.min.js',
+    'assets/vendor/fonts/local-fonts.css',
+    'assets/vendor/fonts/inter/400.ttf',
+    'assets/vendor/fonts/playfairdisplay/400.ttf',
+    'assets/vendor/fonts/dancingscript/400.ttf',
 ];
 
 foreach ($vendorFiles as $file) {
@@ -31,13 +31,13 @@ foreach ($vendorFiles as $file) {
 
 // Check local image placeholders
 $placeholders = [
-    'restaurant/assets/images/placeholders/auth-bg.svg',
-    'restaurant/assets/images/placeholders/gallery-1.svg',
-    'restaurant/assets/images/placeholders/chef.jpg',
-    'restaurant/assets/images/placeholders/about.jpg',
-    'restaurant/assets/images/placeholders/map-placeholder.svg',
-    'restaurant/assets/images/placeholders/testimonial-avatar.svg',
-    'restaurant/assets/images/placeholders/featured-dish.svg',
+    'assets/images/placeholders/auth-bg.svg',
+    'assets/images/placeholders/gallery-1.svg',
+    'assets/images/placeholders/chef.jpg',
+    'assets/images/placeholders/about.jpg',
+    'assets/images/placeholders/map-placeholder.svg',
+    'assets/images/placeholders/testimonial-avatar.svg',
+    'assets/images/placeholders/featured-dish.svg',
 ];
 
 foreach ($placeholders as $img) {
@@ -48,9 +48,9 @@ foreach ($placeholders as $img) {
 
 // Check writable directories
 $writableDirs = [
-    'restaurant/database',
-    'restaurant/uploads',
-    'restaurant/logs',
+    'database',
+    'uploads',
+    'logs',
     '/tmp/dzieres',
 ];
 
@@ -72,8 +72,8 @@ foreach ($requiredExtensions as $ext) {
 }
 
 // Check server.php exists
-if (!file_exists(__DIR__ . '/restaurant/server.php')) {
-    $errors[] = "Missing restaurant/server.php (built-in server router)";
+if (!file_exists(__DIR__ . '/server.php')) {
+    $errors[] = "Missing server.php (built-in server router)";
 }
 
 echo "=== DzieRes Offline Readiness Check ===\n\n";
@@ -98,7 +98,7 @@ if (!empty($warnings)) {
 
 if (empty($errors)) {
     echo "To start the app locally (no internet required):\n";
-    echo "  cd restaurant && php -S localhost:8000 server.php\n";
+    echo "  php -S localhost:8000 server.php\n";
     echo "  OR\n";
     echo "  bash start-local.sh\n";
     echo "\nThen open http://localhost:8000 in your browser.\n";

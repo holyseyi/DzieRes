@@ -1,7 +1,22 @@
-# NOTE: This root wasmer.toml is NOT used for deployment.
-# The deploy package is the `restaurant/` folder — see restaurant/app.yaml
-# (`package: .`) and restaurant/wasmer.toml, which is the manifest that
-# `wasmer deploy` actually reads.
-#
-# Run `wasmer deploy` from the repo root; it will load restaurant/app.yaml
-# and find restaurant/wasmer.toml inside the package root.
+[package]
+name = "dzieres"
+version = "0.1.0"
+
+[package.metadata]
+php_extensions = [
+    "pdo",
+    "pdo_sqlite",
+    "sqlite3",
+    "session",
+    "mbstring",
+    "iconv",
+    "json",
+    "gd",
+    "curl",
+    "openssl",
+    "fileinfo",
+]
+
+[webserver]
+command = "sh"
+args = ["-c", "PORT=${PORT:-8000}; php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t . server.php"]

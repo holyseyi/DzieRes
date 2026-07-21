@@ -5,7 +5,7 @@
 
 PORT=${1:-8000}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR/restaurant"
+cd "$SCRIPT_DIR"
 
 mkdir -p /tmp/dzieres 2>/dev/null || true
 

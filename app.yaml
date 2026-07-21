@@ -1,7 +1,7 @@
 name: DzieRes
 app_id: da_nP7IptBUWDlV
 owner: holyseyi
-package: ./restaurant
+package: .
 scaling:
   mode: single_concurrency
 kind: wasmer.io/App.v0
