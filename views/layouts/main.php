@@ -76,6 +76,10 @@
                 </ul>
                 
                 <div class="navbar-actions d-flex align-items-center gap-2">
+                    <button class="btn btn-icon" id="searchToggle" title="Search">
+                        <?= \icon('search') ?>
+                    </button>
+                    
                     <a href="<?= \baseUrl('cart') ?>" class="btn btn-icon position-relative" title="Cart">
                         <?= \icon('cart') ?>
                         <span class="cart-badge" id="cartCount"><?= \getCartCount() ?></span>
@@ -118,11 +122,11 @@
     <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 76px;">
         <div class="container py-2">
             <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
+                 style="display:block"
                  data-ad-client="ca-pub-8947299957289484"
-                 data-ad-slot="1234567890"></ins>
+                 data-ad-slot="3848114771"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -132,10 +136,12 @@
     <!-- Search Overlay -->
     <div class="search-overlay" id="searchOverlay">
         <div class="search-overlay-content">
-            <button class="btn-close search-close" id="searchClose"></button>
+            <button class="search-close" id="searchClose">
+                <?= \icon('times', ['style' => 'width:1.5em;height:1.5em;']) ?>
+            </button>
             <div class="search-container">
                 <form action="<?= \baseUrl('menu') ?>" method="GET" class="search-form">
-                    <div class="input-group input-group-lg">
+                    <div class="input-group">
                         <input type="text" name="search" class="form-control search-input" 
                                placeholder="Search menu items..." autocomplete="off" id="globalSearch">
                         <button class="btn btn-gold" type="submit">
@@ -194,23 +200,6 @@
             <?php require $__viewPath ?? ''; ?>
         <?php endif; ?>
     </main>
-
-    <!-- ============================================ -->
-    <!-- BOTTOM ADVERTISEMENT -->
-    <!-- ============================================ -->
-    <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 40px;">
-        <div class="container py-3">
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="ca-pub-8947299957289484"
-                 data-ad-slot="1234567890"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
 
     <!-- ============================================ -->
     <!-- FOOTER -->
@@ -300,6 +289,41 @@
             duration: 800,
             once: true,
             offset: 100
+        });
+        
+        // Search Toggle
+        const searchToggle = document.getElementById('searchToggle');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        const globalSearch = document.getElementById('globalSearch');
+        
+        if (searchToggle && searchOverlay) {
+            searchToggle.addEventListener('click', function() {
+                searchOverlay.classList.add('active');
+                setTimeout(function() {
+                    if (globalSearch) globalSearch.focus();
+                }, 100);
+            });
+        }
+        
+        if (searchClose && searchOverlay) {
+            searchClose.addEventListener('click', function() {
+                searchOverlay.classList.remove('active');
+            });
+        }
+        
+        if (searchOverlay) {
+            searchOverlay.addEventListener('click', function(e) {
+                if (e.target === searchOverlay) {
+                    searchOverlay.classList.remove('active');
+                }
+            });
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('active')) {
+                searchOverlay.classList.remove('active');
+            }
         });
     </script>
 </body>

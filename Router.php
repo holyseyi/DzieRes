@@ -86,6 +86,8 @@ class Router
             $uri = '/';
         }
         
+        error_log("ROUTER: method=$method uri=$uri script=" . ($_SERVER['SCRIPT_NAME'] ?? ''));
+        
         // Find matching route
         foreach ($this->routes as $route) {
             if ($route['method'] !== $method) {
