@@ -22,6 +22,4 @@ if ($uri !== '/'
 }
 
 // Forward all other requests to the front controller
-error_log("SERVER: forwarding $uri, SCRIPT_NAME=" . ($_SERVER['SCRIPT_NAME'] ?? ''));
 require __DIR__ . '/index.php';
-error_log("SERVER: after require, SCRIPT_NAME=" . ($_SERVER['SCRIPT_NAME'] ?? ''));

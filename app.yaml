@@ -5,10 +5,3 @@ package: .
 scaling:
   mode: single_concurrency
 kind: wasmer.io/App.v0
-annotations:
-  shipitcli.com/config:
-    name: out
-    phpix: true
-  shipitcli.com/provider: php
-  shipitcli.com/version: 0.22.1
-  wasmer.io/version: 7.2.0
