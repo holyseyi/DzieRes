@@ -174,9 +174,9 @@ class OrderController extends BaseController
             }
         }
 
-        \db()->update('orders', ['rider_id' => $riderId > 0 ? $riderId : null], 'id = :id', ['id' => $id]);
-
         if ($riderId > 0) {
+            \db()->update('orders', ['rider_id' => $riderId, 'status' => 'assigned'], 'id = :id', ['id' => $id]);
+            
             \createNotification(
                 $riderId,
                 'order',
@@ -184,6 +184,16 @@ class OrderController extends BaseController
                 "Order #{$order->order_number} has been assigned to you for delivery.",
                 \baseUrl('rider')
             );
+            
+            \createNotification(
+                null,
+                'order',
+                'Rider Assigned to Order',
+                "Rider has been assigned to order #{$order->order_number}.",
+                \baseUrl('admin/orders/' . $id)
+            );
+        } else {
+            \db()->update('orders', ['rider_id' => null], 'id = :id', ['id' => $id]);
         }
 
         \logActivity('rider_assigned', 'orders', "Order #{$order->order_number} assigned to rider #{$riderId}", \auth()->id);

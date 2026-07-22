@@ -82,13 +82,25 @@ require_once __DIR__ . '/Router.php';
 try {
     $db = \Config\Database::getInstance();
     
-    // Run schema if tables don't exist
-    if (!$db->tableExists('users')) {
+    // Run schema if tables don't exist or schema is outdated
+    $schemaVersion = 0;
+    if ($db->tableExists('settings')) {
+        $row = $db->fetch("SELECT value FROM settings WHERE `key` = 'schema_version'");
+        $schemaVersion = (int)($row->value ?? 0);
+    }
+    $currentSchemaVersion = 2; // Increment this when schema changes
+    
+    if (!$db->tableExists('users') || $schemaVersion < $currentSchemaVersion) {
         $schema = file_get_contents(__DIR__ . '/database/schema.sql');
         if ($schema === false) {
             throw new \RuntimeException('Failed to read database schema file');
         }
         $db->getConnection()->exec($schema);
+        
+        // Update schema version
+        if ($db->tableExists('settings')) {
+            $db->query("INSERT OR REPLACE INTO settings (key, value, updated_at) VALUES ('schema_version', ?, datetime('now'))", [$currentSchemaVersion]);
+        }
     }
     
     // Ensure default users exist so login/admin works even if the database
@@ -99,10 +111,19 @@ try {
             ['Admin', 'User', 'admin@dzieres.com', '+233 50 000 0001', password_hash('admin123', PASSWORD_DEFAULT), 1],
             ['Staff', 'User', 'staff@dzieres.com', '+233 50 000 0002', password_hash('staff123', PASSWORD_DEFAULT), 2],
             ['Test', 'Customer', 'customer@dzieres.com', '+233 50 000 0003', password_hash('customer123', PASSWORD_DEFAULT), 3],
+            ['Rider', 'User', 'rider@dzieres.com', '+233 50 000 0004', password_hash('rider123', PASSWORD_DEFAULT), 4],
         ];
         $stmt = $db->getConnection()->prepare('INSERT OR IGNORE INTO users (firstname, lastname, email, phone, password, role_id, status) VALUES (?, ?, ?, ?, ?, ?, ?)');
         foreach ($users as $u) {
             $stmt->execute([...$u, 'active']);
+        }
+    } else {
+        // Ensure rider user exists even if other users are present
+        $riderExists = $db->fetch("SELECT id FROM users WHERE email = ?", ['rider@dzieres.com']);
+        if (!$riderExists) {
+            $db->query('INSERT INTO users (firstname, lastname, email, phone, password, role_id, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [
+                'Rider', 'User', 'rider@dzieres.com', '+233 50 000 0004', password_hash('rider123', PASSWORD_DEFAULT), 4, 'active'
+            ]);
         }
     }
     

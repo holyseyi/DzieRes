@@ -31,30 +31,44 @@ class Database
 
     private function connect(): void
     {
-        try {
-            $dbPath = $this->resolveWritableDbPath($this->config['database']);
-
-            $this->connection = new PDO(
-                "sqlite:{$dbPath}",
-                null,
-                null,
-                $this->config['options']
-            );
-
+        $attempts = 0;
+        $maxAttempts = 2;
+        $lastDbPath = null;
+        
+        while ($attempts < $maxAttempts) {
             try {
-                $this->connection->exec('PRAGMA journal_mode = WAL');
-            } catch (\Throwable $e) {
-                // ignore
+                $dbPath = $this->resolveWritableDbPath($this->config['database']);
+                $lastDbPath = $dbPath;
+                
+                $this->connection = new PDO(
+                    "sqlite:{$dbPath}",
+                    null,
+                    null,
+                    $this->config['options']
+                );
+                
+                try {
+                    $this->connection->exec('PRAGMA journal_mode = WAL');
+                } catch (\Throwable $e) {
+                    // ignore
+                }
+                try {
+                    $this->connection->exec('PRAGMA foreign_keys = ON');
+                    $this->connection->exec('PRAGMA cache_size = -16000');
+                } catch (\Throwable $e) {
+                    // non-fatal
+                }
+                
+                return;
+            } catch (\PDOException $e) {
+                $msg = $e->getMessage();
+                if (strpos($msg, 'file is not a database') !== false && $lastDbPath) {
+                    @unlink($lastDbPath);
+                    $attempts++;
+                    continue;
+                }
+                throw new \RuntimeException("Database connection failed: " . $msg);
             }
-            try {
-                $this->connection->exec('PRAGMA foreign_keys = ON');
-                $this->connection->exec('PRAGMA cache_size = -16000');
-            } catch (\Throwable $e) {
-                // non-fatal
-            }
-
-        } catch (PDOException $e) {
-            throw new \RuntimeException("Database connection failed: " . $e->getMessage());
         }
     }
 
@@ -76,8 +90,36 @@ class Database
             }
         }
 
-        if (file_exists($dbPath) && filesize($dbPath) === 0) {
-            @unlink($dbPath);
+        if (file_exists($dbPath)) {
+            $size = filesize($dbPath);
+            
+            // Delete empty files
+            if ($size === 0) {
+                @unlink($dbPath);
+                return $dbPath;
+            }
+            
+            // Validate it's a real SQLite database file
+            $handle = @fopen($dbPath, 'rb');
+            if ($handle) {
+                $header = fread($handle, 16);
+                fclose($handle);
+                
+                if ($header !== false && strpos($header, 'SQLite format 3') === false) {
+                    @unlink($dbPath);
+                    return $dbPath;
+                }
+            } else {
+                // Can't read the file - delete it and let PDO create a fresh one
+                @unlink($dbPath);
+                return $dbPath;
+            }
+            
+            // Check if file is writable
+            if (!is_writable($dbPath)) {
+                @unlink($dbPath);
+                return $dbPath;
+            }
         }
 
         return $dbPath;

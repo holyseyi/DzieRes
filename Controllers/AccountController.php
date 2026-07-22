@@ -10,7 +10,13 @@ class AccountController extends BaseController
 {
     public function dashboard(): void
     {
-        $userId = \auth()->id;
+        $user = \auth();
+        if ($user && $user->role_slug === 'rider') {
+            $this->redirect(\baseUrl('rider'));
+            return;
+        }
+
+        $userId = $user->id;
         $db = \db();
 
         $stats = [

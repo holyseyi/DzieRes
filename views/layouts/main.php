@@ -92,13 +92,17 @@
                             <?= \icon('user') ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account') ?>"><?= \icon('home', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Dashboard</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/orders') ?>"><?= \icon('clock', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>My Orders</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/favorites') ?>"><?= \icon('heart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Favorites</a></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('account/loyalty') ?>"><?= \icon('star', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Loyalty Points</a></li>
+                            <?php if (\isRider()): ?>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('rider') ?>"><?= \icon('home', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Rider Dashboard</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('account') ?>"><?= \icon('home', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Dashboard</a></li>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('account/orders') ?>"><?= \icon('clock', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>My Orders</a></li>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('account/favorites') ?>"><?= \icon('heart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Favorites</a></li>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('account/loyalty') ?>"><?= \icon('star', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Loyalty Points</a></li>
+                            <?php endif; ?>
                             <?php if (\isAdmin()): ?>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= \baseUrl('admin') ?>"><?= \icon('cog', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Admin Panel</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?= \baseUrl('admin') ?>"><?= \icon('cog', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Admin Panel</a></li>
                             <?php endif; ?>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?= \baseUrl('logout') ?>"><?= \icon('sign-out', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;']) ?>Logout</a></li>

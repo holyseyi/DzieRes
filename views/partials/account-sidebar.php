@@ -3,8 +3,10 @@
  * Partial: Account Sidebar
  */
 $current = $_SERVER['REQUEST_URI'] ?? '';
+$user = \auth();
+$isRider = $user && $user->role_slug === 'rider';
 $links = [
-    'account' => ['label' => 'Dashboard', 'icon' => 'home'],
+    ($isRider ? 'rider' : 'account') => ['label' => 'Dashboard', 'icon' => 'home'],
     'account/orders' => ['label' => 'Orders', 'icon' => 'receipt'],
     'account/reservations' => ['label' => 'Reservations', 'icon' => 'calendar-check'],
     'account/favorites' => ['label' => 'Favorites', 'icon' => 'heart'],
