@@ -106,9 +106,9 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                 <!-- Quantity & Add to cart -->
                 <?php if ($food->availability === 'available'): ?>
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <div class="quantity-control">
+                        <div class="quantity-control qty-group">
                             <button type="button" class="qty-btn" data-action="dec">−</button>
-                            <input type="number" id="detailQty" value="1" min="1" max="<?= $food->max_order_qty ?? 20 ?>">
+                            <input type="number" class="qty-input" id="detailQty" value="1" min="1" max="<?= $food->max_order_qty ?? 20 ?>">
                             <button type="button" class="qty-btn" data-action="inc">+</button>
                         </div>
                         <button class="btn btn-gold btn-lg flex-grow-1 add-to-cart" data-food-id="<?= $food->id ?>" data-quantity-input="detailQty">

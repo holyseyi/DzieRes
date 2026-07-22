@@ -312,7 +312,7 @@ function initQuantityInputs() {
             var min = parseInt(input.getAttribute('min')) || 1;
             var max = parseInt(input.getAttribute('max')) || 99;
             
-            if (this.classList.contains('qty-minus')) {
+            if (this.getAttribute('data-action') === 'dec') {
                 if (current > min) {
                     input.value = current - 1;
                 }
