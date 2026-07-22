@@ -119,18 +119,16 @@
     <!-- ============================================ -->
     <!-- ADVERTISEMENT BANNER -->
     <!-- ============================================ -->
-    <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 76px; position: relative;">
-        <div class="container py-2">
-            <ins class="adsbygoogle"
-                 style="display:block; min-height:0; max-height:100px; position:absolute; left:0; right:0; bottom:0"
-                 data-ad-client="ca-pub-8947299957289484"
-                 data-ad-slot="3848114771"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+    <div class="container-fluid px-0" style="background: #f8f9fa; margin-top: 76px; position: relative; height: 100px; z-index: 0;">
+        <ins class="adsbygoogle"
+             style="display:block; position:absolute; inset:0; max-height:100px"
+             data-ad-client="ca-pub-8947299957289484"
+             data-ad-slot="3848114771"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <!-- Search Overlay -->

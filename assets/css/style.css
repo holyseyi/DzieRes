@@ -182,6 +182,7 @@ img { max-width: 100%; height: auto; }
     background: var(--nav-bg);
     padding: 12px 0;
     transition: all var(--transition-normal);
+    z-index: 9999;
 }
 
 #mainNavbar .navbar-brand {
