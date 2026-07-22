@@ -10,60 +10,7 @@ class CartController extends BaseController
 {
     public function index(): void
     {
-        $cartItems = [];
-        $total = 0;
-        
-        if (\auth()) {
-            $cartItems = \db()->fetchAll(
-                "SELECT c.*, f.name, f.slug, f.image, f.final_price, f.stock_quantity, f.availability
-                 FROM carts c 
-                 JOIN foods f ON c.food_id = f.id 
-                 WHERE c.user_id = ? 
-                 ORDER BY c.created_at DESC",
-                [\auth()->id]
-            );
-        } else {
-            $sessionCart = $_SESSION['cart'] ?? [];
-            foreach ($sessionCart as $foodId => $item) {
-                $food = \db()->fetch(
-                    "SELECT id, name, slug, image, final_price, stock_quantity, availability 
-                     FROM foods WHERE id = ? AND status = 'active'",
-                    [$foodId]
-                );
-                if ($food) {
-                    $cartItems[] = (object)[
-                        'food_id' => $foodId,
-                        'quantity' => $item['quantity'],
-                        'unit_price' => $food->final_price,
-                        'total_price' => $food->final_price * $item['quantity'],
-                        'name' => $food->name,
-                        'slug' => $food->slug,
-                        'image' => $food->image,
-                        'final_price' => $food->final_price,
-                        'stock_quantity' => $food->stock_quantity,
-                        'availability' => $food->availability,
-                    ];
-                }
-            }
-        }
-        
-        $subtotal = array_sum(array_column($cartItems, 'total_price'));
-        $taxRate = \config('tax.rate', 12.5);
-        $taxAmount = $subtotal * ($taxRate / 100);
-        $deliveryFee = \config('delivery.fee', 15);
-        $serviceCharge = \config('service_charge', 5);
-        $total = $subtotal + $taxAmount + $deliveryFee + $serviceCharge;
-        
-        $this->renderWithLayout('cart/index', [
-            'cartItems' => $cartItems,
-            'subtotal' => $subtotal,
-            'taxRate' => $taxRate,
-            'taxAmount' => $taxAmount,
-            'deliveryFee' => $deliveryFee,
-            'serviceCharge' => $serviceCharge,
-            'total' => $total,
-            'metaTitle' => 'Shopping Cart - DzieRes Restaurant',
-        ]);
+        \redirect(\baseUrl('checkout'));
     }
 
     public function add(): void

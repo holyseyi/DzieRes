@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 /**
  * Restaurant Management System - Entry Point
  * Version 1.0.0

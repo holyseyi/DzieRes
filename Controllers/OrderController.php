@@ -46,14 +46,27 @@ class OrderController extends BaseController
         
         if (empty($cartItems)) {
             \sessionFlash('info', 'Your cart is empty');
-            $this->redirect(\baseUrl('cart'));
+            $this->renderWithLayout('checkout/index', [
+                'cartItems' => [],
+                'subtotal' => 0,
+                'taxAmount' => 0,
+                'taxRate' => 0,
+                'deliveryFee' => \config('delivery.fee', 15),
+                'serviceCharge' => 0,
+                'couponDiscount' => 0,
+                'total' => 0,
+                'restaurantLocations' => [
+                    ['name' => 'DzieRes - Osu', 'lat' => 5.5560, 'lng' => -0.1969, 'address' => 'Oxford Street, Osu, Accra'],
+                    ['name' => 'DzieRes - East Legon', 'lat' => 5.6527, 'lng' => -0.1786, 'address' => 'East Legon, Accra'],
+                    ['name' => 'DzieRes - Labone', 'lat' => 5.5833, 'lng' => -0.2000, 'address' => 'Labone, Accra'],
+                ],
+                'metaTitle' => 'Checkout - DzieRes Restaurant',
+            ]);
+            return;
         }
         
         $subtotal = array_sum(array_column($cartItems, 'total_price'));
-        $taxRate = \config('tax.rate', 12.5);
-        $taxAmount = $subtotal * ($taxRate / 100);
         $deliveryFee = \config('delivery.fee', 15);
-        $serviceCharge = \config('service_charge', 5);
         
         $couponDiscount = 0;
         $coupon = \sessionGet('coupon');
@@ -61,15 +74,15 @@ class OrderController extends BaseController
             $couponDiscount = $coupon['discount'] ?? 0;
         }
         
-        $total = $subtotal + $taxAmount + $deliveryFee + $serviceCharge - $couponDiscount;
+        $total = $subtotal - $couponDiscount;
         
         $this->renderWithLayout('checkout/index', [
             'cartItems' => $cartItems,
             'subtotal' => $subtotal,
-            'taxRate' => $taxRate,
-            'taxAmount' => $taxAmount,
+            'taxAmount' => 0,
+            'taxRate' => 0,
             'deliveryFee' => $deliveryFee,
-            'serviceCharge' => $serviceCharge,
+            'serviceCharge' => 0,
             'couponDiscount' => $couponDiscount,
             'total' => max(0, $total),
             'restaurantLocations' => [
@@ -155,10 +168,7 @@ class OrderController extends BaseController
         }
         
         $subtotal = array_sum(array_column($cartItems, 'total_price'));
-        $taxRate = \config('tax.rate', 12.5);
-        $taxAmount = $subtotal * ($taxRate / 100);
         $deliveryFee = ($orderType === 'delivery') ? \config('delivery.fee', 15) : 0;
-        $serviceCharge = \config('service_charge', 5);
         
         $couponDiscount = 0;
         $couponCode = null;
@@ -168,7 +178,7 @@ class OrderController extends BaseController
             $couponCode = $coupon['code'] ?? null;
         }
         
-        $total = $subtotal + $taxAmount + $deliveryFee + $serviceCharge - $couponDiscount;
+        $total = $subtotal + $deliveryFee - $couponDiscount;
         
         \db()->beginTransaction();
         
@@ -190,9 +200,9 @@ class OrderController extends BaseController
                 'discount_amount' => $couponDiscount,
                 'coupon_code' => $couponCode,
                 'coupon_discount' => $couponDiscount,
-                'tax_amount' => $taxAmount,
+                'tax_amount' => 0,
                 'delivery_fee' => $deliveryFee,
-                'service_charge' => $serviceCharge,
+                'service_charge' => 0,
                 'total_amount' => $total,
                 'payment_status' => 'pending',
                 'payment_method' => $paymentMethod,
@@ -408,7 +418,7 @@ class OrderController extends BaseController
             return;
         }
         $items = \db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$order->id]);
-        \render('order/receipt', [
+        $this->renderWithLayout('order/receipt', [
             'order' => $order,
             'items' => $items,
             'metaTitle' => 'Receipt #' . $order->order_number,

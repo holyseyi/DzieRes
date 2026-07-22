@@ -66,7 +66,7 @@ $statuses = ['pending', 'accepted', 'preparing', 'cooking', 'ready', 'delivered'
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white"><h6 class="mb-0">Update Status</h6></div>
             <div class="card-body">
-                <form id="orderStatusForm" data-order-id="<?= $order->id ?>">
+                <form id="orderStatusForm" method="POST" action="<?= \baseUrl('admin/orders/' . $order->id . '/status') ?>">
                     <?= \csrfField() ?>
                     <select name="status" class="form-select mb-2">
                         <?php foreach ($statuses as $s): ?>
@@ -88,3 +88,31 @@ $statuses = ['pending', 'accepted', 'preparing', 'cooking', 'ready', 'delivered'
         </div>
     </div>
 </div>
+
+<script>
+(function() {
+    var form = document.getElementById('orderStatusForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                showToast('success', data.message || 'Order status updated');
+                setTimeout(function() { location.reload(); }, 800);
+            } else {
+                showToast('error', data.message || 'Failed to update status');
+            }
+        })
+        .catch(function() {
+            showToast('error', 'Network error. Please try again.');
+        });
+    });
+})();
+</script>

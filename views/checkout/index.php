@@ -21,15 +21,43 @@ $restaurantLocations = $restaurantLocations ?? [];
 
 <section class="section-padding">
     <div class="container">
+        <?php if (empty($cartItems)): ?>
+            <div class="text-center py-5">
+                <?= \icon('cart', ['style' => 'width:4em;height:4em;color:#6c757d;']) ?>
+                <h4>Your cart is empty</h4>
+                <p class="text-muted">Add some delicious items to get started.</p>
+                <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg mt-2">Browse Menu</a>
+            </div>
+        <?php else: ?>
         <form id="checkoutForm" method="POST" action="<?= \baseUrl('checkout/place') ?>">
             <?= \csrfField() ?>
             <div class="row g-4">
-                <!-- Left: details -->
+                <!-- Left: cart items + details -->
                 <div class="col-lg-8">
+                    <!-- Cart Items -->
+                    <div class="glass-card p-4 mb-4">
+                        <h5 class="mb-3"><?= \icon('cart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Your Items</h5>
+                        <?php foreach ($cartItems as $item): ?>
+                            <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                <div class="cart-item-img">
+                                    <img src="<?= \menuImageUrl($item) ?>" alt="<?= \escape($item->name) ?>">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0"><?= \escape($item->name) ?></h6>
+                                    <small class="text-muted"><?= \formatPrice($item->final_price ?? $item->unit_price) ?> each</small>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-bold"><?= \formatPrice($item->total_price) ?></div>
+                                    <small class="text-muted">x<?= $item->quantity ?></small>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
                     <!-- Contact -->
                     <div class="glass-card p-4 mb-4">
                         <h5 class="mb-3"><?= \icon('user', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Your Details</h5>
-                        <p class="text-muted small mb-3">No account needed. We'll send your order updates to this phone number.</p>
+                        <p class="text-muted small mb-3">No account needed. We'll send order updates to this phone number.</p>
                         <div class="row g-3">
                             <div class="col-md-6"><label class="form-label">Full Name</label>
                                 <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>" placeholder="Your name"></div>
@@ -62,8 +90,8 @@ $restaurantLocations = $restaurantLocations ?? [];
                                     <input type="text" name="delivery_address" class="form-control" placeholder="Street address"></div>
                                 <div class="col-md-4"><label class="form-label">City</label>
                                     <input type="text" name="delivery_city" class="form-control" placeholder="City"></div>
-                                <div class="col-md-6"><label class="form-label">Phone</label>
-                                    <input type="text" name="delivery_phone" class="form-control"></div>
+                                <div class="col-md-6"><label class="form-label">Recipient Phone Number</label>
+                                    <input type="tel" name="delivery_phone" class="form-control" placeholder="+233 50 000 0000"></div>
                             </div>
                         </div>
 
@@ -105,7 +133,7 @@ $restaurantLocations = $restaurantLocations ?? [];
                     <!-- Payment -->
                     <div class="glass-card p-4 mb-4">
                         <h5 class="mb-3"><?= \icon('credit-card', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Payment Method</h5>
-                        <div class="payment-methods">
+                        <div class="payment-methods mb-3">
                             <?php foreach (['cash' => 'Cash', 'card' => 'Card', 'mobile_money' => 'Mobile Money', 'pay_on_delivery' => 'Pay on Delivery'] as $val => $label): ?>
                                 <label class="payment-option">
                                     <input type="radio" name="payment_method" value="<?= $val ?>" <?= $val === 'cash' ? 'checked' : '' ?>>
@@ -113,6 +141,23 @@ $restaurantLocations = $restaurantLocations ?? [];
                                 </label>
                             <?php endforeach; ?>
                         </div>
+
+                        <div id="cardFields" style="display:none;">
+                            <div class="row g-3">
+                                <div class="col-12"><label class="form-label">Card Number</label>
+                                    <input type="text" name="card_number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+                                <div class="col-md-6"><label class="form-label">Expiry</label>
+                                    <input type="text" name="card_expiry" class="form-control" placeholder="MM/YY" maxlength="5"></div>
+                                <div class="col-md-6"><label class="form-label">CVV</label>
+                                    <input type="text" name="card_cvv" class="form-control" placeholder="123" maxlength="4"></div>
+                            </div>
+                        </div>
+
+                        <div id="momoFields" style="display:none;">
+                            <div class="col-12"><label class="form-label">Mobile Money Number</label>
+                                <input type="tel" name="mobile_money_number" class="form-control" placeholder="+233 50 000 0000"></div>
+                        </div>
+
                         <p class="text-muted small mt-2 mb-0"><?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>This is a demo gateway. No real payment is processed.</p>
                     </div>
 
@@ -126,21 +171,16 @@ $restaurantLocations = $restaurantLocations ?? [];
                 <!-- Right: summary -->
                 <div class="col-lg-4">
                     <div class="cart-summary glass-card p-4 sticky-summary">
-                        <h5 class="mb-3">Your Order</h5>
-                        <?php foreach ($cartItems as $item): ?>
-                            <div class="d-flex justify-content-between mb-2 small">
-                                <span><?= $item->quantity ?>× <?= \escape($item->name) ?></span>
-                                <span><?= \formatPrice($item->total_price) ?></span>
-                            </div>
-                        <?php endforeach; ?>
-                        <hr>
-                        <div class="d-flex justify-content-between mb-2"><span>Subtotal</span><span><?= \formatPrice($subtotal) ?></span></div>
-                        <div class="d-flex justify-content-between mb-2"><span>Tax</span><span><?= \formatPrice($taxAmount) ?></span></div>
-                        <div class="d-flex justify-content-between mb-2"><span>Service</span><span><?= \formatPrice($serviceCharge) ?></span></div>
-                        <div class="d-flex justify-content-between mb-2"><span>Delivery</span><span><?= \formatPrice($deliveryFee) ?></span></div>
+                        <h5 class="mb-3">Order Summary</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span><span><?= \formatPrice($subtotal) ?></span>
+                        </div>
+                        <div id="deliveryLine" style="display:none;" class="d-flex justify-content-between mb-2">
+                            <span>Delivery</span><span><?= \formatPrice($deliveryFee) ?></span>
+                        </div>
                         <?php if ($couponDiscount > 0): ?><div class="d-flex justify-content-between mb-2 text-success"><span>Coupon</span><span>-<?= \formatPrice($couponDiscount) ?></span></div><?php endif; ?>
                         <hr>
-                        <div class="d-flex justify-content-between fs-5 fw-bold"><span>Total</span><span class="text-gold"><?= \formatPrice($total) ?></span></div>
+                        <div class="d-flex justify-content-between fs-5 fw-bold"><span>Total</span><span class="text-gold" id="checkoutTotal"><?= \formatPrice($total) ?></span></div>
                         <button type="submit" class="btn btn-gold w-100 btn-lg mt-3">Place Order</button>
                     </div>
                 </div>
@@ -155,12 +195,27 @@ $restaurantLocations = $restaurantLocations ?? [];
     const deliveryFields = document.getElementById('deliveryFields');
     const pickupFields = document.getElementById('pickupFields');
     const dineInFields = document.getElementById('dineInFields');
+    const deliveryLine = document.getElementById('deliveryLine');
     const tableSelect = document.getElementById('tableSelect');
     const tableStatus = document.getElementById('tableStatus');
     const locateMeBtn = document.getElementById('locateMeBtn');
     const pickupSelect = document.getElementById('pickupLocationSelect');
     const locationStatus = document.getElementById('locationStatus');
     const restaurantLocations = <?= json_encode($restaurantLocations) ?>;
+    const subtotal = <?= (float)$subtotal ?>;
+    const deliveryFee = <?= (float)$deliveryFee ?>;
+    const totalEl = document.getElementById('checkoutTotal');
+
+    function updateTotal() {
+        let total = subtotal;
+        const type = document.querySelector('input[name="order_type"]:checked').value;
+        if (type === 'delivery') {
+            total += deliveryFee;
+        }
+        if (totalEl) {
+            totalEl.textContent = '₵' + total.toFixed(2);
+        }
+    }
 
     function loadAvailableTables() {
         if (!tableSelect) return;
@@ -198,11 +253,29 @@ $restaurantLocations = $restaurantLocations ?? [];
                 loadAvailableTables();
             }
         }
+        if (deliveryLine) deliveryLine.style.display = type === 'delivery' ? 'flex' : 'none';
+        updateTotal();
     }
 
     orderTypeInputs.forEach(function(input) {
         input.addEventListener('change', toggleFields);
     });
+
+    function togglePaymentFields() {
+        const method = document.querySelector('input[name="payment_method"]:checked').value;
+        const cardFields = document.getElementById('cardFields');
+        const momoFields = document.getElementById('momoFields');
+        
+        if (cardFields) cardFields.style.display = method === 'card' ? 'block' : 'none';
+        if (momoFields) momoFields.style.display = method === 'mobile_money' ? 'block' : 'none';
+    }
+
+    document.querySelectorAll('input[name="payment_method"]').forEach(function(input) {
+        input.addEventListener('change', togglePaymentFields);
+    });
+
+    toggleFields();
+    togglePaymentFields();
 
     function getDistance(lat1, lng1, lat2, lng2) {
         const R = 6371;
@@ -250,3 +323,10 @@ $restaurantLocations = $restaurantLocations ?? [];
     }
 })();
 </script>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <?php endif; ?>
+    </div>
+</section>

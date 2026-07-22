@@ -36,16 +36,10 @@ if ($order->status === 'cancelled' || $order->status === 'rejected') {
                     <div class="order-tracker mb-5">
                         <?php $i = 0; foreach ($steps as $key => $label): ?>
                             <div class="tracker-step <?= $i <= $currentIndex ? 'active' : '' ?>">
-                                <div class="tracker-icon-wrap">
-                                    <div class="tracker-icon"><?= \icon($i <= $currentIndex ? 'check' : 'circle', ['style' => 'width:1.5em;height:1.5em;']) ?></div>
-                                </div>
-                                <span class="tracker-label"><?= $label ?></span>
-                                <?php if ($i === $currentIndex): ?>
-                                    <span class="tracker-badge">Current</span>
-                                <?php endif; ?>
+                                <?= $label ?>
                             </div>
                             <?php if ($i < count($steps) - 1): ?>
-                                <div class="tracker-line <?= $i < $currentIndex ? 'active' : '' ?>"></div>
+                                <div class="tracker-arrow <?= $i < $currentIndex ? 'active' : '' ?>"></div>
                             <?php endif; ?>
                         <?php $i++; endforeach; ?>
                     </div>
@@ -159,7 +153,7 @@ if ($order->status === 'cancelled' || $order->status === 'rejected') {
             el.classList.toggle('active', idx <= currentIndex);
         });
 
-        document.querySelectorAll('.tracker-line').forEach(function(el, idx) {
+        document.querySelectorAll('.tracker-arrow').forEach(function(el, idx) {
             el.classList.toggle('active', idx < currentIndex);
         });
 

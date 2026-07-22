@@ -11,7 +11,7 @@
                 <tbody>
                     <?php foreach ($foods as $f): ?>
                         <tr>
-                            <td><img src="<?= \uploadUrl($f->image) ?>" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:8px;"></td>
+                            <td><img src="<?= \menuImageUrl($f) ?>" alt="<?= \escape($f->name) ?>" style="width:50px;height:50px;object-fit:cover;border-radius:8px;"></td>
                             <td><strong><?= \escape($f->name) ?></strong><div class="small text-muted"><?= \escape($f->slug) ?></div></td>
                             <td><?= \escape($f->category_name ?? '') ?></td>
                             <td><?= \formatPrice($f->final_price ?? $f->price) ?><?php if ($f->discount_percent>0): ?><span class="badge bg-danger ms-1">-<?= $f->discount_percent ?>%</span><?php endif; ?></td>
