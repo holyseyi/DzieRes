@@ -243,6 +243,20 @@ function requireStaff(): void
     }
 }
 
+function isRider(): bool
+{
+    $user = auth();
+    return $user && $user->role_slug === 'rider';
+}
+
+function requireRider(): void
+{
+    if (!isRider()) {
+        sessionFlash('error', 'Access denied');
+        redirect(baseUrl());
+    }
+}
+
 // ============================================
 // CSRF PROTECTION
 // ============================================

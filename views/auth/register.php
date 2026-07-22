@@ -9,8 +9,8 @@
             <div class="col-lg-6 col-md-8">
                 <div class="auth-card glass-card" data-aos="fade-up">
                     <div class="text-center mb-4">
-                        <h2 class="section-title mb-1">Create Account</h2>
-                        <p class="text-muted">Join DzieRes for exclusive rewards</p>
+                        <h2 class="section-title mb-1">Create Rider Account</h2>
+                        <p class="text-muted">Join DzieRes delivery team</p>
                     </div>
 
                     <?php $errors = \sessionFlash('errors') ?? []; ?>

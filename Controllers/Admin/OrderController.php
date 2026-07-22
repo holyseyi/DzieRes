@@ -65,11 +65,13 @@ class OrderController extends BaseController
         }
         $items = \db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$id]);
         $tracking = \db()->fetchAll("SELECT * FROM order_tracking WHERE order_id = ? ORDER BY created_at ASC", [$id]);
+        $riders = \db()->fetchAll("SELECT id, firstname, lastname, email FROM users WHERE role_id = (SELECT id FROM roles WHERE slug = 'rider') AND status = 'active' ORDER BY firstname ASC");
 
         $this->renderAdmin('admin/orders/show', [
             'order' => $order,
             'items' => $items,
             'tracking' => $tracking,
+            'riders' => $riders,
             'pageTitle' => 'Order #' . $order->order_number,
         ]);
     }
@@ -147,5 +149,45 @@ class OrderController extends BaseController
              ORDER BY o.created_at DESC LIMIT 10"
         );
         $this->success($orders);
+    }
+
+    public function assignRider(int $id): void
+    {
+        if (!\verifyCsrf()) {
+            $this->error('Invalid security token');
+            return;
+        }
+
+        $order = \db()->fetch("SELECT * FROM orders WHERE id = ?", [$id]);
+        if (!$order) {
+            $this->error('Order not found');
+            return;
+        }
+
+        $riderId = (int)($_POST['rider_id'] ?? 0);
+        
+        if ($riderId > 0) {
+            $rider = \db()->fetch("SELECT * FROM users WHERE id = ? AND role_id = (SELECT id FROM roles WHERE slug = 'rider')", [$riderId]);
+            if (!$rider) {
+                $this->error('Invalid rider selected');
+                return;
+            }
+        }
+
+        \db()->update('orders', ['rider_id' => $riderId > 0 ? $riderId : null], 'id = :id', ['id' => $id]);
+
+        if ($riderId > 0) {
+            \createNotification(
+                $riderId,
+                'order',
+                'New Delivery Assigned',
+                "Order #{$order->order_number} has been assigned to you for delivery.",
+                \baseUrl('rider')
+            );
+        }
+
+        \logActivity('rider_assigned', 'orders', "Order #{$order->order_number} assigned to rider #{$riderId}", \auth()->id);
+
+        $this->success([], 'Rider assigned successfully');
     }
 }

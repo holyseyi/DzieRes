@@ -230,6 +230,7 @@ CREATE TABLE orders (
     estimated_delivery_time DATETIME,
     actual_delivery_time DATETIME,
     special_notes TEXT,
+    rider_id INTEGER,
     is_guest INTEGER DEFAULT 0,
     ip_address VARCHAR(45),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -835,5 +836,6 @@ CREATE INDEX idx_coupons_status ON coupons(status);
 INSERT INTO roles (name, slug, description) VALUES ('Admin', 'admin', 'Full system access');
 INSERT INTO roles (name, slug, description) VALUES ('Staff', 'staff', 'Staff members');
 INSERT INTO roles (name, slug, description) VALUES ('Customer', 'customer', 'Registered customers');
+INSERT INTO roles (name, slug, description) VALUES ('Rider', 'rider', 'Delivery riders');
 
 PRAGMA foreign_keys = ON;

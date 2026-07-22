@@ -76,6 +76,10 @@ class AuthController extends BaseController
             $this->redirect(\baseUrl('admin'));
         }
 
+        if ($user->role_slug === 'rider') {
+            $this->redirect(\baseUrl('rider'));
+        }
+
         $redirect = \sessionGet('redirect_after_login', \baseUrl());
         \sessionRemove('redirect_after_login');
         $this->redirect($redirect);
@@ -136,7 +140,7 @@ class AuthController extends BaseController
         $hashedPassword = \password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
 
         $userId = \db()->insert('users', [
-            'role_id' => 3, // Customer
+            'role_id' => 4, // Rider
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],

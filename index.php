@@ -277,6 +277,7 @@ $router->group('/admin', function($router) {
     $router->get('/orders/{id}', 'Admin\OrderController@show');
     $router->post('/orders/{id}/status', 'Admin\OrderController@updateStatus');
     $router->get('/orders/{id}/receipt', 'Admin\OrderController@receipt');
+    $router->post('/orders/{id}/assign-rider', 'Admin\OrderController@assignRider');
     $router->get('/api/orders/recent', 'Admin\OrderController@recent');
     
     // Kitchen Display
@@ -396,6 +397,18 @@ $router->group('/admin', function($router) {
     $router->get('/api/reports/sales', 'Admin\ReportController@sales');
     $router->get('/api/reports/revenue', 'Admin\ReportController@revenue');
 }, ['requireAdmin']);
+
+// ============================================
+// RIDER ROUTES
+// ============================================
+
+$router->group('/rider', function($router) {
+    $router->get('', 'RiderController@index');
+    $router->get('/dashboard', 'RiderController@index');
+    $router->post('/order/{id}/accept', 'RiderController@acceptOrder');
+    $router->post('/order/{id}/pickup', 'RiderController@updateStatus');
+    $router->post('/order/{id}/deliver', 'RiderController@updateStatus');
+}, ['requireRider']);
 
 // ============================================
 // API ROUTES

@@ -77,6 +77,17 @@ $statuses = ['pending', 'accepted', 'preparing', 'cooking', 'ready', 'delivered'
                     <button type="submit" class="btn btn-gold w-100">Update</button>
                 </form>
                 <hr>
+                <form method="POST" action="<?= \baseUrl('admin/orders/' . $order->id . '/assign-rider') ?>" class="mb-3">
+                    <?= \csrfField() ?>
+                    <label class="form-label small">Assign Rider</label>
+                    <select name="rider_id" class="form-select mb-2">
+                        <option value="">Unassigned</option>
+                        <?php foreach ($riders ?? [] as $rider): ?>
+                            <option value="<?= $rider->id ?>" <?= $order->rider_id == $rider->id ? 'selected' : '' ?>><?= \escape($rider->firstname . ' ' . $rider->lastname) ?> (<?= \escape($rider->email) ?>)</option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit" class="btn btn-outline-gold btn-sm w-100">Assign Rider</button>
+                </form>
                 <dl class="small mb-0">
                     <dt>Customer</dt><dd><?= \escape($order->customer_name ?? 'Guest') ?></dd>
                     <dt>Type</dt><dd><?= ucfirst(str_replace('_', ' ', $order->order_type)) ?></dd>

@@ -9,8 +9,8 @@
             <div class="col-lg-5 col-md-7">
                 <div class="auth-card glass-card" data-aos="fade-up">
                     <div class="text-center mb-4">
-                        <h2 class="section-title mb-1">Welcome Back</h2>
-                        <p class="text-muted">Sign in to your DzieRes account</p>
+                        <h2 class="section-title mb-1">Rider Login</h2>
+                        <p class="text-muted">Sign in to your DzieRes rider account</p>
                     </div>
 
                     <?php $errors = \sessionFlash('errors') ?? []; ?>
@@ -47,14 +47,14 @@
                         <button type="submit" class="btn btn-gold w-100 btn-lg">Sign In</button>
                     </form>
 
-                    <div class="text-center mt-4">
-                        <p class="mb-0">Don't have an account? <a href="<?= \baseUrl('register') ?>" class="text-gold">Sign Up</a></p>
+                     <div class="text-center mt-4">
+                        <p class="mb-0">Rider access only. Contact admin for account setup.</p>
                     </div>
 
                     <div class="auth-demo mt-4 p-3 rounded bg-light-section">
                         <small class="text-muted d-block mb-1"><?= \icon('info', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Demo Accounts</small>
                         <small><strong>Admin:</strong> admin@dzieres.com / admin123</small><br>
-                        <small><strong>Customer:</strong> customer@dzieres.com / customer123</small>
+                        <small><strong>Rider:</strong> rider@dzieres.com / rider123</small>
                     </div>
                 </div>
             </div>
