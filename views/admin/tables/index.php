@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Tables & Floor Plan</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#tableModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Table</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#tableModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Table</button>
 </div>
 
 <div class="row g-3 mb-4">
@@ -27,7 +27,7 @@
                         </ul>
                     </div>
                     <button class="btn btn-sm btn-outline-danger table-del" href="#" data-id="<?= $t->id ?>" title="Delete table">
-                        <?= \icon('trash', []) ?>></i>
+                        <?= \icon('trash', []) ?>
                     </button>
                 </div>
             </div>

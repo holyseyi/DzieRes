@@ -12,18 +12,18 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-success bg-opacity-10 text-success"><?= \icon('money-bill-wave', []) ?>></i></div><div class="stat-number" id="kpiToday">0</div><div class="text-muted">Today Revenue</div></div></div>
-    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-info bg-opacity-10 text-info"><?= \icon('calendar-month', []) ?>></i></div><div class="stat-number" id="kpiMonth">0</div><div class="text-muted">Month Revenue</div></div></div>
-    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-warning bg-opacity-10 text-warning"><?= \icon('chart-line', []) ?>></i></div><div class="stat-number" id="kpiTotal">0</div><div class="text-muted">Total Revenue</div></div></div>
-    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-primary bg-opacity-10 text-primary"><?= \icon('utensils', []) ?>></i></div><div class="stat-number" id="kpiOrders">0</div><div class="text-muted">Period Orders</div></div></div>
+    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-success bg-opacity-10 text-success"><?= \icon('money-bill-wave', []) ?></div><div class="stat-number" id="kpiToday">0</div><div class="text-muted">Today Revenue</div></div></div>
+    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-info bg-opacity-10 text-info"><?= \icon('calendar-month', []) ?></div><div class="stat-number" id="kpiMonth">0</div><div class="text-muted">Month Revenue</div></div></div>
+    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-warning bg-opacity-10 text-warning"><?= \icon('chart-line', []) ?></div><div class="stat-number" id="kpiTotal">0</div><div class="text-muted">Total Revenue</div></div></div>
+    <div class="col-md-3"><div class="stat-card-admin"><div class="stat-icon bg-primary bg-opacity-10 text-primary"><?= \icon('utensils', []) ?></div><div class="stat-number" id="kpiOrders">0</div><div class="text-muted">Period Orders</div></div></div>
 </div>
 
 <div class="row g-4">
     <div class="col-lg-8">
-        <div class="card border-0 shadow-sm"><div class="card-header bg-white"><h6 class="mb-0"><?= \icon('chart-area', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Revenue & Orders</h6></div><div class="card-body"><canvas id="reportChart" height="260"></canvas></div></div>
+        <div class="card border-0 shadow-sm"><div class="card-header bg-white"><h6 class="mb-0"><?= \icon('chart-area', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Revenue & Orders</h6></div><div class="card-body"><canvas id="reportChart" height="260"></canvas></div></div>
     </div>
     <div class="col-lg-4">
-        <div class="card border-0 shadow-sm"><div class="card-header bg-white"><h6 class="mb-0"><?= \icon('star', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Top Meals</h6></div><div class="card-body" id="topMeals"><div class="text-muted">Loading...</div></div></div>
+        <div class="card border-0 shadow-sm"><div class="card-header bg-white"><h6 class="mb-0"><?= \icon('star', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Top Meals</h6></div><div class="card-body" id="topMeals"><div class="text-muted">Loading...</div></div></div>
     </div>
 </div>
 

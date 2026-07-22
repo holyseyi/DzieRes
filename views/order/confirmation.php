@@ -20,7 +20,7 @@ if (in_array($order->status, ['delivered', 'completed', 'paid', 'approved', 'act
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="text-center mb-4" data-aos="fade-up">
-                    <div class="success-check"><?= \icon('check', []) ?>></i></div>
+                    <div class="success-check"><?= \icon('check', []) ?></div>
                     <h2 class="mt-3">Order Confirmed!</h2>
                     <p class="text-muted">Thank you! Your order has been received.</p>
                 </div>
@@ -31,7 +31,7 @@ if (in_array($order->status, ['delivered', 'completed', 'paid', 'approved', 'act
                     <div class="display-4 fw-bold text-gold mb-2" style="letter-spacing: 2px;"><?= \escape($order->order_number) ?></div>
                     <p class="text-muted mb-3">Use this code to track your order. Save it or screenshot this page.</p>
                     <button class="btn btn-outline-gold btn-sm" onclick="navigator.clipboard.writeText('<?= \escape($order->order_number) ?>').then(()=>alert('Tracking code copied!'))">
-                        <?= \icon('copy', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Copy Code
+                        <?= \icon('copy', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Copy Code
                     </button>
                 </div>
 

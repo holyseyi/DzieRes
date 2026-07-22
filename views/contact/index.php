@@ -22,19 +22,19 @@ $errors = \sessionFlash('errors') ?? [];
                 <div class="glass-card p-4 h-100">
                     <h4 class="mb-4">Get In Touch</h4>
                     <div class="contact-info-item mb-4">
-                        <div class="contact-icon"><?= \icon('map-marker', []) ?>></i></div>
+                        <div class="contact-icon"><?= \icon('map-marker', []) ?></div>
                         <div><strong>Address</strong><p class="text-muted mb-0"><?= \escape(\getSetting('restaurant_address', '123 Independence Avenue, Accra, Ghana')) ?></p></div>
                     </div>
                     <div class="contact-info-item mb-4">
-                        <div class="contact-icon"><?= \icon('phone', []) ?>></i></div>
+                        <div class="contact-icon"><?= \icon('phone', []) ?></div>
                         <div><strong>Phone</strong><p class="text-muted mb-0"><?= \escape(\getSetting('restaurant_phone', '+233 50 000 0000')) ?></p></div>
                     </div>
                     <div class="contact-info-item mb-4">
-                        <div class="contact-icon"><?= \icon('message', []) ?>></i></div>
+                        <div class="contact-icon"><?= \icon('message', []) ?></div>
                         <div><strong>Email</strong><p class="text-muted mb-0"><?= \escape(\getSetting('restaurant_email', 'info@dzieres.com')) ?></p></div>
                     </div>
                     <div class="contact-info-item">
-                        <div class="contact-icon"><?= \icon('clock', []) ?>></i></div>
+                        <div class="contact-icon"><?= \icon('clock', []) ?></div>
                         <div><strong>Hours</strong><p class="text-muted mb-0"><?= \escape(\getSetting('opening_hours', 'Mon - Sun: 7:00 AM - 11:00 PM')) ?></p></div>
                     </div>
                 </div>

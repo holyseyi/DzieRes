@@ -205,6 +205,20 @@ class OrderController extends BaseController
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
             ]);
             
+            if ($orderType === 'dine_in' && $tableId) {
+                $table = \db()->fetch("SELECT table_number, capacity FROM tables WHERE id = ?", [$tableId]);
+                if ($table) {
+                    \db()->update('tables', ['status' => 'occupied'], 'id = :id', ['id' => $tableId]);
+                    \createNotification(
+                        null,
+                        'table_booking',
+                        'Table ' . $table->table_number . ' Booked',
+                        'Dine-in order #' . $orderNumber . ' booked table ' . $table->table_number . ' (' . $table->capacity . ' seats).',
+                        \baseUrl('admin/orders/' . $orderId)
+                    );
+                }
+            }
+            
             foreach ($cartItems as $item) {
                 \db()->insert('order_items', [
                     'order_id' => $orderId,
@@ -254,6 +268,27 @@ class OrderController extends BaseController
                 "New {$orderType} order #{$orderNumber} placed" . ($userId ? " by user #{$userId}" : " by guest"),
                 \baseUrl("admin/orders/{$orderId}")
             );
+            
+            if ($userId && !empty($cartItems)) {
+                $foodIds = array_column($cartItems, 'food_id');
+                $placeholders = implode(',', array_fill(0, count($foodIds), '?'));
+                $favItems = \db()->fetchAll(
+                    "SELECT food_id FROM favorites WHERE user_id = ? AND food_id IN ($placeholders)",
+                    array_merge([$userId], $foodIds)
+                );
+                $favFoodIds = array_column($favItems, 'food_id');
+                foreach ($cartItems as $item) {
+                    if (in_array((int)$item->food_id, $favFoodIds)) {
+                        \createNotification(
+                            null,
+                            'favorite_purchase',
+                            'Favorited Item Purchased',
+                            "Order #{$orderNumber} includes a favorited item: {$item->name}",
+                            \baseUrl("admin/orders/{$orderId}")
+                        );
+                    }
+                }
+            }
             
             \sessionFlash('success', 'Order placed successfully');
             $this->redirect(\baseUrl("order/confirmation/{$orderId}"));

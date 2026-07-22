@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Blog Posts</h4>
-    <a href="<?= \baseUrl('admin/blog/create') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>New Post</a>
+    <a href="<?= \baseUrl('admin/blog/create') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>New Post</a>
 </div>
 
 <div class="card border-0 shadow-sm">
@@ -23,8 +23,8 @@
                             <td><span class="badge bg-<?= $p->status==='published'?'success':($p->status==='draft'?'secondary':'warning') ?>"><?= ucfirst($p->status) ?></span></td>
                             <td><small class="text-muted"><?= $p->published_at ? \formatDate($p->published_at) : '—' ?></small></td>
                             <td>
-                                <a href="<?= \baseUrl('admin/blog/' . $p->id . '/edit') ?>" class="btn btn-sm btn-outline-secondary"><?= \icon('edit', []) ?>></i></a>
-                                <button class="btn btn-sm btn-outline-danger blog-del" data-id="<?= $p->id ?>"><?= \icon('trash', []) ?>></i></button>
+                                <a href="<?= \baseUrl('admin/blog/' . $p->id . '/edit') ?>" class="btn btn-sm btn-outline-secondary"><?= \icon('edit', []) ?></a>
+                                <button class="btn btn-sm btn-outline-danger blog-del" data-id="<?= $p->id ?>"><?= \icon('trash', []) ?></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

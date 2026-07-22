@@ -21,9 +21,9 @@
             <div class="col-lg-7">
                 <img src="<?= \uploadUrl($event->image) ?>" alt="<?= \escape($event->title) ?>" class="img-fluid rounded-4 mb-4 shadow">
                 <div class="mb-3">
-                    <span class="badge bg-light text-dark me-2"><?= \icon('calendar', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \formatDate($event->event_date) ?></span>
-                    <?php if ($event->event_time): ?><span class="badge bg-light text-dark me-2"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \formatTime($event->event_time) ?></span><?php endif; ?>
-                    <?php if ($event->location): ?><span class="badge bg-light text-dark"><?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($event->location) ?></span><?php endif; ?>
+                    <span class="badge bg-light text-dark me-2"><?= \icon('calendar', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \formatDate($event->event_date) ?></span>
+                    <?php if ($event->event_time): ?><span class="badge bg-light text-dark me-2"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \formatTime($event->event_time) ?></span><?php endif; ?>
+                    <?php if ($event->location): ?><span class="badge bg-light text-dark"><?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($event->location) ?></span><?php endif; ?>
                 </div>
                 <div class="event-content">
                     <?= nl2br(\escape($event->content ?? $event->description ?? '')) ?>

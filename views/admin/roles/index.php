@@ -14,7 +14,7 @@ foreach ($permissions as $p) {
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Roles & Permissions</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#roleModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Role</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#roleModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Role</button>
 </div>
 
 <div class="card border-0 shadow-sm mb-4">

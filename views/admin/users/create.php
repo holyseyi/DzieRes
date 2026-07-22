@@ -6,7 +6,7 @@
  */
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <div><a href="<?= \baseUrl('admin/users') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Back</a><h4 class="mb-0 mt-1">Add User</h4></div>
+    <div><a href="<?= \baseUrl('admin/users') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Back</a><h4 class="mb-0 mt-1">Add User</h4></div>
 </div>
 <div class="card border-0 shadow-sm"><div class="card-body">
 <form method="POST" action="<?= \baseUrl('admin/users/store') ?>">

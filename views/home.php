@@ -58,9 +58,14 @@
                             <div class="food-price">
                                 <?= \formatPrice($food->final_price ?? $food->price) ?>
                             </div>
-                            <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                                <?= \icon('heart', []) ?>
-                            </button>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
+                                    <?= \icon('cart', []) ?>
+                                </button>
+                                <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
+                                    <?= \icon('heart', []) ?>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

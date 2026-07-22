@@ -33,8 +33,8 @@
                                 <span class="badge bg-gold mb-2"><?= \escape(ucfirst($event->type)) ?></span>
                                 <h5><a href="<?= \baseUrl('events/' . $event->slug) ?>" class="text-decoration-none text-reset"><?= \escape($event->title) ?></a></h5>
                                 <p class="text-muted small mb-2">
-                                    <?= \icon('calendar', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \formatDate($event->event_date) ?>
-                                    <?php if ($event->event_time): ?><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \formatTime($event->event_time) ?><?php endif; ?>
+                                    <?= \icon('calendar', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \formatDate($event->event_date) ?>
+                                    <?php if ($event->event_time): ?><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \formatTime($event->event_time) ?><?php endif; ?>
                                 </p>
                                 <p class="small"><?= \truncate($event->description ?? '', 90) ?></p>
                                 <div class="d-flex justify-content-between align-items-center">

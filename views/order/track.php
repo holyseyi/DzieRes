@@ -28,7 +28,7 @@ if ($order->status === 'cancelled' || $order->status === 'rejected') {
             <div class="col-lg-8">
                 <?php if ($currentIndex === -1): ?>
                     <div class="alert alert-danger text-center">
-                        <?= \icon('times', ['style' => 'width:2em;height:2em;']) ?>></i>
+                        <?= \icon('times', ['style' => 'width:2em;height:2em;']) ?>
                         <h4>This order was <?= ucfirst($order->status) ?></h4>
                     </div>
                 <?php else: ?>

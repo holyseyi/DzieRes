@@ -22,7 +22,7 @@
                 <?php foreach ($images as $image): ?>
                     <div class="gallery-item" onclick="openLightbox('<?= \uploadUrl($image->image) ?>', '<?= \escape($image->title ?? '') ?>')">
                         <img src="<?= \uploadUrl($image->image) ?>" alt="<?= \escape($image->title ?? 'Gallery') ?>" loading="lazy">
-                        <div class="gallery-overlay"><?= \icon('search-plus', ['style' => 'width:2em;height:2em;color:#fff;']) ?>></i></div>
+                        <div class="gallery-overlay"><?= \icon('search-plus', ['style' => 'width:2em;height:2em;color:#fff;']) ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>

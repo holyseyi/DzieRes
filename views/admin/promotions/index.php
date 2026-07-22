@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Promotions</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#promoModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Promotion</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#promoModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Promotion</button>
 </div>
 
 <div class="row g-3">
@@ -18,7 +18,7 @@
                     <div class="d-flex justify-content-between"><h6 class="mb-0"><?= \escape($p->title) ?></h6><span class="badge bg-<?= \matchStatusColor($p->status) ?>"><?= ucfirst($p->status) ?></span></div>
                     <p class="small text-muted mt-2 mb-2"><?= \escape($p->description ?? '') ?></p>
                     <?php if ($p->discount_percent): ?><span class="badge bg-gold"><?= $p->discount_percent ?>% off</span><?php endif; ?>
-                    <div class="mt-2"><button class="btn btn-sm btn-outline-danger promo-del" data-id="<?= $p->id ?>"><?= \icon('trash', []) ?>></i> Delete</button></div>
+                    <div class="mt-2"><button class="btn btn-sm btn-outline-danger promo-del" data-id="<?= $p->id ?>"><?= \icon('trash', []) ?> Delete</button></div>
                 </div>
             </div>
         </div>

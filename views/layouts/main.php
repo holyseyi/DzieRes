@@ -59,6 +59,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand" href="<?= \baseUrl() ?>">
+                <img src="<?= \asset('images/favicon.svg') ?>" alt="DzieRes" class="brand-favicon">
                 <span class="brand-text">Dzie<span class="text-gold">Res</span></span>
             </a>
             
@@ -104,12 +105,8 @@
                         </ul>
                     </div>
                     <?php else: ?>
-                    <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">
-                        <?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;']) ?>Admin
-                    </a>
-                    <button class="btn btn-gold btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">
-                        <?= \icon('search-location', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;']) ?>Track Order
-                    </button>
+                    <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">Admin</a>
+                    <button class="btn btn-gold btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#trackOrderModal">Track Order</button>
                     <?php endif; ?>
                 </div>
             </div>

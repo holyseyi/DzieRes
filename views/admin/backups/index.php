@@ -9,7 +9,7 @@
     <h4 class="mb-0">Backups</h4>
     <form method="POST" action="<?= \baseUrl('admin/backups/create') ?>" class="d-inline">
         <?= \csrfField() ?>
-        <button class="btn btn-gold"><?= \icon('download', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Create Backup</button>
+        <button class="btn btn-gold"><?= \icon('download', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Create Backup</button>
     </form>
 </div>
 

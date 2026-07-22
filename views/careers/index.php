@@ -28,11 +28,11 @@
                                 <span class="badge bg-gold"><?= \escape(ucfirst(str_replace('_', ' ', $job->type))) ?></span>
                             </div>
                             <div class="text-muted small mb-2">
-                                <?php if ($job->department): ?><?= \icon('building', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($job->department) ?> · <?php endif; ?>
-                                <?php if ($job->location): ?><?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($job->location) ?><?php endif; ?>
+                                <?php if ($job->department): ?><?= \icon('building', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($job->department) ?> · <?php endif; ?>
+                                <?php if ($job->location): ?><?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($job->location) ?><?php endif; ?>
                             </div>
                             <p class="small"><?= \truncate($job->description ?? '', 120) ?></p>
-                            <?php if ($job->salary_range): ?><p class="small text-gold fw-bold mb-3"><?= \icon('money-bill-wave', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($job->salary_range) ?></p><?php endif; ?>
+                            <?php if ($job->salary_range): ?><p class="small text-gold fw-bold mb-3"><?= \icon('money-bill-wave', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($job->salary_range) ?></p><?php endif; ?>
                             <a href="<?= \baseUrl('careers/' . $job->slug) ?>" class="btn btn-outline-gold">View & Apply</a>
                         </div>
                     </div>

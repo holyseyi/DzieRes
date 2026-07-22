@@ -28,13 +28,11 @@ $restaurantLocations = $restaurantLocations ?? [];
                 <div class="col-lg-8">
                     <!-- Contact -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><?= \icon('user', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Your Details</h5>
+                        <h5 class="mb-3"><?= \icon('user', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Your Details</h5>
                         <p class="text-muted small mb-3">No account needed. We'll send your order updates to this phone number.</p>
                         <div class="row g-3">
                             <div class="col-md-6"><label class="form-label">Full Name</label>
                                 <input type="text" name="guest_name" class="form-control" required value="<?= \escape($_POST['guest_name'] ?? '') ?>" placeholder="Your name"></div>
-                            <div class="col-md-6"><label class="form-label">Email</label>
-                                <input type="email" name="guest_email" class="form-control" required placeholder="you@example.com"></div>
                             <div class="col-md-6"><label class="form-label">Phone Number</label>
                                 <input type="tel" name="guest_phone" class="form-control" required placeholder="+233 50 000 0000"></div>
                         </div>
@@ -42,19 +40,19 @@ $restaurantLocations = $restaurantLocations ?? [];
 
                     <!-- Order type -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><?= \icon('box', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Order Type</h5>
+                        <h5 class="mb-3"><?= \icon('box', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Order Type</h5>
                         <div class="order-type-selector">
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="delivery" checked>
-                                <span><?= \icon('motorcycle', []) ?>></i> Delivery</span>
+                                <span><?= \icon('motorcycle', []) ?> Delivery</span>
                             </label>
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="pickup">
-                                <span><?= \icon('cart', []) ?>></i> Pickup</span>
+                                <span><?= \icon('cart', []) ?> Pickup</span>
                             </label>
                             <label class="order-type-option">
                                 <input type="radio" name="order_type" value="dine_in">
-                                <span><?= \icon('chair', []) ?>></i> Dine In</span>
+                                <span><?= \icon('chair', []) ?> Dine In</span>
                             </label>
                         </div>
 
@@ -74,7 +72,7 @@ $restaurantLocations = $restaurantLocations ?? [];
                                 <div class="col-12">
                                     <label class="form-label">Pickup Location</label>
                                     <button type="button" id="locateMeBtn" class="btn btn-outline-gold btn-sm mb-2">
-                                        <?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Use My Location
+                                        <?= \icon('map-marker', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Use My Location
                                     </button>
                                     <select name="pickup_location" id="pickupLocationSelect" class="form-select">
                                         <option value="">Select nearest location</option>
@@ -95,13 +93,10 @@ $restaurantLocations = $restaurantLocations ?? [];
                             <div class="row g-3 mt-2">
                                 <div class="col-md-6">
                                     <label class="form-label">Select Table</label>
-                                    <select name="table_id" class="form-select">
-                                        <option value="">Choose a table</option>
-                                        <?php $tables = \db()->fetchAll("SELECT * FROM tables WHERE status = 'available' ORDER BY capacity ASC"); ?>
-                                        <?php foreach ($tables as $t): ?>
-                                            <option value="<?= $t->id ?>"><?= \escape($t->table_number) ?> (<?= $t->capacity ?> seats)</option>
-                                        <?php endforeach; ?>
+                                    <select name="table_id" id="tableSelect" class="form-select">
+                                        <option value="">Loading tables...</option>
                                     </select>
+                                    <div id="tableStatus" class="form-text text-muted"></div>
                                 </div>
                             </div>
                         </div>
@@ -109,21 +104,21 @@ $restaurantLocations = $restaurantLocations ?? [];
 
                     <!-- Payment -->
                     <div class="glass-card p-4 mb-4">
-                        <h5 class="mb-3"><?= \icon('credit-card', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Payment Method</h5>
+                        <h5 class="mb-3"><?= \icon('credit-card', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Payment Method</h5>
                         <div class="payment-methods">
                             <?php foreach (['cash' => 'Cash', 'card' => 'Card', 'mobile_money' => 'Mobile Money', 'pay_on_delivery' => 'Pay on Delivery'] as $val => $label): ?>
                                 <label class="payment-option">
                                     <input type="radio" name="payment_method" value="<?= $val ?>" <?= $val === 'cash' ? 'checked' : '' ?>>
-                                    <span><?= \icon('money-bill-wave', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $label ?></span>
+                                    <span><?= \icon('money-bill-wave', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= $label ?></span>
                                 </label>
                             <?php endforeach; ?>
                         </div>
-                        <p class="text-muted small mt-2 mb-0"><?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>This is a demo gateway. No real payment is processed.</p>
+                        <p class="text-muted small mt-2 mb-0"><?= \icon('lock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>This is a demo gateway. No real payment is processed.</p>
                     </div>
 
                     <!-- Notes -->
                     <div class="glass-card p-4">
-                        <h5 class="mb-3"><?= \icon('note-sticky', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>></i>Special Instructions</h5>
+                        <h5 class="mb-3"><?= \icon('note-sticky', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;', 'class' => 'text-gold']) ?>Special Instructions</h5>
                         <textarea name="special_notes" class="form-control" rows="3" placeholder="Allergies, preferences, etc."></textarea>
                     </div>
                 </div>
@@ -160,16 +155,49 @@ $restaurantLocations = $restaurantLocations ?? [];
     const deliveryFields = document.getElementById('deliveryFields');
     const pickupFields = document.getElementById('pickupFields');
     const dineInFields = document.getElementById('dineInFields');
+    const tableSelect = document.getElementById('tableSelect');
+    const tableStatus = document.getElementById('tableStatus');
     const locateMeBtn = document.getElementById('locateMeBtn');
     const pickupSelect = document.getElementById('pickupLocationSelect');
     const locationStatus = document.getElementById('locationStatus');
     const restaurantLocations = <?= json_encode($restaurantLocations) ?>;
 
+    function loadAvailableTables() {
+        if (!tableSelect) return;
+        tableSelect.innerHTML = '<option value="">Loading tables...</option>';
+        tableSelect.disabled = true;
+        tableStatus.textContent = 'Refreshing from admin dashboard...';
+        
+        fetch('<?= \baseUrl('api/tables/dinein') ?>')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                const tables = data.data || data || [];
+                const available = tables.filter(function(t) { return t.status === 'available'; });
+                let html = '<option value="">Choose a table</option>';
+                available.forEach(function(t) {
+                    html += '<option value="' + t.id + '">Table ' + t.table_number + ' (' + t.capacity + ' seats - ' + (t.location || 'Indoor') + ')</option>';
+                });
+                tableSelect.innerHTML = html;
+                tableSelect.disabled = false;
+                tableStatus.textContent = available.length ? 'Showing only available tables from admin dashboard' : 'No tables available right now';
+            })
+            .catch(function() {
+                tableSelect.innerHTML = '<option value="">Failed to load tables</option>';
+                tableSelect.disabled = false;
+                tableStatus.textContent = 'Please try again later';
+            });
+    }
+
     function toggleFields() {
         const type = document.querySelector('input[name="order_type"]:checked').value;
         if (deliveryFields) deliveryFields.style.display = type === 'delivery' ? 'block' : 'none';
         if (pickupFields) pickupFields.style.display = type === 'pickup' ? 'block' : 'none';
-        if (dineInFields) dineInFields.style.display = type === 'dine_in' ? 'block' : 'none';
+        if (dineInFields) {
+            dineInFields.style.display = type === 'dine_in' ? 'block' : 'none';
+            if (type === 'dine_in') {
+                loadAvailableTables();
+            }
+        }
     }
 
     orderTypeInputs.forEach(function(input) {

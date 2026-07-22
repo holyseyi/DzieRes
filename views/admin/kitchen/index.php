@@ -19,8 +19,8 @@
 
 <div class="kitchen-board">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="text-white mb-0"><?= \icon('kitchen-set', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i>Kitchen Display</h3>
-        <div class="text-white-50"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><span id="kdsClock"></span></div>
+        <h3 class="text-white mb-0"><?= \icon('kitchen-set', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>Kitchen Display</h3>
+        <div class="text-white-50"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><span id="kdsClock"></span></div>
     </div>
     <div class="row g-3" id="kdsBoard">
         <div class="col-lg-2 col-md-4"><div class="kitchen-col"><h5>Pending</h5><div id="col-pending"></div></div></div>

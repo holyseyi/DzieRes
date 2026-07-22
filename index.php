@@ -188,6 +188,7 @@ $router->get('/reservations', 'ReservationController@index');
 $router->post('/reservations/book', 'ReservationController@book');
 $router->get('/reservations/confirm/{number}', 'ReservationController@confirm');
 $router->get('/api/tables/available', 'ReservationController@availableTables');
+$router->get('/api/tables/dinein', 'ReservationController@availableForDineIn');
 
 // Gallery
 $router->get('/gallery', 'GalleryController@index');

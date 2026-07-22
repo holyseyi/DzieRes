@@ -58,28 +58,28 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                 <div class="row g-3 mb-4">
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <?= \icon('clock', ['class=" text-gold"']) ?>></i>
+                            <?= \icon('clock', ['class=" text-gold"']) ?>
                             <div class="fw-bold"><?= $food->preparation_time ?? 15 ?> min</div>
                             <small class="text-muted">Prep Time</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <?= \icon('fire', ['class=" text-gold"']) ?>></i>
+                            <?= \icon('fire', ['class=" text-gold"']) ?>
                             <div class="fw-bold"><?= $food->calories ?? 0 ?></div>
                             <small class="text-muted">Calories</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <?= \icon('pepper-hot', ['class=" text-gold"']) ?>></i>
+                            <?= \icon('pepper-hot', ['class=" text-gold"']) ?>
                             <div class="fw-bold text-capitalize"><?= str_replace('_', ' ', $food->spice_level ?? 'mild') ?></div>
                             <small class="text-muted">Spice</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="info-box text-center">
-                            <?= \icon('utensils', ['class=" text-gold"']) ?>></i>
+                            <?= \icon('utensils', ['class=" text-gold"']) ?>
                             <div class="fw-bold text-capitalize"><?= $food->unit ?? 'plate' ?></div>
                             <small class="text-muted">Serving</small>
                         </div>
@@ -112,10 +112,10 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                             <button type="button" class="qty-btn" data-action="inc">+</button>
                         </div>
                         <button class="btn btn-gold btn-lg flex-grow-1 add-to-cart" data-food-id="<?= $food->id ?>" data-quantity-input="detailQty">
-                            <?= \icon('cart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>></i>Add to Cart
+                            <?= \icon('cart', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>Add to Cart
                         </button>
                         <button class="btn btn-light-gold btn-lg favorite-btn" data-food-id="<?= $food->id ?>">
-                            <?= \icon('heart', []) ?>></i>
+                            <?= \icon('heart', []) ?>
                         </button>
                     </div>
                 <?php else: ?>
@@ -165,9 +165,8 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                 <?php endif; ?>
             </div>
             <div class="col-lg-4">
-                <div class="glass-card p-4">
-                    <h5>Write a Review</h5>
-                    <?php if (\auth()): ?>
+                    <div class="glass-card p-4">
+                        <h5>Write a Review</h5>
                         <form id="reviewForm">
                             <?= \csrfField() ?>
                             <input type="hidden" name="food_id" value="<?= $food->id ?>">
@@ -177,15 +176,13 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                                     <?php for ($i = 5; $i >= 1; $i--): ?><option value="<?= $i ?>"><?= $i ?> Star<?= $i > 1 ? 's' : '' ?></option><?php endfor; ?>
                                 </select>
                             </div>
+                            <div class="mb-2"><input type="text" name="name" class="form-control" placeholder="Your name" required></div>
+                            <div class="mb-2"><input type="tel" name="phone" class="form-control" placeholder="Phone number" required></div>
                             <div class="mb-2"><input type="text" name="title" class="form-control" placeholder="Title (optional)"></div>
                             <div class="mb-2"><textarea name="comment" class="form-control" rows="3" placeholder="Your review" required></textarea></div>
                             <button type="submit" class="btn btn-gold w-100">Submit Review</button>
                         </form>
-                    <?php else: ?>
-                        <p class="text-muted mb-2">Please login to write a review.</p>
-                        <a href="<?= \baseUrl('login') ?>" class="btn btn-outline-gold w-100">Login</a>
-                    <?php endif; ?>
-                </div>
+                    </div>
             </div>
         </div>
 
@@ -208,7 +205,7 @@ $ingredientsList = is_array($food->ingredients_list ?? []) ? $food->ingredients_
                                 </div>
                                 <div class="food-footer">
                                     <div class="food-price"><?= \formatPrice($rf->final_price ?? $rf->price) ?></div>
-                                    <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $rf->id ?>"><?= \icon('cart', []) ?>></i></button>
+                                    <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $rf->id ?>"><?= \icon('cart', []) ?></button>
                                 </div>
                             </div>
                         </div>

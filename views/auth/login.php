@@ -22,7 +22,7 @@
                         <div class="mb-3">
                             <label class="form-label">Email Address</label>
                             <div class="input-group">
-                                <span class="input-group-text"><?= \icon('message', []) ?>></i></span>
+                                <span class="input-group-text"><?= \icon('message', []) ?></span>
                                 <input type="email" name="email" class="form-control" required
                                        value="<?= \escape($old['email'] ?? '') ?>" placeholder="you@example.com">
                             </div>
@@ -31,7 +31,7 @@
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <div class="input-group">
-                                <span class="input-group-text"><?= \icon('lock', []) ?>></i></span>
+                                <span class="input-group-text"><?= \icon('lock', []) ?></span>
                                 <input type="password" name="password" class="form-control" required placeholder="••••••••">
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="auth-demo mt-4 p-3 rounded bg-light-section">
-                        <small class="text-muted d-block mb-1"><?= \icon('info', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Demo Accounts</small>
+                        <small class="text-muted d-block mb-1"><?= \icon('info', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Demo Accounts</small>
                         <small><strong>Admin:</strong> admin@dzieres.com / admin123</small><br>
                         <small><strong>Customer:</strong> customer@dzieres.com / customer123</small>
                     </div>

@@ -7,7 +7,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Suppliers</h4>
-    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#supModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add Supplier</button>
+    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#supModal"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Add Supplier</button>
 </div>
 
 <div class="row g-3">
@@ -17,8 +17,8 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between"><h6 class="mb-0"><?= \escape($s->name) ?></h6><span class="badge bg-<?= \matchStatusColor($s->status) ?>"><?= ucfirst($s->status) ?></span></div>
                     <p class="small text-muted mb-1"><?= \escape($s->contact_person ?? '') ?></p>
-                    <p class="small mb-1"><?= \icon('phone', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($s->phone ?? '') ?></p>
-                    <p class="small mb-0"><?= \icon('message', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= \escape($s->email ?? '') ?></p>
+                    <p class="small mb-1"><?= \icon('phone', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($s->phone ?? '') ?></p>
+                    <p class="small mb-0"><?= \icon('message', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= \escape($s->email ?? '') ?></p>
                 </div>
             </div>
         </div>

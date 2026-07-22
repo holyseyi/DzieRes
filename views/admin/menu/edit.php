@@ -9,7 +9,7 @@ $tags = is_array($food->tags) ? implode(', ', $food->tags) : implode(', ', json_
 $ingredients = is_array($food->ingredients ?? []) ? implode(', ', $food->ingredients) : $food->ingredients;
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <div><a href="<?= \baseUrl('admin/menu') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Back</a><h4 class="mb-0 mt-1">Edit: <?= \escape($food->name) ?></h4></div>
+    <div><a href="<?= \baseUrl('admin/menu') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Back</a><h4 class="mb-0 mt-1">Edit: <?= \escape($food->name) ?></h4></div>
 </div>
 
 <div class="card border-0 shadow-sm">

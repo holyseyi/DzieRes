@@ -26,7 +26,7 @@
                    value="<?= \escape($search ?? '') ?>">
         </div>
         <div class="col-auto">
-            <button type="submit" class="btn btn-gold"><?= \icon('search', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Search</button>
+            <button type="submit" class="btn btn-gold"><?= \icon('search', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Search</button>
         </div>
         <div class="col-auto">
             <a href="<?= \baseUrl('admin/orders') ?>" class="btn btn-outline-secondary">Clear</a>

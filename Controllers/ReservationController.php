@@ -162,6 +162,14 @@ class ReservationController extends BaseController
         $this->success($tables);
     }
 
+    public function availableForDineIn(): void
+    {
+        $tables = \db()->fetchAll(
+            "SELECT id, table_number, capacity, location, status FROM tables WHERE status = 'available' ORDER BY CAST(table_number AS INTEGER) ASC"
+        );
+        $this->success($tables);
+    }
+
     private function isAjax(): bool
     {
         return !empty($_SERVER['HTTP_X_REQUESTED_WITH'])

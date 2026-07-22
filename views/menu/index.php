@@ -61,7 +61,7 @@ $currentCategory = $currentCategory ?? '';
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <button type="submit" class="btn btn-gold w-100"><?= \icon('filter', []) ?>></i></button>
+                    <button type="submit" class="btn btn-gold w-100"><?= \icon('filter', []) ?></button>
                 </div>
             </form>
         </div>
@@ -90,9 +90,7 @@ $currentCategory = $currentCategory ?? '';
                                     <span class="discount-badge">-<?= $food->discount_percent ?>%</span>
                                 <?php endif; ?>
                                 <div class="food-overlay">
-                                    <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
-                                        <?= \icon('cart', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Add to Cart
-                                    </button>
+                                    <button class="btn btn-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">Add to Cart</button>
                                 </div>
                             </div>
                             <div class="food-body">
@@ -104,8 +102,8 @@ $currentCategory = $currentCategory ?? '';
                                 </h5>
                                 <p class="food-description"><?= \truncate($food->description ?? '', 70) ?></p>
                                 <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                    <span class="badge bg-light text-dark"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $food->preparation_time ?? 15 ?> min</span>
-                                    <span class="badge bg-light text-dark"><?= \icon('fire', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i><?= $food->calories ?? 0 ?> cal</span>
+                                    <span class="badge bg-light text-dark"><?= \icon('clock', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= $food->preparation_time ?? 15 ?> min</span>
+                                    <span class="badge bg-light text-dark"><?= \icon('fire', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?><?= $food->calories ?? 0 ?> cal</span>
                                     <?php if ($food->spice_level && $food->spice_level !== 'mild'): ?>
                                         <span class="badge bg-danger-subtle text-danger"><?= ucwords(str_replace('_', ' ', $food->spice_level)) ?></span>
                                     <?php endif; ?>
@@ -118,16 +116,21 @@ $currentCategory = $currentCategory ?? '';
                                         <span class="original-price"><?= \formatPrice($food->price) ?></span>
                                     <?php endif; ?>
                                 </div>
-                                <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
-                                    <?= \icon('heart', []) ?>></i>
-                                </button>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-light-gold btn-sm add-to-cart" data-food-id="<?= $food->id ?>">
+                                        <?= \icon('cart', []) ?>
+                                    </button>
+                                    <button class="btn btn-light-gold btn-sm favorite-btn" data-food-id="<?= $food->id ?>">
+                                        <?= \icon('heart', []) ?>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="col-12 text-center py-5">
-                    <?= \icon('utensils', ['style' => 'width:3em;height:3em;color:#6c757d;']) ?>></i>
+                    <?= \icon('utensils', ['style' => 'width:3em;height:3em;color:#6c757d;']) ?>
                     <p class="text-muted">No menu items found. Try adjusting your filters.</p>
                 </div>
             <?php endif; ?>

@@ -7,14 +7,14 @@
 ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Settings</h4>
-    <button class="btn btn-gold" id="saveSettings"><?= \icon('save', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Save Settings</button>
+    <button class="btn btn-gold" id="saveSettings"><?= \icon('save', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Save Settings</button>
 </div>
 
 <form id="settingsForm" method="POST" action="<?= \baseUrl('admin/settings/update') ?>">
     <?= \csrfField() ?>
     <?php foreach ($grouped as $group => $items): ?>
         <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white"><h6 class="mb-0 text-capitalize"><?= \icon('cog', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i><?= \escape(str_replace('_', ' ', $group)) ?></h6></div>
+            <div class="card-header bg-white"><h6 class="mb-0 text-capitalize"><?= \icon('cog', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?><?= \escape(str_replace('_', ' ', $group)) ?></h6></div>
             <div class="card-body">
                 <div class="row g-3">
                     <?php foreach ($items as $s): ?>

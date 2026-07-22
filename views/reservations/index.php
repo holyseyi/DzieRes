@@ -74,10 +74,10 @@ $old = \sessionFlash('old') ?? [];
                 <div class="glass-card p-4">
                     <h5 class="mb-3">Reservation Info</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-3"><?= \icon('clock', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i><?= \escape(\getSetting('opening_hours', 'Open Daily 7:00 AM - 11:00 PM')) ?></li>
-                        <li class="mb-3"><?= \icon('phone', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i><?= \escape(\getSetting('restaurant_phone', '+233 50 000 0000')) ?></li>
-                        <li class="mb-3"><?= \icon('map-marker', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i><?= \escape(\getSetting('restaurant_address', '123 Independence Avenue, Accra')) ?></li>
-                        <li><?= \icon('info', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>></i>Confirmation sent by email</li>
+                        <li class="mb-3"><?= \icon('clock', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?><?= \escape(\getSetting('opening_hours', 'Open Daily 7:00 AM - 11:00 PM')) ?></li>
+                        <li class="mb-3"><?= \icon('phone', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?><?= \escape(\getSetting('restaurant_phone', '+233 50 000 0000')) ?></li>
+                        <li class="mb-3"><?= \icon('map-marker', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?><?= \escape(\getSetting('restaurant_address', '123 Independence Avenue, Accra')) ?></li>
+                        <li><?= \icon('info', ['class=" text-gold" style="width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;"']) ?>Confirmation sent by email</li>
                     </ul>
                 </div>
             </div>

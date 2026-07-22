@@ -197,10 +197,6 @@ class AccountController extends BaseController
 
     public function submitReview(): void
     {
-        if (!\auth()) {
-            $this->error('Please login first', 401);
-            return;
-        }
         if (!\verifyCsrf()) {
             $this->error('Invalid security token');
             return;
@@ -208,6 +204,8 @@ class AccountController extends BaseController
 
         $foodId = (int)($_POST['food_id'] ?? 0);
         $rating = (int)($_POST['rating'] ?? 0);
+        $name = \sanitize($_POST['name'] ?? '');
+        $phone = \sanitize($_POST['phone'] ?? '');
         $title = \sanitize($_POST['title'] ?? '');
         $comment = \sanitize($_POST['comment'] ?? '');
 
@@ -216,9 +214,16 @@ class AccountController extends BaseController
             return;
         }
 
+        if (empty($name)) {
+            $this->error('Please provide your name');
+            return;
+        }
+
         \db()->insert('food_reviews', [
             'food_id' => $foodId,
-            'user_id' => \auth()->id,
+            'user_id' => \auth() ? \auth()->id : null,
+            'guest_name' => $name,
+            'guest_phone' => $phone,
             'rating' => $rating,
             'title' => $title,
             'comment' => $comment,

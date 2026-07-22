@@ -9,7 +9,7 @@
     <h4 class="mb-0">Inventory</h4>
     <div>
         <a href="<?= \baseUrl('admin/inventory/suppliers') ?>" class="btn btn-outline-gold me-2">Suppliers</a>
-        <a href="<?= \baseUrl('admin/inventory/ingredients') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>></i>Manage Ingredients</a>
+        <a href="<?= \baseUrl('admin/inventory/ingredients') ?>" class="btn btn-gold"><?= \icon('plus', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Manage Ingredients</a>
     </div>
 </div>
 

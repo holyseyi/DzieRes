@@ -171,6 +171,7 @@ CREATE TABLE food_reviews (
     food_id INTEGER NOT NULL,
     user_id INTEGER,
     guest_name VARCHAR(100),
+    guest_phone VARCHAR(20),
     rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 5),
     title VARCHAR(200),
     comment TEXT,

@@ -20,7 +20,7 @@
     <div class="container">
         <?php if (empty($cartItems)): ?>
             <div class="text-center py-5">
-                <?= \icon('cart', ['style' => 'width:4em;height:4em;color:#6c757d;']) ?>></i>
+                <?= \icon('cart', ['style' => 'width:4em;height:4em;color:#6c757d;']) ?>
                 <h4>Your cart is empty</h4>
                 <p class="text-muted">Add some delicious items to get started.</p>
                 <a href="<?= \baseUrl('menu') ?>" class="btn btn-gold btn-lg mt-2">Browse Menu</a>
@@ -32,33 +32,38 @@
                         <?php foreach ($cartItems as $item): ?>
                             <div class="cart-item" data-food-id="<?= $item->food_id ?>">
                                 <div class="cart-item-img">
-                                    <img src="<?= \uploadUrl($item->image) ?>" alt="<?= \escape($item->name) ?>">
+                                    <img src="<?= \menuImageUrl($item) ?>" alt="<?= \escape($item->name) ?>">
                                 </div>
                                 <div class="cart-item-info flex-grow-1">
-                                    <h6 class="mb-1"><?= \escape($item->name) ?></h6>
-                                    <div class="text-muted small"><?= \formatPrice($item->final_price ?? $item->unit_price) ?> each</div>
+                                    <h6 class="cart-item-name"><?= \escape($item->name) ?></h6>
+                                    <div class="cart-item-price"><?= \formatPrice($item->final_price ?? $item->unit_price) ?> each</div>
                                     <?php if (($item->availability ?? 'available') === 'sold_out'): ?>
-                                        <span class="badge bg-danger mt-1">Sold Out</span>
+                                        <span class="badge bg-danger mt-2">Sold Out</span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="cart-item-qty">
                                     <div class="quantity-control">
-                                        <button type="button" class="qty-btn update-qty" data-action="dec" data-id="<?= $item->food_id ?>">−</button>
-                                        <input type="number" class="qty-input" value="<?= $item->quantity ?>" min="1" data-id="<?= $item->food_id ?>">
-                                        <button type="button" class="qty-btn update-qty" data-action="inc" data-id="<?= $item->food_id ?>">+</button>
+                                        <button type="button" class="qty-btn update-qty" data-action="dec"
+                                            data-id="<?= $item->food_id ?>">−</button>
+                                        <input type="number" class="qty-input" value="<?= $item->quantity ?>" min="1"
+                                            data-id="<?= $item->food_id ?>">
+                                        <button type="button" class="qty-btn update-qty" data-action="inc"
+                                            data-id="<?= $item->food_id ?>">+</button>
                                     </div>
                                 </div>
                                 <div class="cart-item-total">
                                     <strong><?= \formatPrice($item->total_price) ?></strong>
                                 </div>
                                 <button class="cart-item-remove remove-item" data-id="<?= $item->food_id ?>" title="Remove">
-                                    <?= \icon('trash', []) ?>></i>
+                                    <?= \icon('trash', []) ?>
                                 </button>
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="mt-3">
-                        <a href="<?= \baseUrl('menu') ?>" class="btn btn-outline-gold"><?= \icon('arrow-left', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>></i>Continue Shopping</a>
+                        <a href="<?= \baseUrl('menu') ?>"
+                            class="btn btn-outline-gold"><?= \icon('arrow-left', ['style' => 'width:1.1em;height:1.1em;margin-right:0.5rem;vertical-align:-0.15em;']) ?>Continue
+                            Shopping</a>
                     </div>
                 </div>
 
@@ -82,7 +87,8 @@
                         <form id="couponForm" class="my-3">
                             <?= \csrfField() ?>
                             <div class="input-group">
-                                <input type="text" name="code" class="form-control" placeholder="Coupon code" id="couponCode">
+                                <input type="text" name="code" class="form-control" placeholder="Coupon code"
+                                    id="couponCode">
                                 <button class="btn btn-gold" type="submit">Apply</button>
                             </div>
                         </form>
