@@ -276,6 +276,11 @@ function initFavoriteToggle() {
             
             var foodId = this.getAttribute('data-food-id');
             var icon = this.querySelector('i');
+            var isFav = icon.classList.contains('fas');
+            
+            if (!confirm(isFav ? 'Remove from favorites?' : 'Add to favorites?')) {
+                return;
+            }
             
             fetch(BASE_URL + 'account/favorites/toggle', {
                 method: 'POST',

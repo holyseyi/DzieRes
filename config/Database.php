@@ -83,6 +83,11 @@ class Database
         return $dbPath;
     }
 
+    public function getWritableDbPath(): string
+    {
+        return $this->resolveWritableDbPath($this->config['database']);
+    }
+
     public function getConnection()
     {
         return $this->connection;
