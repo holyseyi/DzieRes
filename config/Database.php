@@ -76,8 +76,8 @@ class Database
             }
         }
 
-        if (!file_exists($dbPath)) {
-            @touch($dbPath);
+        if (file_exists($dbPath) && filesize($dbPath) === 0) {
+            @unlink($dbPath);
         }
 
         return $dbPath;
