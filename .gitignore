@@ -1,0 +1,31 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Database
+database/restaurant.db
+database/*.db
+*.db
+
+# Uploads
+/assets/uploads/
+
+# Cache
+/tmp/
+/cache/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Wasmer
+.wasmer/
