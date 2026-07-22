@@ -125,6 +125,11 @@ class OrderController extends BaseController
             \showError(404, 'Order not found');
             return;
         }
+        if ($order->status !== 'delivered') {
+            \sessionFlash('error', 'Receipt is only available after the order has been delivered.');
+            \redirect(\baseUrl('admin/orders/' . $id));
+            return;
+        }
         $items = \db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$id]);
         $this->renderAdmin('admin/orders/receipt', [
             'order' => $order,

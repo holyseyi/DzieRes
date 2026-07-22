@@ -34,7 +34,8 @@
                         </table>
                     </div>
                     <div class="text-end">
-                        <a href="<?= \baseUrl('order/track/' . $order->order_number) ?>" class="btn btn-outline-gold">Track Order</a>
+                        <a href="<?= \baseUrl('order/receipt/' . $order->order_number) ?>" class="btn btn-gold btn-sm" target="_blank"><?= \icon('print', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Print Receipt</a>
+                        <a href="<?= \baseUrl('order/track/' . $order->order_number) ?>" class="btn btn-outline-gold btn-sm">Track Order</a>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,9 @@ $statuses = ['pending', 'accepted', 'preparing', 'cooking', 'ready', 'delivered'
         <a href="<?= \baseUrl('admin/orders') ?>" class="text-muted small"><?= \icon('arrow-left', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Back to Orders</a>
         <h4 class="mb-0 mt-1">Order #<?= \escape($order->order_number) ?></h4>
     </div>
-    <button class="btn btn-outline-gold" onclick="window.print()"><?= \icon('print', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Print Receipt</button>
+    <?php if ($order->status === 'delivered'): ?>
+        <a href="<?= \baseUrl('admin/orders/' . $order->id . '/receipt') ?>" class="btn btn-outline-gold"><?= \icon('print', ['style' => 'width:0.9em;height:0.9em;margin-right:0.35rem;vertical-align:-0.15em;']) ?>Print Receipt</a>
+    <?php endif; ?>
 </div>
 
 <div class="row g-4">

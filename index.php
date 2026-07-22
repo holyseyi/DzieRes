@@ -182,6 +182,8 @@ $router->get('/checkout', 'OrderController@checkout');
 $router->post('/checkout/place', 'OrderController@placeOrder');
 $router->get('/order/confirmation/{id}', 'OrderController@confirmation');
 $router->get('/order/track/{number}', 'OrderController@track');
+$router->get('/order/receipt/{number}', 'OrderController@receipt');
+$router->get('/api/order/track/{number}', 'OrderController@trackApi');
 
 // Reservations
 $router->get('/reservations', 'ReservationController@index');

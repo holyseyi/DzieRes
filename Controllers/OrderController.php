@@ -369,4 +369,49 @@ class OrderController extends BaseController
             'metaTitle' => 'Track Order - DzieRes Restaurant',
         ]);
     }
+
+    public function trackApi(string $number): void
+    {
+        $order = \db()->fetch(
+            "SELECT id, status, order_number, updated_at 
+             FROM orders WHERE order_number = ?",
+            [$number]
+        );
+        
+        if (!$order) {
+            $this->success(['found' => false]);
+            return;
+        }
+        
+        $tracking = \db()->fetchAll(
+            "SELECT * FROM order_tracking WHERE order_id = ? ORDER BY created_at ASC",
+            [$order->id]
+        );
+        
+        $this->success([
+            'found' => true,
+            'status' => $order->status,
+            'order_number' => $order->order_number,
+            'updated_at' => $order->updated_at,
+            'tracking' => $tracking,
+        ]);
+    }
+
+    public function receipt(string $number): void
+    {
+        $order = \db()->fetch(
+            "SELECT * FROM orders WHERE order_number = ?",
+            [$number]
+        );
+        if (!$order) {
+            \showError(404, 'Order not found');
+            return;
+        }
+        $items = \db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$order->id]);
+        \render('order/receipt', [
+            'order' => $order,
+            'items' => $items,
+            'metaTitle' => 'Receipt #' . $order->order_number,
+        ]);
+    }
 }
