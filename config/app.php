@@ -83,4 +83,9 @@ return [
         'address' => '123 Independence Avenue, Accra, Ghana',
         'opening_hours' => 'Mon-Sun: 7:00 AM - 11:00 PM',
     ],
+    
+    // Google Maps
+    'google_maps' => [
+        'api_key' => getenv('GOOGLE_MAPS_API_KEY') ?: '',
+    ],
 ];
