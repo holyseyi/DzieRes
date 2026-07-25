@@ -28,7 +28,7 @@ return [
         'csrf_expiry' => 3600,
         'rate_limit' => 60, // requests per minute
         'max_login_attempts' => 5,
-        'lockout_time' => 900, // 15 minutes
+        'lockout_time' => 300, // 5 minutes
     ],
     
     // Pagination
