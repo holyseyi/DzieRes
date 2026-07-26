@@ -88,4 +88,10 @@ return [
     'google_maps' => [
         'api_key' => getenv('GOOGLE_MAPS_API_KEY') ?: '',
     ],
+    
+    // Paystack
+    'paystack' => [
+        'public_key' => getenv('PAYSTACK_PUBLIC_KEY') ?: '***REMOVED***',
+        'secret_key' => getenv('PAYSTACK_SECRET_KEY') ?: '***REMOVED***',
+    ],
 ];
