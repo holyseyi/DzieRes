@@ -60,6 +60,7 @@ return [
         'radius_km' => 20,
     ],
     'service_charge' => 5.00,
+    'vip_table_fee' => 30.00,
     
     // Loyalty
     'loyalty' => [
