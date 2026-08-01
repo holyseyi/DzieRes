@@ -1,0 +1,11 @@
+kind: wasmer.io/App.v0
+name: DzieRes
+app_id: da_nP7IptBUWDlV
+owner: holyseyi
+package: .
+annotations:
+  anybuild.run/config:
+    name: out
+  anybuild.run/provider: staticfile
+  anybuild.run/version: 0.25.0
+  wasmer.io/version: 7.2.1

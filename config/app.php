@@ -28,7 +28,7 @@ return [
         'csrf_expiry' => 3600,
         'rate_limit' => 60, // requests per minute
         'max_login_attempts' => 5,
-        'lockout_time' => 300, // 5 minutes
+        'lockout_time' => 900, // 15 minutes
     ],
     
     // Pagination
@@ -60,7 +60,6 @@ return [
         'radius_km' => 20,
     ],
     'service_charge' => 5.00,
-    'vip_table_fee' => 30.00,
     
     // Loyalty
     'loyalty' => [
@@ -83,16 +82,5 @@ return [
         'email' => 'info@dzieres.com',
         'address' => '123 Independence Avenue, Accra, Ghana',
         'opening_hours' => 'Mon-Sun: 7:00 AM - 11:00 PM',
-    ],
-    
-    // Google Maps
-    'google_maps' => [
-        'api_key' => getenv('GOOGLE_MAPS_API_KEY') ?: '',
-    ],
-    
-    // Paystack
-    'paystack' => [
-        'public_key' => getenv('PAYSTACK_PUBLIC_KEY') ?: '',
-        'secret_key' => getenv('PAYSTACK_SECRET_KEY') ?: '',
     ],
 ];
