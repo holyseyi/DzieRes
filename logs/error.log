@@ -1,0 +1,25 @@
+2026-07-22 17:16:38 ParseError: syntax error, unexpected token "endforeach", expecting end of file in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/views/order/track.php:51
+2026-07-22 20:03:29 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:03:40 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:03:43 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:03:45 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:03:48 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:05:00 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:05:02 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:06:47 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-22 20:06:48 Error: Cannot use object of type stdClass as array in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/DzieRes/index.php:88
+2026-07-25 16:50:24 Error: Unknown named parameter $id in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/Router.php:177
+2026-07-25 16:51:09 Error: Unknown named parameter $id in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/Router.php:177
+2026-07-25 16:52:17 Error: Unknown named parameter $id in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/Router.php:177
+2026-07-27 13:12:18 Error: Call to undefined function config() in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/index.php:48
+2026-07-27 19:45:01 Error: Call to undefined function config() in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/index.php:48
+2026-07-27 19:45:14 Error: Call to undefined function config() in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/index.php:48
+2026-07-27 21:15:58 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: tables.table_number in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-29 14:24:35 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-29 14:25:08 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-29 14:25:44 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-30 10:01:42 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-30 10:04:53 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-30 10:25:39 PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: foods.slug in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/config/Database.php:142
+2026-07-30 10:27:54 TypeError: implode(): Argument #1 ($array) must be of type array, string given in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/views/admin/menu/edit.php:9
+2026-07-30 10:49:37 TypeError: implode(): Argument #1 ($array) must be of type array, string given in /media/david-o-dadzie/3a8c564a-4d4f-400d-86f5-2100b4c68242/APPlications/DzieRes/views/admin/menu/edit.php:9
